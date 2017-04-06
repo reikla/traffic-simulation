@@ -8,4 +8,4 @@
 
 ## Inhaltsverzeichnis
 
-### [Architektur](/wiki/architecture)
+### [Architektur](/_wiki/architecture.md)
