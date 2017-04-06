@@ -1,6 +1,6 @@
 # Architektur
 ## Architektur Diagramm 
-![](/Architektur.png)
+![](img/Architektur.png)
 
 Die Architektur der TrafficSimulation ist in 4 Komponenten aufgeteilt.
 
