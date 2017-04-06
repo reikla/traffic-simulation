@@ -28,7 +28,7 @@ Logging ist in eine eigenständige Komponente ausgelagert, da mindestens zwei Pr
 
 ## Allgemeines
 Die Kommunikation zwischen den Komponenten wird mit WCF durchgeführt.
---- Was ist WCF?
+WCF ist ......
 
 ## Zusammenwirken der Komponenten
 - Grafisch
