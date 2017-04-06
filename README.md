@@ -1,10 +1,10 @@
-# Übersicht
+# Dokumentation
 
 ## Änderungshistorie
 
 | Autor | Änderung | Datum | Version |
 | --- | --- | --- | --- |
-| Reimar | Initiale Version | 06.04.2017 | 1.0 |
+| Reimar | Team Projekt erstellt\n, Architekturdiagramm eingefügt| 06.04.2017 | 1.0 |
 
 ## Inhaltsverzeichnis
 
