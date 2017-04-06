@@ -3,8 +3,13 @@
 die Aufgabenstellung:
 Implementierung einer verteilten komponentenbasierten Verkehrssimulation.
 Die Sumilation unterstützt:
-- sdf
-- sf
+- Mikroskopische Simulation der Fahrzeuge (PKW und LKW) und Ampelanlagen
+- Zusammenhängendes Verkehrs-/Straßennetz
+- Geregelte und ungeregelte Kreuzungen
+- Verhalten der Verkehrsteilnehmer sollte weitgehend parametrisierbar sein (variabel/zufällig/individuell)
+- Verhalten der Lichtsteueranlage parametrisierbar Regelung über eigenen Prozess
+- Anzahl der über Einfahrtsstraßen in das System zufahrenden Fahrzeuge regelbar
+- Grafische Darstellung und einfache Benutzerschnittstelle Konfiguration-GUI nicht unbedingt notwendig
 ## Architektur Diagramm 
 ![](img/Architektur.png)
 
