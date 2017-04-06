@@ -8,4 +8,4 @@
 
 ## Inhaltsverzeichnis
 
-### [Architektur](architecture)
+### [Architektur](wiki/architecture)
