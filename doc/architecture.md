@@ -28,7 +28,7 @@ Logging ist in eine eigenständige Komponente ausgelagert, da mindestens zwei Pr
 
 ## Allgemeines
 Die Kommunikation zwischen den Komponenten wird mit WCF durchgeführt.
-WCF ist ......
+WCF ist ist eine dienstorientierte Kommunikationsplattform für verteilte Anwendungen in Microsoft Windows. Sie führt viele Netzwerkfunktionen zusammen und stellt sie den Programmierern solcher Anwendungen standardisiert zur Verfügung.
 
 ## Zusammenwirken der Komponenten
 - Grafisch
