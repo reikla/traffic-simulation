@@ -1,3 +1,3 @@
 # Architektur
 
-![](Architektur.png)
+![](/Architektur.png)
