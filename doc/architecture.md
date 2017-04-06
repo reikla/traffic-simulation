@@ -1,6 +1,10 @@
 # Architektur
 ## Beschreibung
-laalal
+die Aufgabenstellung:
+Implementierung einer verteilten komponentenbasierten Verkehrssimulation.
+Die Sumilation unterstützt:
+- sdf
+- sf
 ## Architektur Diagramm 
 ![](img/Architektur.png)
 
