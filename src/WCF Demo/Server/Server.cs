@@ -3,25 +3,34 @@ using Contracts;
 
 namespace Server
 {
-    public class Server
+  /// <summary>
+  ///   Diese Klasse kapselt den WCF Server
+  /// </summary>
+  public class Server
+  {
+    private readonly ServiceHost serviceHost;
+
+    public Server()
     {
-        private ServiceHost serviceHost;
-
-        public Server()
-        {
-            serviceHost = new ServiceHost(typeof(LogService));
-            NetNamedPipeBinding binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-            serviceHost.AddServiceEndpoint(typeof(ILogService), binding, Constants.Address);
-        }
-
-        public void Start()
-        {
-            serviceHost.Open();
-        }
-
-        public void Stop()
-        {
-            serviceHost.Close();
-        }
+      serviceHost = new ServiceHost(typeof(LogService));
+      var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+      serviceHost.AddServiceEndpoint(typeof(ILogService), binding, Constants.Address);
     }
+
+    /// <summary>
+    ///   Start des servers
+    /// </summary>
+    public void Start()
+    {
+      serviceHost.Open();
+    }
+
+    /// <summary>
+    ///   Stop des servers
+    /// </summary>
+    public void Stop()
+    {
+      serviceHost.Close();
+    }
+  }
 }

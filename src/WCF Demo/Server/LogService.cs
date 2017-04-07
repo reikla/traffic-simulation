@@ -3,12 +3,15 @@ using Contracts;
 
 namespace Server
 {
-    public class LogService : ILogService
+  /// <summary>
+  ///   Implementation von ILogService
+  /// </summary>
+  public class LogService : ILogService
+  {
+    public void Log(string message)
     {
-        public void Log(string message)
-        {
-            var timestamp = DateTime.Now.ToString("O");
-            Console.WriteLine($"{timestamp} - {message}");
-        }
+      var timestamp = DateTime.Now.ToString("O");
+      Console.WriteLine($"{timestamp} - {message}");
     }
+  }
 }
