@@ -12,7 +12,7 @@ Die Sumilation unterstützt:
 ## Architektur Diagramm 
 ![](img/Architektur.png)
 
-Die Architektur der TrafficSimulation ist in 4 Komponenten aufgeteilt.
+Die Traffic Simulation wird in 4 verschiedene Komponenten aufgeteilt. Diese Komponenten kommunizieren mit der Windows Communication Foundation (WCF) miteinander. WCF wurde ausgewählt da es damit sehr einfach möglich ist Interprozesskommunikation (IPC) zu implementieren, und diese Kommunikation in zukunft sogar auf Webservices umzustellen um zwischen verschiedenen Systemen 
 
 ### Simulation
 Die Komponenten für die Simulation.
