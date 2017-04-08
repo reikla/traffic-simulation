@@ -12,16 +12,16 @@ Die Sumilation unterstützt:
 ## Architektur Diagramm 
 ![](img/Architektur.png)
 
-Die Traffic Simulation wird in 4 verschiedene Komponenten aufgeteilt. Diese Komponenten kommunizieren mit der Windows Communication Foundation (WCF) miteinander. WCF wurde ausgewählt da es damit sehr einfach möglich ist Interprozesskommunikation (IPC) zu implementieren, und diese Kommunikation in zukunft sogar auf Webservices umzustellen um zwischen verschiedenen Systemen 
+Die Traffic Simulation wird in vier verschiedene Komponenten aufgeteilt welche mit der Windows Communication Foundation (WCF) miteinander kommunizieren. Die WCF wurde ausgewählt da es damit sehr einfach möglich ist Interprozesskommunikation (IPC) zu implementieren und Diese in Zukunft sogar auf Webservices umzustellen um die Komponenten auf verschiedenen Systemen laufen zu lassen.
 
 ### Simulation
-Die Komponenten für die Simulation.
+Beinhält die Simulationslogik, Steuerung und die Simulierten Objekte. Die Simulation ist unabhängig von jeglicher Anzeigetechnologie wie WPF oder Webtechniken.
 
 ### UI
 Visualsierung der Simulation.
 
 ### Traffic Light Control
-Steuerung für die Ampeln
+Steuerung der Ampelanlagen. 
 
 ### Logging
 Logging ist in eine eigenständige Komponente ausgelagert, da mindestens zwei Prozesse Log Meldungen produzieren werden und das nicht über verschiedenste Logfiles verteilt werden soll.
