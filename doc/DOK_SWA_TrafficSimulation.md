@@ -31,11 +31,12 @@ Die Endlösung könnte in etwa, wie [hier](http://volkhin.com/RoadTrafficSimulat
 Qualitätsziele {#_qualit_tsziele}
 --------------
 
-- agile Softwareentwicklungsprozess einhalten 
+- agile Softwareentwicklungsprozess einhalten mit folgenden Zielen:
 
-    - die Vorgehens-weise hat das Ziel, den Softwareentwicklungsprozess durch Abbau der Bürokratie und durch die stärkere Berücksichtigung der menschlichen Aspekte effizienter zu gestalten.
+    - Abbau der Bürokratie und durch die stärkere Berücksichtigung der menschlichen Aspekte effizienter zu gestalten
     - reine Entwurfsphase auf ein Mindestmaß zu reduzieren
-    - im Entwicklungsprozess so früh wie möglich zu aus-führbarer Software zu gelangen,
+    - im Entwicklungsprozess so früh wie möglich zu aus-führbarer Software zu gelangen
+    - in regelmäßigen, kurzen Abständen dem Kunden zur gemeinsamen Abstimmung die Ergebnise für weitere Abstimmung vorzeigen
 
 - laufende Dokumentationsanpassung:
 
