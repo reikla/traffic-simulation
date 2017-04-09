@@ -40,15 +40,11 @@ Qualitätsziele {#_qualit_tsziele}
 
 - laufende Dokumentationsanpassung:
 
-    Die Doku soll nicht erst am Ende es Projekts sondern laufend erfolgen
+    Die Doku soll nicht erst am Ende es Projekts sondern laufend erfolgen. Das Ziel ist dabei permanent gültige Dokumente zu besitzen.
 
 - komponentenbasierte Entwicklung (mehrere loigsche Komponente und kein Monolit)
-
-    sdf
-
 - Erweiterbarkeit der Komponenten vorsehen
-
-    sdfsf
+    In der Hinsicht auf mögliche Veränderungen oder ERweiterungen müssen die Kompnenten zu einem gewissen Teil eine einfache Anpssung ohne großen Aufwand "vertragen"
 
 
 Stakeholder {#_stakeholder}
