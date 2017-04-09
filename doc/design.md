@@ -15,7 +15,7 @@ Kreuzung ist ein "Knoten"
 
 Auto soll fahren
 
-Auto hat Start und Ziel (Route). 
+Auto hat Start "Quelle" und Ziel "Senke" (Route). 
 
 Start kann auch gleichzeitig ein Ziel sein 
 
