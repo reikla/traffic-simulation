@@ -51,11 +51,11 @@ Qualitätsziele {#_qualit_tsziele}
 Stakeholder {#_stakeholder}
 -----------
 
-Rolle | Kontakt | Erwartungshaltung |
-------- | ---------------- | ---------- | 
+Rolle | Kontakt | Erwartungshaltung 
+------- | ---------------- | ---------- |
 Joan  | saag paneer | medium |
-Sally  | vindaloo        | mild       |
-Erin   | lamb madras | HOT      |
+Sally  | vindaloo        | mild       
+Erin   | lamb madras | HOT      
 
 
 | Rolle           | Kontakt         | Erwartungshaltung                 |
