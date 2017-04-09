@@ -9,9 +9,13 @@ Straße soll da sein
 
 Straße ist eine "Kante"
 
+"Kante" bekommen eine Länge x  
+
 Kreuzung soll da sein
 
 Kreuzung ist ein "Knoten"
+
+"Knoten" müssen Koordinaten haben
 
 Auto soll fahren
 
