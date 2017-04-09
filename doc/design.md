@@ -29,9 +29,16 @@ Start und Ziel sind definitiv die Endpunkte vom Bildschirm
 
 was soll das Ding könne?!
 
-- Thema Tick
-    - sdf
-    - sdf
+- Thema Tick 
+    - fix in der Engine einprogrammiert
+    - s
+
+**Enviroment**
+
+Includiert:
+
+- Knoten und Kanten
+- 
     
 
 **GUI**
