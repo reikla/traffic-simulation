@@ -45,7 +45,11 @@ Includiert:
 
 
 
+**Doku-Konventionen**
 
+- Sprache Englisch
+- Kommentare nur Interafce
+- Jede Klasse hat Public Methoden
 
 
 
