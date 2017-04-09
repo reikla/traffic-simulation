@@ -31,8 +31,8 @@ Die Endlösung könnte in etwa, wie [hier](http://volkhin.com/RoadTrafficSimulat
 Qualitätsziele {#_qualit_tsziele}
 --------------
 
-- Agile Softwareentwicklungsprozess einhalten 
-- Aussagekräftige Architekturmodell und lückelose Dokumentation
+- agile Softwareentwicklungsprozess einhalten 
+- laufende Dokumentationsanpassung
 - Erweiterbarkeit der Komponenten vorsehen
 
 Inhalt.
