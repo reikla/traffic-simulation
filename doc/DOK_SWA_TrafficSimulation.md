@@ -33,18 +33,19 @@ Qualitätsziele {#_qualit_tsziele}
 
 - agile Softwareentwicklungsprozess einhalten 
 
-sdf
+    sdf
+
 - laufende Dokumentationsanpassung:
 
-Die Doku soll nicht erst am Ende es Projekts sondern laufend erfolgen
+    Die Doku soll nicht erst am Ende es Projekts sondern laufend erfolgen
 
 - komponentenbasierte Entwicklung (mehrere loigsche Komponente und kein Monolit)
 
-sdf
+    sdf
 
 - Erweiterbarkeit der Komponenten vorsehen
 
-sdfsf
+    sdfsf
 
 
 Stakeholder {#_stakeholder}
