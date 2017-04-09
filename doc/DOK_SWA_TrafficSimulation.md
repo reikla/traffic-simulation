@@ -1,20 +1,12 @@
 Einführung und Ziele {#section-introduction-and-goals}
 ====================
-Beim Projekt "Traffic Sumulation" handelt es sich um ein FH-Projekt im Zuge der Lehrveranstaltng  Softwarearchitektur.
-Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung einer verteilten komponentenbasierten Verkehrsimulation.
-
-
-
--   zugrunde liegenden Geschäftsziele, wesentliche Aufgabenstellung und
-    essenzielle fachliche Anforderungen an das System
-
--   Qualitätsziele für die Architektur
-
--   relevante Stakeholder und deren Erwartungshaltung
 
 Aufgabenstellung {#_aufgabenstellung}
 ----------------
 **Inhalt.**
+
+Beim Projekt "Traffic Sumulation" handelt es sich um ein FH-Projekt im Zuge der Lehrveranstaltng  Softwarearchitektur.
+Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung einer verteilten komponentenbasierten Verkehrsimulation.
 
 Kurzbeschreibung der fachlichen Aufgabenstellung, treibenden Kräfte,
 Extrakt (oder Abstract) der Anforderungen. Verweis auf (hoffentlich
