@@ -6,7 +6,7 @@ Aufgabenstellung {#_aufgabenstellung}
 **Inhalt.**
 
 Beim Projekt "Traffic Sumulation" handelt es sich um ein FH-Projekt im Zuge der Lehrveranstaltng  Softwarearchitektur.
-Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung einer verteilten komponentenbasierten Verkehrsimulation.
+Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung einer verteilten komponentenbasierten Verkehrsimulation gemäß des Anforderungsdokuments.
 
 **Die Simulation sollte wie folgt unterstützen:**
 - Mikroskopische Simulation der Fahrzeuge (PKW und LKW) und Ampelanlagen
