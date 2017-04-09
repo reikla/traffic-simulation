@@ -31,6 +31,24 @@ Die Endlösung könnte in etwa, wie [hier](http://volkhin.com/RoadTrafficSimulat
 Qualitätsziele {#_qualit_tsziele}
 --------------
 
+- Agile Softwareentwicklungsprozess einhalten 
+- Aussagekräftige Architekturmodell und lückelose Dokumentation
+- Erweiterbarkeit der Komponenten vorsehen
+
+Inhalt.
+
+Die Top-3 bis Top-5 der Qualitätsziele für die Architektur, deren Erfüllung oder Einhaltung den maßgeblichen Stakeholdern besonders wichtig sind. Gemeint sind hier wirklich Qualitätsziele, die nicht unbedingt mit den Zielen des Projekts übereinstimmen. Beachten Sie den Unterschied.
+
+Motivation.
+
+Weil Qualitätsziele grundlegende Architekturentscheidungen oft maßgeblich beeinflussen, sollten Sie die für Ihre Stakeholder relevanten Qualitätsziele kennen, möglichst konkret und operationalisierbar.
+
+Wenn Sie als Architekt nicht wissen, woran Ihre Arbeit gemessen wird, ….
+
+Form.
+
+Tabellarische Darstellung der Qualitätsziele mit möglichst konkreten Szenarien, geordnet nach Prioritäten.
+
 Stakeholder {#_stakeholder}
 -----------
 
