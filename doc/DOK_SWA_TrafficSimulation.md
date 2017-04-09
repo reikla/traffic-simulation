@@ -57,7 +57,7 @@ Joan  | saag paneer | medium | $11
 Sally  | vindaloo        | mild       | $14
 Erin   | lamb madras | HOT      | $5
 
-+-----------------+-----------------+-----------------------------------+
+
 | Rolle           | Kontakt         | Erwartungshaltung                 |
 +=================+=================+===================================+
 | *&lt;Rolle-1&gt | *&lt;Kontakt-1& | *&lt;Erwartung-1&gt;*             |
