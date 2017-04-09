@@ -27,6 +27,7 @@ Start und Ziel sind definitiv die Endpunkte vom Bildschirm
 
 **Engine**
 
+
 was soll das Ding könne?!
 
 - Thema Tick 
@@ -34,6 +35,10 @@ was soll das Ding könne?!
     - s
 
 **Enviroment**
+
+- Heimat aller Strassen Kreuzungen
+
+- Hat fertige Objekte, die instansiert sind 
 
 Includiert:
 
