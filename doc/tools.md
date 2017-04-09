@@ -6,6 +6,11 @@ Ich nehm die Enterprise Version, die gibts über die FH
 Echt ein tolles Tool, wir können darüber zum Beispiel auch die CodingConventions forcen
 Kann man mit dem Studentenaccount von [JetBrains](https://www.jetbrains.com/) holen.
 
+### Indention
+Extras -> Optionen -> Texteditor -> C# -> Tabstopps
+Tapstopgröße 2
+Einzugsgröße 2
+
 ## Nice to have
 ### Productivity Power Tools
 Viele angenehme kleine Helfer
