@@ -18,6 +18,7 @@ Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung 
 - Grafische Darstellung und einfache Benutzerschnittstelle Konfiguration-GUI nicht unbedingt notwendig
 
 **Motivation.**
+
 Die Motivation aus Sicht der Teammitgliedern besteht nicht nur in Fertigstellung des Projets, sondern auch in:
 - praktische Umsetzung eines Projektes mit Hilfe von agilen Projktmanagementtechniken
 - Erweiterung der Know-How in der .NET Umgebung
