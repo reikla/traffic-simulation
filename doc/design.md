@@ -29,12 +29,14 @@ Start und Ziel sind definitiv die Endpunkte vom Bildschirm
 
 was soll das Ding könne?!
 
+- Thema Tick
+    - sdf
+    - sdf
+    
 
 **GUI**
 
 
-
-sdfsfd
 
 
 
