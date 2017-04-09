@@ -14,6 +14,27 @@ Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung 
 
 Aufgabenstellung {#_aufgabenstellung}
 ----------------
+**Inhalt.**
+
+Kurzbeschreibung der fachlichen Aufgabenstellung, treibenden Kräfte,
+Extrakt (oder Abstract) der Anforderungen. Verweis auf (hoffentlich
+vorliegende) Anforderungsdokumente (mit Versionsbezeichnungen und
+Ablageorten).
+
+**Motivation.**
+
+Aus Sicht der späteren Nutzer ist die Unterstützung einer fachlichen
+Aufgabe oder Verbesserung der Qualität der eigentliche Beweggrund, ein
+neues System zu schaffen oder ein bestehendes zu modifizieren.
+
+**Form.**
+
+Kurze textuelle Beschreibung, eventuell in tabellarischer Use-Case Form.
+Sofern vorhanden sollte die Aufgabenstellung Verweise auf die
+entsprechenden Anforderungsdokumente enthalten.
+
+Halten Sie diese Auszüge so knapp wie möglich und wägen Sie Lesbarkeit
+und Redundanzfreiheit gegeneinander ab.
 
 Qualitätsziele {#_qualit_tsziele}
 --------------
