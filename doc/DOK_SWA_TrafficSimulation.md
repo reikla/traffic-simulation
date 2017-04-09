@@ -52,10 +52,10 @@ Stakeholder {#_stakeholder}
 -----------
 
 Rolle | Kontakt | Erwartungshaltung 
-------- | ---------------- | ---------- |
-Joan  | saag paneer | medium |
-Sally  | vindaloo        | mild       
-Erin   | lamb madras | HOT      
+------- | ---------------- | ----------:
+Roland Graf  | roland.graf@fh-salzburg.ac.at | Fertigstellung des Projekts |
+Eduard Hirsch  | eduard.hirsch@fh-salzburg.ac.at | Fertigstellung des Projekts
+      
 
 
 | Rolle           | Kontakt         | Erwartungshaltung                 |
