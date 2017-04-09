@@ -44,6 +44,7 @@ Qualitätsziele {#_qualit_tsziele}
 
 - komponentenbasierte Entwicklung (mehrere loigsche Komponente und kein Monolit)
 - Erweiterbarkeit der Komponenten vorsehen
+
     In der Hinsicht auf mögliche Veränderungen oder ERweiterungen müssen die Kompnenten zu einem gewissen Teil eine einfache Anpssung ohne großen Aufwand "vertragen"
 
 
