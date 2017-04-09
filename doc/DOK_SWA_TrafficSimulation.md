@@ -1,6 +1,14 @@
 Einführung und Ziele {#section-introduction-and-goals}
 ====================
-sdf
+Beim Projekt "Traffic Sumulation" handelt es sich um ein FH-Projekt im Zuge der Lehrveranstaltng  Softwarearchitektur.
+Die wesentliche _aufgabenstellung ist 
+
+-   zugrunde liegenden Geschäftsziele, wesentliche Aufgabenstellung und
+    essenzielle fachliche Anforderungen an das System
+
+-   Qualitätsziele für die Architektur
+
+-   relevante Stakeholder und deren Erwartungshaltung
 
 Aufgabenstellung {#_aufgabenstellung}
 ----------------
