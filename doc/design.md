@@ -1,7 +1,20 @@
 # Design
 
+blabla
+----------------
+
+
+
 Setting {#_aufgabenstellung}
 ----------------
+
+Beschreibung:
+
+- Settin ist dumm
+
+- darf/soll nichts können, außer object - Beschreibung
+
+-  
 
 Statisch
 
