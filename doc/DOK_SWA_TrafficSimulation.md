@@ -53,20 +53,9 @@ Stakeholder {#_stakeholder}
 
 Rolle | Kontakt | Erwartungshaltung 
 ------- | ---------------- | ----------:
-Roland Graf  | roland.graf@fh-salzburg.ac.at | Fertigstellung des Projekts |
+Roland Graf  | roland.graf@fh-salzburg.ac.at | Fertigstellung des Projekts
 Eduard Hirsch  | eduard.hirsch@fh-salzburg.ac.at | Fertigstellung des Projekts
       
-
-
-| Rolle           | Kontakt         | Erwartungshaltung                 |
-+=================+=================+===================================+
-| *&lt;Rolle-1&gt   *&lt;Kontakt-1& | *&lt;Erwartung-1&gt;*             |
-| ;*              | gt;*            |                                   |
-+-----------------+-----------------+-----------------------------------+
-| *&lt;Rolle-2&gt | *&lt;Kontakt-2& | *&lt;Erwartung-2&gt;*             |
-| ;*              | gt;*            |                                   |
-+-----------------+-----------------+-----------------------------------+
-
 Randbedingungen {#section-architecture-constraints}
 ===============
 
