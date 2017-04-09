@@ -1,8 +1,21 @@
 # Design
 
-blabla
+Allgemein
 ----------------
-xv
+
+Straße soll da sein
+
+Auto soll fahren
+
+Auto hat Start und Ziel (Route). 
+
+Start kann auch gleichzeitig ein Ziel sein 
+
+Start und Ziel sind definitiv die Endpunkte vom Bildschirm
+
+
+
+
 
 
 
