@@ -40,6 +40,8 @@ was soll das Ding könne?!
 
 - Hat fertige Objekte, die instansiert sind 
 
+- Einfügen Basisklassen im Enviroment
+
 Includiert:
 
 - Knoten und Kanten
