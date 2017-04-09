@@ -17,10 +17,7 @@ Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung 
 - Anzahl der über Einfahrtsstraßen in das System zufahrenden Fahrzeuge regelbar
 - Grafische Darstellung und einfache Benutzerschnittstelle Konfiguration-GUI nicht unbedingt notwendig
 
-**Motivation (IN PROGRESS).**
-
-Aus der Sicht der beteiligten Teammitlglieder besteht die Motivation 
-
+**Motivation.**
 Die Motivation aus Sicht der Teammitgliedern besteht nicht nur in Fertigstellung des Projets, sondern auch in:
 - praktische Umsetzung eines Projektes mit Hilfe von agilen Projktmanagementtechniken
 - Erweiterung der Know-How in der .NET Umgebung
