@@ -3,7 +3,15 @@
 Allgemein
 ----------------
 
+**Was muss da sein?**
+
 Straße soll da sein
+
+Straße ist eine "Kante"
+
+Kreuzung soll da sein
+
+Kreuzung ist ein "Knoten"
 
 Auto soll fahren
 
