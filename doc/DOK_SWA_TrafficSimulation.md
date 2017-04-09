@@ -19,17 +19,16 @@ Die wesentliche Aufgabenstellung ist Entwurf, Dokumentation und Implementierung 
 
 **Motivation (IN PROGRESS).**
 
-Aus Sicht der späteren Nutzer ist die Unterstützung einer fachlichen
-Aufgabe oder Verbesserung der Qualität der eigentliche Beweggrund, ein
-neues System zu schaffen oder ein bestehendes zu modifizieren.
+Aus der Sicht der beteiligten Teammitlglieder besteht die Motivation 
+
+Die Motivation aus Sicht der Teammitgliedern besteht nicht nur in Fertigstellung des Projets, sondern auch in:
+- praktische Umsetzung eines Projektes mit Hilfe von agilen Projktmanagementtechniken
+- Erweiterung der Know-How in der .NET Umgebung
+- weitere Erfahrungen in der komponentenbasierten Entwicklung sammeln
 
 **Form.**
 
-Die Endlösung könnte in etwa, wie [hier](http://volkhin.com/RoadTrafficSimulator/) aussehen
-
-Kurze textuelle Beschreibung, eventuell in tabellarischer Use-Case Form.
-Sofern vorhanden sollte die Aufgabenstellung Verweise auf die
-entsprechenden Anforderungsdokumente enthalten.
+Die Endlösung könnte in etwa, wie [hier](http://volkhin.com/RoadTrafficSimulator/) aussehen.
 
 Qualitätsziele {#_qualit_tsziele}
 --------------
