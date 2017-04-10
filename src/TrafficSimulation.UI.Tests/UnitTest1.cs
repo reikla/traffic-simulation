@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TrafficSimulation.UI.Tests
 {
@@ -9,7 +8,7 @@ namespace TrafficSimulation.UI.Tests
     [TestMethod]
     public void TestMethod1()
     {
-      using(ShimsContext.Create())
+
     }
   }
 }

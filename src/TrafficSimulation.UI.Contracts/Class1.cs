@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TrafficSimulation.UI.Contracts
+﻿namespace TrafficSimulation.UI.Contracts
 {
     public class Class1
     {
