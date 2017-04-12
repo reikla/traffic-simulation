@@ -38,6 +38,8 @@
 \usepackage{lastpage}
 \usepackage{fancyhdr}
 \usepackage{longtable}
+\usepackage{multirow}
+\usepackage{bigstrut}
 %\makeatletter
 %\newcommand*{\currentname}{\@currentlabelname}
 %\makeatother
@@ -430,6 +432,34 @@ D. Komohorov & 11.04.17 & 1.1 & Erstellung der Dokumentenstruktur\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%BEISPIEL  TABELLE mit Umbrüchen 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{table}[htbp]
+%  \centering
+%  \caption{Add caption}
+%    \begin{tabular}{| p{6cm} | p{10cm} |l|l|}
+%    \hline
+%    Bla1 & Bla2 \bigstrut\\
+%    \hline
+%    Bla1 & Bla2 \bigstrut\\
+%    \hline
+%    Bla1 & Bla2 \bigstrut\\
+%    \hline
+%    \end{tabular}%
+%  \label{tab:addlabel}%
+%\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%BEISPIEL  TABELLE mit Umbrüchen 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 %----------------------------------------------------------------------------------------------------------
 % Kapitel: Einleitung, is eigentlich Kapitel 1!!!!!!!
 % ----------------------------------------------------------------------------------------------------------
@@ -450,55 +480,97 @@ Beim Projekt "Traffic Sumulation" handelt es sich um ein FH-Projekt im Zuge der 
 - Anzahl der über Einfahrtsstraßen in das System zufahrenden Fahrzeuge regelbar \\
 - Grafische Darstellung und einfache Benutzerschnittstelle Konfiguration-GUI nicht unbedingt notwendig \\
  \\
-\textbf{Motivation.}
-
-Die Motivation aus Sicht der Teammitgliedern besteht nicht nur in Fertigstellung des Projets, sondern auch in: \\
-- praktische Umsetzung eines Projektes mit Hilfe von agilen Projktmanagementtechniken \\
-- Erweiterung der Know-How in der .NET Umgebung \\
-- weitere Erfahrungen in der komponentenbasierten Entwicklung sammeln \\
-\textbf{Form.}
-
-Die Endlösung könnte in etwa, wie hier aussehen.
 \subsubsection{Qualitätsziele}
-- agiler Softwareentwicklungsprozess einhalten mit folgenden Zielen: \\
-\begin{tabular}[t]{lr} 
-* Abbau der Bürokratie und durch die stärkere Berücksichtigung der menschlichen Aspekte effizienter zu gestalten \\
-* reine Entwurfsphase auf ein Mindestmaß zu reduzieren \\
-* im Entwicklungsprozess so früh wie möglich zu ausführbarer Software zu gelangen \\
-* in regelmäßigen, kurzen Abständen dem Kunden zur gemeinsamen Abstimmung die Ergebnisse für weitere Abstimmung vorzeigen \\
-\end{tabular}
 
-- laufende Dokumentationsanpassung: \\
-\begin{tabular}[t]{lr} 
-Die Doku soll nicht erst am Ende es Projekts sondern laufend erfolgen. Das Ziel ist dabei permanent gültige Dokumente zu besitzen.
-\end{tabular}
 
-- komponentenbasierte Entwicklung (mehrere logische Komponente und kein Monolit) \\
-\\
-- Erweiterbarkeit der Komponenten vorsehen \\
-\begin{tabular}[t]{lr} 
-In der Hinsicht auf mögliche Veränderungen oder ERweiterungen müssen die Kompnenten zu einem gewissen Teil eine einfache Anpssung ohne großen Aufwand "vertragen"
-\end{tabular}
 
+\begin{table}[htbp]
+  \centering
+  \caption{Qualitätsziele}
+    \begin{tabular}{| p{6cm} | p{10cm} |l|l|}
+    \hline
+    \textbf{Qualitätsmerkmal} & \textbf{Beschreibung} \bigstrut\\
+    \hline
+   agiler Softwareentwicklungsprozess & - reine Entwurfsphase auf ein Mindestmaß zu reduzieren \newline - im Entwicklungsprozess so früh wie möglich zu ausführbarer Software zu gelangen \newline - in regelmäßigen, kurzen Abständen dem Kunden zur gemeinsamen Abstimmung die Ergebnisse für weitere Abstimmung vorzeigen \bigstrut\\
+    \hline
+    komponentenbasierte Entwicklung & mehrere logische Komponente und kein Monolit \bigstrut\\
+    \hline
+    Anpassbarkeit & In der Hinsicht auf mögliche Veränderungen oder Erweiterungen müssen die Komponenten zu einem gewissen Teil eine einfache Anpassung ohne großen Aufwand "vertragen" \bigstrut\\
+    \hline
+    Testbarkeit & Die einzelnen Komponenten können getrennt voneinander getestet werden. \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}
+\newpage
 \subsubsection{Stakeholder}
+\begin{table}[htbp]
+  \centering
+  \caption{Stakeholder}
+    \begin{tabular}{| p{4cm} | p{6cm} | p{6cm} |l|l|l|}
+    \hline
+    \textbf{Rolle} & \textbf{Kontakt} & \textbf{Erwartungshaltung} \bigstrut\\
+    \hline
+     Roland Graf (Auftraggeber) &   roland.graf@fh-salzburg.ac.at &  - Fertigstellung des Projekts nach Anforderungsdokument \newline - Professionelle Architektur und Designdokumente \bigstrut\\
+    \hline
+     Eduard Hirsch(Auftraggeber)&  eduard.hirsch@fh-salzburg.ac.at & - Fertigstellung des Projekts nach Anforderungsdokument \newline - Professionelle Architektur und Designdokumente \bigstrut\\
+    \hline
+       Teammitglieder &  gkatzinger.itsb-m2016@fh-salzburg.ac.at \newline tmayer.itsb-m2016@fh-salzburg.ac.at \newline iklammer.itsb-m2016@fh-salzburg.ac.at \newline dkomohorov.itsb-m2016@fh-salzburg.ac.at &  - Beschreibung Softwarearchitektur \newline - Leichte Umsetzbarkeit \newline - Gut testbare Komponenten \bigstrut\\
+    \hline
+    \end{tabular}%
+  \label{tab:addlabel}%
+\end{table}
+
+
 \subsection{Randbedingungen}
 \subsubsection{Technische Rahmenbedingungen}
+- C\# / .NET\\
+- Visual Studio 2015 und höher \\
+Alternativ kann zur Entwicklung auch C\#/Mono verwendet werden. Die Abgabe am Ende des Semesters hat aber ausnahmslos als Visual Studio Solution zu erfolgen!\\
+
 \subsubsection{Organisatorische Rahmenbedingungen}
-\subsubsection{Verteilte Zusammenarbeit}
-\subsubsection{Vorgehensmodell}
-\subsubsection{Sourcecodeverwaltung}
-\subsubsection{Dokumentation}
+\textbf{Verteilte Zusammenarbeit} \\
+Das Team schafft entsprechende Rahmenbedingungen, dass einzelne Teammitglieder ihre Arbeitspakete von einander unabhängig fertigstellen können.
+\\
+\textbf{Vorgehensmodell }\\
+Die Entwicklung erfolgt iterativ und agil. Offene Punkte werden in Paketen nach Scrum-Prinzip abgearbeitet. Die Architekturdokumentation, das Designdokument und die Umsetzung müssen bis Mitte Juli 2017 abgeschlossen werden.
+Bei relevanten Änderungen werde das entsprechende Dokument unverzüglich angepasst.
+\\
+\textbf{Sourcecodeverwaltung} \\
+ Die Verwaltung erfolgt über Microsoft Tool "Team Foundation" MSDN. \\
+\\
+\textbf{Dokumentation} \\
+ Alle relevanten Dokumente werden in Deutsch verfasst. Die Dokumentation im Sourcecode erfolgt in Englisch.
+\\
+\textbf{Konventionen} \\
+\begin{itemize}
+\item 1
+\item 2
+\item 3
+\end{itemize}
+
+
+
 \subsection{Kontextabgrenzung}
 \subsubsection{Technischer und fachlicher Kontext}
+
 \subsection{Lösungsstrategie}
+
 \subsection{Bausteinsicht}
+
 \subsection{Laufzeitsicht}
+
 \subsection{Verteilungssicht}
+
 \subsection{Konzepte}
 \subsection{Entwurfsentscheidungen}
+
 \subsection{Szenarien}
+
 \subsection{Risiken und technische Schulden}
+
 \subsection{Glossar}
+
 \newpage
 \section{Softwaredesign}
 \sloppy
