@@ -3,4 +3,4 @@
 
 [Coole C# Lösung](https://github.com/Schulteatq/CityTrafficSimulator)
 
-![](videos/logging.mp4)
+[Logging](videos/logging.mp4)
