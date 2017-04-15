@@ -13,10 +13,12 @@ namespace TrafficSimulation.Logging.ConsoleLogViewer
 
         Console.WriteLine("The service is ready. Press [Enter] to stop it.");
         Console.ReadLine();
-
+        
         // Close the ServiceHost.
         host.Close();
       }
     }
   }
+
+
 }

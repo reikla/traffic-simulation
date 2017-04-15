@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="179,149,0,0" VerticalAlignment="Top" Width="117" Click="Button_Click"/>
+        <Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="179,149,0,0" VerticalAlignment="Top" Width="117"/>
 
     </Grid>
 </Window>
