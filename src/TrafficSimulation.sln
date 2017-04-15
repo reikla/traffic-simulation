@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26403.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Simulation.Settings", "TrafficSimulation.Simulation.Settings\TrafficSimulation.Simulation.Settings.csproj", "{B03DE89F-F46D-4A57-8F42-2967B137C797}"
 EndProject
@@ -30,6 +30,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{DAD2C740-1943-449F-889D-16F5E4076FDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.UI.Application", "TrafficSimulation.UI.Application\TrafficSimulation.UI.Application.csproj", "{1EFA5E15-A770-49AA-85B3-3E158C6629D2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B} = {7C738BD7-F16E-43C9-AC87-3739CCD5A79B}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{55EE958D-F419-4EF4-B2F4-C9702F79A61C}"
 EndProject
@@ -51,6 +54,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{D767C276
 	ProjectSection(SolutionItems) = preProject
 		VersionInfo.cs = VersionInfo.cs
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Logging.ConsoleLogViewer", "TrafficSimulation.Logging.ConsoleLogViewer\TrafficSimulation.Logging.ConsoleLogViewer.csproj", "{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +135,10 @@ Global
 		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -153,5 +162,6 @@ Global
 		{CD08AA7B-BF62-4C58-AE58-FA26DDB71312} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
 		{B4D31918-3C37-4572-9B61-57AC5A699D36} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
 		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
+		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
 	EndGlobalSection
 EndGlobal
