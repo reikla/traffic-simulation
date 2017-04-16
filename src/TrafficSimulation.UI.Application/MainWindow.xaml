@@ -6,19 +6,7 @@
         xmlns:local="clr-namespace:TrafficSimulation.UI.Application"
         mc:Ignorable="d"
         Title="MainWindow" SizeChanged="MainWindow_OnSizeChanged" Height="350" Width="525">
-    <Canvas>
-        <Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="117"/>
-        <Button x:Name="Button1" Content="Button1" HorizontalAlignment="Left" Margin="432,45,0,0" VerticalAlignment="Top" Width="75" Click="Button1_Click"/>
-        <Rectangle x:Name="rectangle1" Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="19" Margin="27,100,0,0" Stroke="Black" VerticalAlignment="Top" Width="68" RadiusY="9" RadiusX="9" RenderTransformOrigin="0.5,0.5">
-            <Rectangle.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Rectangle.RenderTransform>
-        </Rectangle>
+    
+        <!--<Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="117"/>-->
 
-    </Canvas>
 </Window>
