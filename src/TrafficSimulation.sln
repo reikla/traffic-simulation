@@ -30,11 +30,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{DAD2C740-1943-449F-889D-16F5E4076FDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.UI.Application", "TrafficSimulation.UI.Application\TrafficSimulation.UI.Application.csproj", "{1EFA5E15-A770-49AA-85B3-3E158C6629D2}"
-	ProjectSection(ProjectDependencies) = postProject
-		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B} = {7C738BD7-F16E-43C9-AC87-3739CCD5A79B}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{55EE958D-F419-4EF4-B2F4-C9702F79A61C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.UI.ViewModel", "TrafficSimulation.UI.ViewModel\TrafficSimulation.UI.ViewModel.csproj", "{E4F0CDF4-4265-4BD3-B15C-9A1D69ECCEF4}"
 EndProject
@@ -42,20 +37,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.UI.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.UI.Contracts", "TrafficSimulation.UI.Contracts\TrafficSimulation.UI.Contracts.csproj", "{74B90C10-CFAE-415A-904E-AB70B4150CC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Logging.LogViewer", "TrafficSimulation.Logging.LogViewer\TrafficSimulation.Logging.LogViewer.csproj", "{1CAE09AA-24EA-43EF-BBBA-0F58E1EA4953}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Logging.LogServer", "TrafficSimulation.Logging.LogServer\TrafficSimulation.Logging.LogServer.csproj", "{CD08AA7B-BF62-4C58-AE58-FA26DDB71312}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Logging.Contracts", "TrafficSimulation.Logging.Contracts\TrafficSimulation.Logging.Contracts.csproj", "{B4D31918-3C37-4572-9B61-57AC5A699D36}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Logging.Tests", "TrafficSimulation.Logging.Tests\TrafficSimulation.Logging.Tests.csproj", "{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{D767C276-4B44-414D-B504-C73EB88A8CBA}"
 	ProjectSection(SolutionItems) = preProject
+		NLog.config = NLog.config
+		NLog.xsd = NLog.xsd
 		VersionInfo.cs = VersionInfo.cs
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Logging.ConsoleLogViewer", "TrafficSimulation.Logging.ConsoleLogViewer\TrafficSimulation.Logging.ConsoleLogViewer.csproj", "{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,26 +106,6 @@ Global
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CAE09AA-24EA-43EF-BBBA-0F58E1EA4953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CAE09AA-24EA-43EF-BBBA-0F58E1EA4953}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CAE09AA-24EA-43EF-BBBA-0F58E1EA4953}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CAE09AA-24EA-43EF-BBBA-0F58E1EA4953}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD08AA7B-BF62-4C58-AE58-FA26DDB71312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD08AA7B-BF62-4C58-AE58-FA26DDB71312}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD08AA7B-BF62-4C58-AE58-FA26DDB71312}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD08AA7B-BF62-4C58-AE58-FA26DDB71312}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4D31918-3C37-4572-9B61-57AC5A699D36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4D31918-3C37-4572-9B61-57AC5A699D36}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4D31918-3C37-4572-9B61-57AC5A699D36}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4D31918-3C37-4572-9B61-57AC5A699D36}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,10 +125,5 @@ Global
 		{E4F0CDF4-4265-4BD3-B15C-9A1D69ECCEF4} = {DAD2C740-1943-449F-889D-16F5E4076FDB}
 		{A62FB0B9-605E-42E7-97D6-D9548EAE4A81} = {DAD2C740-1943-449F-889D-16F5E4076FDB}
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5} = {DAD2C740-1943-449F-889D-16F5E4076FDB}
-		{1CAE09AA-24EA-43EF-BBBA-0F58E1EA4953} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
-		{CD08AA7B-BF62-4C58-AE58-FA26DDB71312} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
-		{B4D31918-3C37-4572-9B61-57AC5A699D36} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
-		{51CF0B41-6091-4EA5-A5C2-E1F7D4593154} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
-		{7C738BD7-F16E-43C9-AC87-3739CCD5A79B} = {55EE958D-F419-4EF4-B2F4-C9702F79A61C}
 	EndGlobalSection
 EndGlobal

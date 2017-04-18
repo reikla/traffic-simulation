@@ -94,10 +94,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Content Include="NLog.config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <None Include="NLog.xsd">
+    <None Include="..\NLog.config">
+      <Link>NLog.config</Link>
+    </None>
+    <None Include="..\NLog.xsd">
+      <Link>NLog.xsd</Link>
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
