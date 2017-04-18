@@ -6,7 +6,7 @@ namespace Server
   /// <summary>
   ///   Diese Klasse kapselt den WCF Server
   /// </summary>
-  public class Server
+  internal class Server
   {
     private readonly ServiceHost serviceHost;
 

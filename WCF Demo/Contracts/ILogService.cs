@@ -14,5 +14,12 @@ namespace Contracts
     /// <param name="message">Nachricht die geloggt werden soll.</param>
     [OperationContract]
     void Log(string message);
+
+    /// <summary>
+    /// Log an advanced message including serialization.
+    /// </summary>
+    /// <param name="message">The message</param>
+    [OperationContract]
+    void LogAdvanced(LogMessage message);
   }
 }

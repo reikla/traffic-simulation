@@ -29,9 +29,10 @@ namespace Client
             throw new Exception("Exit");
           }
           logService.Log(message);
+          logService.LogAdvanced(new LogMessage {Message = message, TimeContext = new TimeContext {Time = DateTime.Now}});
         }
       }
-      catch (Exception)
+      catch (Exception ex)
       {
         //exit
       }
