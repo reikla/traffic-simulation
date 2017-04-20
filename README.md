@@ -10,8 +10,8 @@
 ## Inhaltsverzeichnis
 ### [Tools und Settings](/doc/tools.md)
 ### [Nice to know](/doc/nicetoknow.md)
-### [Architektur](/doc/architecture.md)
-### [Design](/doc/design.md)
+### [Architektur](/doc/Architecture.md)
+### [Design](/doc/Design.md)
 
 
 ## History erweitert
