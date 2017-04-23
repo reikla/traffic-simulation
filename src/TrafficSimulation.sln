@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.3
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Simulation.Settings", "TrafficSimulation.Simulation.Settings\TrafficSimulation.Simulation.Settings.csproj", "{B03DE89F-F46D-4A57-8F42-2967B137C797}"
 EndProject
@@ -43,6 +43,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{D767C276
 		NLog.xsd = NLog.xsd
 		VersionInfo.cs = VersionInfo.cs
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Simulation.Applications", "TrafficSimulation.Simulation.Applications\TrafficSimulation.Simulation.Applications.csproj", "{CDC4E86C-AC63-4B4D-818D-D961F72D159B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +108,10 @@ Global
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC4E86C-AC63-4B4D-818D-D961F72D159B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC4E86C-AC63-4B4D-818D-D961F72D159B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC4E86C-AC63-4B4D-818D-D961F72D159B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC4E86C-AC63-4B4D-818D-D961F72D159B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,5 +131,6 @@ Global
 		{E4F0CDF4-4265-4BD3-B15C-9A1D69ECCEF4} = {DAD2C740-1943-449F-889D-16F5E4076FDB}
 		{A62FB0B9-605E-42E7-97D6-D9548EAE4A81} = {DAD2C740-1943-449F-889D-16F5E4076FDB}
 		{74B90C10-CFAE-415A-904E-AB70B4150CC5} = {DAD2C740-1943-449F-889D-16F5E4076FDB}
+		{CDC4E86C-AC63-4B4D-818D-D961F72D159B} = {0EBCC682-1CB2-4413-BD6A-699FFDAA155B}
 	EndGlobalSection
 EndGlobal
