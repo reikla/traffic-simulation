@@ -4,8 +4,8 @@
   {
     public SlowSimulationSettings()
     {
-      TickRate = 10;
-      TickStepSize = 100;
+      TickRate = 250;
+      TickStepSize = 1;
     }
   }
 }

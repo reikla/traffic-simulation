@@ -16,5 +16,12 @@ namespace TrafficSimulation.Simulation.Contracts
     /// the length of the route.
     /// </summary>
     double Legth { get; }
+
+    /// <summary>
+    /// Returns the next node on this connection
+    /// </summary>
+    /// <param name="currentConnection"></param>
+    /// <returns>null if that was the last node</returns>
+    INodeConnection NextConnection(INodeConnection currentConnection);
   }
 }

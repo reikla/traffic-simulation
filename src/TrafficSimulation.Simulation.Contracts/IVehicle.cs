@@ -3,7 +3,7 @@
   /// <summary>
   /// Represents a vehicle in the simulation
   /// </summary>
-  public interface IVehicle : ITickable
+  public interface IVehicle : ITickable, IPlaceable
   {
     /// <summary>
     /// the type of the vehicle

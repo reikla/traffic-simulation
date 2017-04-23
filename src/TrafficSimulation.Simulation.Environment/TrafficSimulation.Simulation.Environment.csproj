@@ -46,6 +46,7 @@
     <Compile Include="EndNode.cs" />
     <Compile Include="Node.cs" />
     <Compile Include="NodeConnection.cs" />
+    <Compile Include="Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route.cs" />
     <Compile Include="StartNode.cs" />

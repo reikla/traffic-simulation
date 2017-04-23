@@ -15,12 +15,14 @@ namespace TrafficSimulation.Simulation.Engine
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private DataModel _dataModel = new DataModel();
     private Timer SimulationTimer;
-    private SimulationSettings _settings; 
+    private SimulationSettings _settings;
+    private IDataModelInitializer _dataModelInitializer;
 
 
     public SimulationEngine()
     {
       _settings = new SlowSimulationSettings();
+      _dataModelInitializer = new SingleCarDataModelInitialzier();
     }
 
 
@@ -85,9 +87,7 @@ namespace TrafficSimulation.Simulation.Engine
         throw new EngineInitializationException(Strings.Exception_Already_Initialized);
       }
       Logger.Trace("Init Simulation Engine");
-      CreateNodes();
-      CreateVehicle();
-
+      _dataModelInitializer.Initialize(_dataModel);
       _isInitialized = true;
     }
 
@@ -99,31 +99,6 @@ namespace TrafficSimulation.Simulation.Engine
       }
     }
 
-    private void CreateNodes()
-    {
-      Logger.Trace("Creating Nodes");
-      var startNode = new StartNode();
-      var endNode = new EndNode();
-      var node = new Node();
 
-      var connection1 = new NodeConnection(startNode, node, 100);
-      var connection2 = new NodeConnection(node, endNode, 100);
-
-      _dataModel.Nodes.Add(startNode);
-      _dataModel.Nodes.Add(node);
-      _dataModel.Nodes.Add(endNode);
-
-      _dataModel.NodeConnections.Add(connection1);
-      _dataModel.NodeConnections.Add(connection2);
-    }
-
-    private void CreateVehicle()
-    {
-      Logger.Trace("Creating Vehicles");
-
-      var vehicle = new Vehicle(VehicleType.Car);
-      _dataModel.Vehicles.Add(vehicle);
-
-    }
   }
 }
