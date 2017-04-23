@@ -49,6 +49,9 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Exceptions\EngineInitializationException.cs" />
+    <Compile Include="Exceptions\EngineStateException.cs" />
+    <Compile Include="Exceptions\SimulationException.cs" />
     <Compile Include="IEndNode.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="INode.cs" />

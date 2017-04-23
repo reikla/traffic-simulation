@@ -51,11 +51,21 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="EngineTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
+      <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
+      <Name>TrafficSimulation.Simulation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Engine\TrafficSimulation.Simulation.Engine.csproj">
+      <Project>{4B41D580-C0CD-43A5-B28B-3714A3A1CDB2}</Project>
+      <Name>TrafficSimulation.Simulation.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
