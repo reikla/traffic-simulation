@@ -52,15 +52,29 @@
     <Compile Include="Properties\VersionInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\NLog.config">
+      <Link>NLog.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="..\NLog.xsd">
+      <Link>NLog.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.config" />
-    <None Include="NLog.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
+      <Project>{03aba0ba-0186-49ce-a8df-a6f0af92620f}</Project>
+      <Name>TrafficSimulation.Simulation.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrafficSimulation.Simulation.Engine\TrafficSimulation.Simulation.Engine.csproj">
       <Project>{4B41D580-C0CD-43A5-B28B-3714A3A1CDB2}</Project>
       <Name>TrafficSimulation.Simulation.Engine</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>XCOPY "$(SolutionDir)\Sentinel 0.12.4.0 Release" "$(TargetDir)\Sentinel" /c /s /i /y</PreBuildEvent>
+  </PropertyGroup>
 </Project>

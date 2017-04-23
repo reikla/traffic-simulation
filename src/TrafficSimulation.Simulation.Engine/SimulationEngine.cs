@@ -10,19 +10,16 @@ namespace TrafficSimulation.Simulation.Engine
     public void Start()
     {
       _logger.Trace("Starting Simulation");
-      throw new System.NotImplementedException();
     }
 
     public void Stop()
     {
       _logger.Trace("Stopping Simulation");
-      throw new System.NotImplementedException();
     }
 
     public void Step()
     {
       _logger.Trace("Simulating a step.");
-      throw new System.NotImplementedException();
     }
 
     public void Init()
