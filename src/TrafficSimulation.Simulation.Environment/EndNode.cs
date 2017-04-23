@@ -2,7 +2,7 @@
 
 namespace TrafficSimulation.Simulation.Environment
 {
-  public class EndNode : SimulationBase, IEndNode
+  public class EndNode : Node, IEndNode
   {
     public void DestroyVehicle(IVehicle vehicle)
     {

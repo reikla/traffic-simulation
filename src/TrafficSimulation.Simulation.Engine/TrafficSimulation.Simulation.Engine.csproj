@@ -57,6 +57,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
+      <Project>{885DCB21-8AEF-4028-8285-677330B43F0E}</Project>
+      <Name>TrafficSimulation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
       <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>
@@ -64,6 +68,14 @@
     <ProjectReference Include="..\TrafficSimulation.Simulation.Environment\TrafficSimulation.Simulation.Environment.csproj">
       <Project>{CFC1D40E-3DAB-4351-B434-B1EF5FB4CA3A}</Project>
       <Name>TrafficSimulation.Simulation.Environment</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Settings\TrafficSimulation.Simulation.Settings.csproj">
+      <Project>{B03DE89F-F46D-4A57-8F42-2967B137C797}</Project>
+      <Name>TrafficSimulation.Simulation.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.SimulationObjects\TrafficSimulation.Simulation.SimulationObjects.csproj">
+      <Project>{E33A01A4-94B2-457D-9D5F-49B9E65C14D8}</Project>
+      <Name>TrafficSimulation.Simulation.SimulationObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

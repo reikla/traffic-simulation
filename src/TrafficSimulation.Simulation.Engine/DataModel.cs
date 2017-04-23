@@ -3,7 +3,7 @@ using TrafficSimulation.Simulation.Contracts;
 
 namespace TrafficSimulation.Simulation.Engine
 {
-  public class DataModel
+  internal class DataModel
   {
     public DataModel()
     {

@@ -1,8 +1,11 @@
 ﻿using System.Timers;
 using NLog;
+using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.Exceptions;
 using TrafficSimulation.Simulation.Environment;
+using TrafficSimulation.Simulation.Settings;
+using TrafficSimulation.Simulation.SimulationObjects;
 
 namespace TrafficSimulation.Simulation.Engine
 {
@@ -12,16 +15,32 @@ namespace TrafficSimulation.Simulation.Engine
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private DataModel _dataModel = new DataModel();
     private Timer SimulationTimer;
+    private SimulationSettings _settings; 
+
+
+    public SimulationEngine()
+    {
+      _settings = new SlowSimulationSettings();
+    }
+
 
     public void Start()
     {
+      Logger.Trace("Starting Simulation");
       CheckOrThrowInitialization("Start()");
       if (SimulationTimer != null)
       {
-        throw new EngineStateException("Simulation already started.");
+        Logger.Error(Strings.Exception_Already_Started);
+        throw new EngineStateException(Strings.Exception_Already_Started);
       }
-      SimulationTimer = new Timer();
-      Logger.Trace("Starting Simulation");
+      SimulationTimer = new Timer(_settings.TickRate);
+      SimulationTimer.Elapsed += SimulationTimer_Elapsed;
+      SimulationTimer.Start();
+    }
+
+    private void SimulationTimer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+      DoStep();
     }
 
     public void Stop()
@@ -29,9 +48,12 @@ namespace TrafficSimulation.Simulation.Engine
       CheckOrThrowInitialization("Stop()");
       if (SimulationTimer == null)
       {
-        throw new EngineStateException("Simulation not running.");
+        Logger.Error(Strings.Exception_Already_Stopped);
+        throw new EngineStateException(Strings.Exception_Already_Stopped);
       }
       Logger.Trace("Stopping Simulation");
+      SimulationTimer.Stop();
+      SimulationTimer = null;
     }
 
     public void Step()
@@ -39,19 +61,32 @@ namespace TrafficSimulation.Simulation.Engine
       CheckOrThrowInitialization("Step()");
       if (SimulationTimer != null)
       {
-        throw new EngineStateException("Can not single step. Simulation is running");
+        Logger.Error(Strings.Exception_Cant_Step);
+        throw new EngineStateException(Strings.Exception_Cant_Step);
       }
       Logger.Trace("Simulating a step.");
+      DoStep();
+    }
+
+    private void DoStep()
+    {
+      Logger.Trace($"Do Step. Size: {_settings.TickStepSize}");
+      foreach (var dataModelVehicle in _dataModel.Vehicles)
+      {
+        dataModelVehicle.Tick(_settings.TickStepSize);
+      }
     }
 
     public void Init()
     {
       if (_isInitialized)
       {
-        throw new EngineInitializationException("Engine is alread initialized.");
+        Logger.Error(Strings.Exception_Already_Initialized);
+        throw new EngineInitializationException(Strings.Exception_Already_Initialized);
       }
       Logger.Trace("Init Simulation Engine");
       CreateNodes();
+      CreateVehicle();
 
       _isInitialized = true;
     }
@@ -80,6 +115,15 @@ namespace TrafficSimulation.Simulation.Engine
 
       _dataModel.NodeConnections.Add(connection1);
       _dataModel.NodeConnections.Add(connection2);
+    }
+
+    private void CreateVehicle()
+    {
+      Logger.Trace("Creating Vehicles");
+
+      var vehicle = new Vehicle(VehicleType.Car);
+      _dataModel.Vehicles.Add(vehicle);
+
     }
   }
 }

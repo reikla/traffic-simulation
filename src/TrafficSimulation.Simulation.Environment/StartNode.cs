@@ -2,7 +2,7 @@
 
 namespace TrafficSimulation.Simulation.Environment
 {
-  public class StartNode : SimulationBase, IStartNode
+  public class StartNode : Node, IStartNode
   {
     public IVehicle CreateVehicle()
     {

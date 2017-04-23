@@ -2,7 +2,7 @@
 
 namespace TrafficSimulation.Simulation.Environment
 {
-    public class Node : INode
+    public class Node : SimulationBase, INode
     {
     }
 }

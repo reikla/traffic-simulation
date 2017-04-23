@@ -6,9 +6,9 @@ namespace TrafficSimulation.Simulation.SimulationObjects
   /// <summary>
   /// Represents a vehicle in the simulation
   /// </summary>
-  public class Vehicle : IVehicle
+  public class Vehicle : SimulationBase, IVehicle
   {
-    private static Logger _logger = LogManager.GetCurrentClassLogger();
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
     public Vehicle(VehicleType type)
     {
@@ -16,7 +16,7 @@ namespace TrafficSimulation.Simulation.SimulationObjects
     }
     public void Tick(double timespan)
     {
-      _logger.Trace($"Tick: {this}");
+      Logger.Trace($"Tick: {this}");
     }
 
     public VehicleType VehicleType { get; set; }

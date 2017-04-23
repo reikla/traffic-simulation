@@ -43,8 +43,9 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
+    <Compile Include="SimulationSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SlowSimulationSettings.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,10 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Threading;
+using NLog;
 
 namespace TrafficSimulation.Simulation.Applications
 {
   class LoggingController : IController
   {
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private Process _sentinelProcess;
     private bool _forceKillOnExit;
 
@@ -16,11 +18,13 @@ namespace TrafficSimulation.Simulation.Applications
 
     public void Start()
     {
+      Logger.Trace("Starting LoggingController");
       StartOrGetProcess();
     }
 
     public void Shutdown()
     {
+      Logger.Trace($"Shutdown Logging Controller. ForceKillOnExit: {_forceKillOnExit}");
       if (_forceKillOnExit)
       {
         _sentinelProcess.Kill();
