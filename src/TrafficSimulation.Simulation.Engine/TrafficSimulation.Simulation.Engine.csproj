@@ -52,6 +52,7 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
+    <Compile Include="DataModel.cs" />
     <Compile Include="SimulationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -59,6 +60,10 @@
     <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
       <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Environment\TrafficSimulation.Simulation.Environment.csproj">
+      <Project>{CFC1D40E-3DAB-4351-B434-B1EF5FB4CA3A}</Project>
+      <Name>TrafficSimulation.Simulation.Environment</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
