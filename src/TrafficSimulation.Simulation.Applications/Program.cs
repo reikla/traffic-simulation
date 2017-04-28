@@ -14,13 +14,13 @@ namespace TrafficSimulation.Simulation.Applications
       var engine = new SimulationEngine();
       var loggingController = new LoggingController(false);
       Controllers.Add(loggingController);
-      loggingController.Start();
-      
-      engine.Init();
-      engine.Start();
+      Controllers.Add(new SimulationWebserviceController());
+      Controllers.ForEach(x => x.Start());
+
+      Console.WriteLine("Services Started. Press any Key to exit.");
       Console.ReadKey();
 
-      engine.Stop();
+
       ShutDown();
     }
 

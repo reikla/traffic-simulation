@@ -3,9 +3,7 @@ using NLog;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.Exceptions;
-using TrafficSimulation.Simulation.Environment;
 using TrafficSimulation.Simulation.Settings;
-using TrafficSimulation.Simulation.SimulationObjects;
 
 namespace TrafficSimulation.Simulation.Engine
 {
@@ -17,6 +15,8 @@ namespace TrafficSimulation.Simulation.Engine
     private Timer SimulationTimer;
     private SimulationSettings _settings;
     private IDataModelInitializer _dataModelInitializer;
+
+    internal DataModel DataModel => _dataModel;
 
 
     public SimulationEngine()
@@ -73,9 +73,9 @@ namespace TrafficSimulation.Simulation.Engine
     private void DoStep()
     {
       Logger.Trace($"Do Step. Size: {_settings.TickStepSize}");
-      foreach (var dataModelVehicle in _dataModel.Vehicles)
+      foreach (var vehicle in _dataModel.Vehicles)
       {
-        dataModelVehicle.Tick(_settings.TickStepSize);
+        vehicle.Tick(_settings.TickStepSize);
       }
     }
 
@@ -98,7 +98,5 @@ namespace TrafficSimulation.Simulation.Engine
         throw new EngineInitializationException($"Can not execute {method}. Engine is not initialzied.");
       }
     }
-
-
   }
 }

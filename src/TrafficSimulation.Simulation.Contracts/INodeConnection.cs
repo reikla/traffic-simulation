@@ -3,7 +3,7 @@
   /// <summary>
   /// A node connection connects two nodes. 
   /// </summary>
-  public interface INodeConnection
+  public interface INodeConnection : ISimulationBase
   {
     /// <summary>
     /// The start node of the connection.

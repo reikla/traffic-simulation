@@ -3,7 +3,7 @@
   /// <summary>
   /// Represents a base item of the simulation. This is used to exactly identify each object.
   /// </summary>
-  public class SimulationBase
+  public class SimulationBase : ISimulationBase
   {
     private static int _id = 0;
     /// <summary>

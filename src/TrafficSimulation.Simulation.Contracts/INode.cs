@@ -3,7 +3,7 @@
   /// <summary>
   /// Represents a node in the simulation.
   /// </summary>
-  public interface INode
+  public interface INode : ISimulationBase
   {
     
   }

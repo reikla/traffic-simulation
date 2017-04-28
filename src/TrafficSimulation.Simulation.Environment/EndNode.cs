@@ -6,7 +6,7 @@ namespace TrafficSimulation.Simulation.Environment
   {
     public void DestroyVehicle(IVehicle vehicle)
     {
-      throw new System.NotImplementedException();
+      
     }
   }
 }

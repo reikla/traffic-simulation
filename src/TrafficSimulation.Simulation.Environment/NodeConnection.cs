@@ -5,7 +5,7 @@ namespace TrafficSimulation.Simulation.Environment
   /// <summary>
   /// Represents a connections between two nodes.
   /// </summary>
-  public class NodeConnection : INodeConnection
+  public class NodeConnection : SimulationBase, INodeConnection
   {
     /// <summary>
     /// Constructor

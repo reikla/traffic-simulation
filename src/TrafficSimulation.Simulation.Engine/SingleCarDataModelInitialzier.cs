@@ -29,7 +29,7 @@ namespace TrafficSimulation.Simulation.Engine
       var node = new Node();
 
       var connection1 = new NodeConnection(startNode, node, 100);
-      var connection2 = new NodeConnection(node, endNode, 1000);
+      var connection2 = new NodeConnection(node, endNode, 100000);
 
       dataModel.Nodes.Add(startNode);
       dataModel.Nodes.Add(node);
