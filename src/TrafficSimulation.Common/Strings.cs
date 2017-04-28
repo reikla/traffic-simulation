@@ -1,6 +1,6 @@
 ﻿namespace TrafficSimulation.Common
 {
-  public class Strings
+  public static class Strings
   {
     public static readonly string Exception_Already_Started = "Can't start simulation. Its already started.";
     public static readonly string Exception_Already_Stopped = "Can't stop Simulation because its not running.";

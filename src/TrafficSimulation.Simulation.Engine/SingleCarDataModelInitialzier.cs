@@ -1,7 +1,7 @@
 ﻿using NLog;
 using TrafficSimulation.Simulation.Contracts;
-using TrafficSimulation.Simulation.Environment;
-using TrafficSimulation.Simulation.SimulationObjects;
+using TrafficSimulation.Simulation.Engine.Environment;
+using TrafficSimulation.Simulation.Engine.SimulationObjects;
 
 namespace TrafficSimulation.Simulation.Engine
 {

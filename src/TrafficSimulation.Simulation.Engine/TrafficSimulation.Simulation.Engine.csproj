@@ -54,9 +54,32 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="DataModel.cs" />
+    <Compile Include="Environment\EndNode.cs" />
+    <Compile Include="Environment\Node.cs" />
+    <Compile Include="Environment\NodeConnection.cs" />
+    <Compile Include="Environment\Position.cs" />
+    <Compile Include="Environment\Route.cs" />
+    <Compile Include="Environment\StartNode.cs" />
     <Compile Include="IDataModelInitializer.cs" />
+    <Compile Include="Environment\IEndNode.cs" />
+    <Compile Include="IEngine.cs" />
+    <Compile Include="Environment\INode.cs" />
+    <Compile Include="Environment\INodeConnection.cs" />
+    <Compile Include="Environment\IPlaceable.cs" />
+    <Compile Include="Environment\IPosition.cs" />
+    <Compile Include="Environment\IRoute.cs" />
+    <Compile Include="ISimulationBase.cs" />
+    <Compile Include="Environment\IStartNode.cs" />
+    <Compile Include="ITickable.cs" />
+    <Compile Include="IVehicle.cs" />
+    <Compile Include="Settings\SimulationSettings.cs" />
+    <Compile Include="Settings\SlowSimulationSettings.cs" />
+    <Compile Include="SimulationBase.cs" />
     <Compile Include="SimulationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimulationObjects\Placer.cs" />
+    <Compile Include="SimulationObjects\Vehicle.cs" />
+    <Compile Include="SimulationObjects\VehiclePhysics.cs" />
     <Compile Include="SimulationService.cs" />
     <Compile Include="SingleCarDataModelInitialzier.cs" />
   </ItemGroup>
@@ -68,18 +91,6 @@
     <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
       <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrafficSimulation.Simulation.Environment\TrafficSimulation.Simulation.Environment.csproj">
-      <Project>{CFC1D40E-3DAB-4351-B434-B1EF5FB4CA3A}</Project>
-      <Name>TrafficSimulation.Simulation.Environment</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrafficSimulation.Simulation.Settings\TrafficSimulation.Simulation.Settings.csproj">
-      <Project>{B03DE89F-F46D-4A57-8F42-2967B137C797}</Project>
-      <Name>TrafficSimulation.Simulation.Settings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TrafficSimulation.Simulation.SimulationObjects\TrafficSimulation.Simulation.SimulationObjects.csproj">
-      <Project>{E33A01A4-94B2-457D-9D5F-49B9E65C14D8}</Project>
-      <Name>TrafficSimulation.Simulation.SimulationObjects</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

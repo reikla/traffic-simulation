@@ -1,9 +1,8 @@
 ﻿using System.Timers;
 using NLog;
 using TrafficSimulation.Common;
-using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.Exceptions;
-using TrafficSimulation.Simulation.Settings;
+using TrafficSimulation.Simulation.Engine.Settings;
 
 namespace TrafficSimulation.Simulation.Engine
 {
