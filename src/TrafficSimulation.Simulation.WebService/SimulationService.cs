@@ -3,8 +3,9 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
+using TrafficSimulation.Simulation.Engine;
 
-namespace TrafficSimulation.Simulation.Engine
+namespace TrafficSimulation.Simulation.WebService
 {
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
   public class SimulationService : ISimulationService

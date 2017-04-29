@@ -80,7 +80,6 @@
     <Compile Include="SimulationObjects\Placer.cs" />
     <Compile Include="SimulationObjects\Vehicle.cs" />
     <Compile Include="SimulationObjects\VehiclePhysics.cs" />
-    <Compile Include="SimulationService.cs" />
     <Compile Include="SingleCarDataModelInitialzier.cs" />
   </ItemGroup>
   <ItemGroup>

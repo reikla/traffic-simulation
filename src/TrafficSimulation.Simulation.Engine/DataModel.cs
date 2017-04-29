@@ -18,7 +18,7 @@ namespace TrafficSimulation.Simulation.Engine
     public List<INodeConnection> NodeConnections { get; set; }
     public List<IVehicle> Vehicles { get; set; }
     public List<IRoute> Routes { get; set; }
-    internal IEnumerable<IStartNode> StartNodes => Nodes.Where(x => x is IStartNode) as IEnumerable<IStartNode>;
-    internal IEnumerable<IEndNode> EndNodes => Nodes.Where(x => x is IEndNode) as IEnumerable<IEndNode>;
+    public IEnumerable<IStartNode> StartNodes => Nodes.Where(x => x is IStartNode) as IEnumerable<IStartNode>;
+    public IEnumerable<IEndNode> EndNodes => Nodes.Where(x => x is IEndNode) as IEnumerable<IEndNode>;
   }
 }

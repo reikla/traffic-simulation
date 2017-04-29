@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CDC4E86C-AC63-4B4D-818D-D961F72D159B}</ProjectGuid>
+    <ProjectGuid>{4B9BA40E-E33B-4AF9-BD91-A2D1D50360C8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TrafficSimulation.Simulation.Applications</RootNamespace>
-    <AssemblyName>TrafficSimulation.Simulation.Applications</AssemblyName>
+    <RootNamespace>TrafficSimulation.Simulation.WebService</RootNamespace>
+    <AssemblyName>TrafficSimulation.Simulation.WebService</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.6\lib\net45\NLog.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -49,12 +46,9 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="IController.cs" />
-    <Compile Include="ProcessController.cs" />
-    <Compile Include="LoggingController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SimulationWebserviceController.cs" />
+    <Compile Include="SimulationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\NLog.config">
@@ -65,13 +59,17 @@
       <Link>NLog.xsd</Link>
       <SubType>Designer</SubType>
     </None>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="packages.config" />
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
+      <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
+      <Name>TrafficSimulation.Simulation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Engine\TrafficSimulation.Simulation.Engine.csproj">
+      <Project>{4B41D580-C0CD-43A5-B28B-3714A3A1CDB2}</Project>
+      <Name>TrafficSimulation.Simulation.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>XCOPY "$(SolutionDir)\Sentinel 0.12.4.0 Release" "$(TargetDir)\Sentinel" /c /s /i /y</PreBuildEvent>
-  </PropertyGroup>
 </Project>
