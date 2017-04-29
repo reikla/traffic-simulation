@@ -4,15 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1DBB2418-AC29-46F8-ABA9-1EEA75936B64}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TrafficSimulation.TrafficLightControl.Contracts</RootNamespace>
-    <AssemblyName>TrafficSimulation.TrafficLightControl.Contracts</AssemblyName>
+    <ProjectGuid>{D6358289-C108-4240-9322-A177F78C2F08}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TrafficSimulation.TrafficLightControl.WebService</RootNamespace>
+    <AssemblyName>TrafficSimulation.TrafficLightControl.WebService</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +23,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -30,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.4.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceModel" />
@@ -44,9 +49,30 @@
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
-    <Compile Include="Class1.cs" />
-    <Compile Include="ITrafficLightService.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrafficLightControlService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\NLog.config">
+      <Link>NLog.config</Link>
+    </None>
+    <None Include="..\NLog.xsd">
+      <Link>NLog.xsd</Link>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
+      <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
+      <Name>TrafficSimulation.Simulation.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.TrafficLightControl.Contracts\TrafficSimulation.TrafficLightControl.Contracts.csproj">
+      <Project>{1dbb2418-ac29-46f8-aba9-1eea75936b64}</Project>
+      <Name>TrafficSimulation.TrafficLightControl.Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
