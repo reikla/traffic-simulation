@@ -13,8 +13,8 @@ namespace Server
     public Server()
     {
       serviceHost = new ServiceHost(typeof(LogService));
-      var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-      serviceHost.AddServiceEndpoint(typeof(ILogService), binding, Constants.Address);
+//      var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
+//      serviceHost.AddServiceEndpoint(typeof(ILogService), binding, Constants.Address);
     }
 
     /// <summary>

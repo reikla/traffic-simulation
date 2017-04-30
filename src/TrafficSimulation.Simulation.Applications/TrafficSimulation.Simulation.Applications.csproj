@@ -54,6 +54,7 @@
     <Compile Include="LoggingController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrafficLightWebserviceController.cs" />
     <Compile Include="SimulationWebserviceController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +73,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>XCOPY "$(SolutionDir)\Sentinel 0.12.4.0 Release" "$(TargetDir)\Sentinel" /c /s /i /y</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY "$(SolutionDir)\Sentinel 0.12.4.0 Release" "$(TargetDir)\Sentinel" /c /s /i /y
+XCOPY "$(SolutionDir)TrafficSimulation.TrafficLightControl.WebService\bin\$(Configuration)" "$(TargetDir)\TrafficLightControlService" /c /s /i /y
+XCOPY "$(SolutionDir)TrafficSimulation.Simulation.WebService\bin\$(Configuration)" "$(TargetDir)\SimulationService" /c /s /i /y</PostBuildEvent>
   </PropertyGroup>
 </Project>

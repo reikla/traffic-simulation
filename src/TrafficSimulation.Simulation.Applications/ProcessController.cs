@@ -12,14 +12,14 @@ namespace TrafficSimulation.Simulation.Applications
     private Process _process;
     private bool _forceKillOnExit;
     private string _processName;
-    private string _pathToProcess;
+    private string _relativePathToProcess;
     private string _startParameter;
 
-    public ProcessController(bool forceKillOnExit, string processName, string pathToProcess, string startParameter)
+    public ProcessController(bool forceKillOnExit, string processName, string relativePathToProcess, string startParameter)
     {
       _forceKillOnExit = forceKillOnExit;
       _processName = processName;
-      _pathToProcess = pathToProcess;
+      _relativePathToProcess = relativePathToProcess;
       _startParameter = startParameter;
     }
 
@@ -33,9 +33,10 @@ namespace TrafficSimulation.Simulation.Applications
     public void Shutdown()
     {
       Logger.Trace($"Shutdown {GetType().Name}. ForceKillOnExit: {_forceKillOnExit}");
-      if (_forceKillOnExit)
+      if (_forceKillOnExit && _process != null && !_process.HasExited)
       {
         _process.Kill();
+        _process = null;
       }
     }
 
@@ -48,12 +49,13 @@ namespace TrafficSimulation.Simulation.Applications
       }
       else
       {
-        var workingDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _pathToProcess);
+        var workingDir = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _relativePathToProcess);
         ProcessStartInfo psi =
           new ProcessStartInfo(Path.Combine(workingDir, $"{_processName}.exe"), _startParameter)
           {
             WorkingDirectory = workingDir,
-            UseShellExecute = false
+            UseShellExecute = false,
+            CreateNoWindow = false
           };
         _process = Process.Start(psi);
         

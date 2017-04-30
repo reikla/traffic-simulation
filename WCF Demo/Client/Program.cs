@@ -11,8 +11,8 @@ namespace Client
       Console.WriteLine("Waiting for server. Press button to start.");
       Console.ReadKey();
 
-      var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.None);
-      var ep = new EndpointAddress(Constants.Address);
+      var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
+      var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");
       var logService = ChannelFactory<ILogService>.CreateChannel(binding, ep);
 
       Console.WriteLine("Connected to Log Server.");

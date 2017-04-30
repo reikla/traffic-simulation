@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26403.0
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Simulation", "Simulation", "{0EBCC682-1CB2-4413-BD6A-699FFDAA155B}"
 EndProject
@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{D767C276
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrafficSimulation.Simulation.Applications", "TrafficSimulation.Simulation.Applications\TrafficSimulation.Simulation.Applications.csproj", "{CDC4E86C-AC63-4B4D-818D-D961F72D159B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4B9BA40E-E33B-4AF9-BD91-A2D1D50360C8} = {4B9BA40E-E33B-4AF9-BD91-A2D1D50360C8}
+		{D6358289-C108-4240-9322-A177F78C2F08} = {D6358289-C108-4240-9322-A177F78C2F08}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{8F04E273-6D2D-4A38-8576-3A5F584D667D}"
 EndProject

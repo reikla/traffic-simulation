@@ -1,8 +1,4 @@
-﻿using System.Diagnostics;
-using System.Threading;
-using NLog;
-
-namespace TrafficSimulation.Simulation.Applications
+﻿namespace TrafficSimulation.Simulation.Applications
 {
   class LoggingController : ProcessController
   {
