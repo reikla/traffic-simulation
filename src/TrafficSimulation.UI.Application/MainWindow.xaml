@@ -16,9 +16,8 @@
     <Window.DataContext>
         <viewModel:TrafficSimulationViewModel />
     </Window.DataContext>
-    <Canvas x:Name="MainCanvas">
-        <Label x:Name="label" Content="{Binding CurrPos}" Canvas.Left="130" Canvas.Top="76"/>
-        <Rectangle Width="50" Height="50" Canvas.Left="50" Canvas.Top="50" Stroke="Black" Fill="Green"></Rectangle>
+    <Canvas x:Name="MainCanvas" Margin="10">
+
 
     </Canvas>
 </Window>

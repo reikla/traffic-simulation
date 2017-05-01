@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.UI.Application.ViewModel;
 
 
@@ -23,55 +25,63 @@ namespace TrafficSimulation.UI.Application
     public MainWindow()
     {
       InitializeComponent();
-      DispatcherTimer timer = new DispatcherTimer();
-      timer.Interval = TimeSpan.FromSeconds(1);
-      timer.Tick += timer_Tick;
-      timer.Start();
     }
+    //  DispatcherTimer timer = new DispatcherTimer();
+    //  timer.Interval = TimeSpan.FromSeconds(1);
+    //  timer.Tick += timer_Tick;
+    //  timer.Start();
+    //}
 
-    void timer_Tick(object sender, EventArgs e)
-    {
-      UpdateViewModel();
-    }
+    //void timer_Tick(object sender, EventArgs e)
+    //{
+    //  UpdateViewModel();
+    //}
 
-    void UpdateViewModel()
-    {
-    }
+    //void UpdateViewModel()
+    //{
+    //}
 
-    public void DrawSim()
-    {
-      foreach (var street in ViewModel.NodeConnections)
-      {
-      }
-    }
+    //public void DrawSim()
+    //{
+    //  foreach (var street in ViewModel.NodeConnections)
+    //  {
+    //  }
+    //}
 
-    public Rectangle DrawVehicle(double width, double height, Brush brush)
+    public Rectangle DrawVehicle(double width, double height)
     {
       return new Rectangle()
       {
         Width = width,
         Height = height,
-        Fill = brush
+        Fill = Brushes.Green,
+        Stroke = Brushes.Green,
+        StrokeThickness = 2
       };
     }
 
-    public Rectangle DrawStreet(double width, double height, Brush brush)
+    public Line DrawStreet(double xStart, double yStart, double xEnde, double yEnde)
     {
-      return new Rectangle()
+      return new Line()
       {
-        Width = width,
-        Height = height,
-        Fill = brush
+        X1 = xStart,
+        Y1 = yStart,
+        X2 = xEnde,
+        Y2 = yEnde,
+        Fill = Brushes.DimGray,
+        Stroke = Brushes.DimGray,
+        StrokeThickness = 2
+        
       };
     }
 
-    public Rectangle DrawNode(double width, double height, Brush brush)
+    public Rectangle DrawNode(double width, double height)
     {
       return new Rectangle()
       {
         Width = width,
         Height = height,
-        Fill = brush,
+        Fill = Brushes.Black,
         Stroke = Brushes.Black,
         StrokeThickness = 2
       };
@@ -82,19 +92,43 @@ namespace TrafficSimulation.UI.Application
       lock (ViewModel)
       {
         this.MainCanvas.Children.Clear();
+        
         foreach (var node in ViewModel.Nodes)
         {
-          var rectangle = DrawNode(5, 5, Brushes.Black);
+          var rectangle = DrawNode(5, 5);
           MainCanvas.Children.Add(rectangle);
           Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth);
-          Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight);
+          Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height/2);
+        }
+
+        foreach (var nodeconnection in ViewModel.NodeConnections)
+        {
+          Node startNode = ViewModel.Nodes.First(x => x.Id == nodeconnection.StartNodeId);
+          Node endNode = ViewModel.Nodes.First(x => x.Id == nodeconnection.EndNodeId);
+          var line = DrawStreet(startNode.X * MainCanvas.ActualWidth, startNode.Y * MainCanvas.ActualHeight, endNode.X * MainCanvas.ActualWidth, endNode.Y * MainCanvas.ActualHeight);
+          MainCanvas.Children.Add(line);
         }
 
         foreach (var viewModelVehicle in ViewModel.Vehicles)
         {
-          var rectangle = DrawVehicle(10, 10, Brushes.Green);
+          var rectangle = DrawVehicle(10, 10);
+          NodeConnection street = ViewModel.NodeConnections.First(x => x.Id == viewModelVehicle.CurrentNodeConnectionId);
+          Node startNode = ViewModel.Nodes.First(x => x.Id == street.StartNodeId);
+          Node endNode = ViewModel.Nodes.First(x => x.Id == street.EndNodeId);
+
           MainCanvas.Children.Add(rectangle);
-          Canvas.SetLeft(rectangle, viewModelVehicle.PositionOnConnection);
+          if (endNode.Y == startNode.Y)
+          {
+            Canvas.SetLeft(rectangle,(viewModelVehicle.PositionOnConnection / street.Length) *(endNode.X * MainCanvas.ActualWidth - startNode.X * MainCanvas.ActualWidth));
+            Canvas.SetTop(rectangle, endNode.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
+          }
+          else if (endNode.X == startNode.X)
+          {
+
+            Canvas.SetLeft(rectangle, endNode.X * MainCanvas.ActualWidth - rectangle.Width / 2);
+            Canvas.SetTop(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.Y * MainCanvas.ActualHeight - startNode.Y * MainCanvas.ActualHeight) );
+
+          }
         }
       }
     }
