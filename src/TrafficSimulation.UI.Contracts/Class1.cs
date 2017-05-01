@@ -1,12 +1,7 @@
-﻿using System.ServiceModel;
-
-namespace TrafficSimulation.UI.Contracts
+﻿namespace TrafficSimulation.UI.Contracts
 {
-
   public class Class1
   {
-   
-
 
   }
 }

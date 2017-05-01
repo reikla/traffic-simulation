@@ -36,7 +36,7 @@ namespace TrafficSimulation.Simulation.WebService
     public ReadOnlyCollection<Node> GetNodes()
     {
       var nodes = new List<Node>();
-      _engine.DataModel.Nodes.ForEach(x=>nodes.Add(new Node(x.Id) {X = x.X, Y = x.Y}));
+      _engine.DataModel.Nodes.ForEach(x=> nodes.Add(new Node(x.Id) {X = x.X, Y = x.Y}));
       return new ReadOnlyCollection<Node>(nodes);
     }
 
