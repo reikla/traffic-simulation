@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
-using System.Windows.Threading;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.UI.Application.ViewModel;
 
@@ -126,7 +124,7 @@ namespace TrafficSimulation.UI.Application
           {
 
             Canvas.SetLeft(rectangle, endNode.X * MainCanvas.ActualWidth - rectangle.Width / 2);
-            Canvas.SetTop(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.Y * MainCanvas.ActualHeight - startNode.Y * MainCanvas.ActualHeight) );
+            Canvas.SetTop(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.Y * MainCanvas.ActualHeight - startNode.Y * MainCanvas.ActualHeight));
 
           }
         }

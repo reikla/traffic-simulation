@@ -20,11 +20,12 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
         {
           Logger.Debug($"Vehicle {vehicle} has reaced end of route. Destroying vehicle.");
           //we have reached the end of our route
-          var endNode = vehicle.Position.NodeConnection.EndNode as IEndNode;
-          endNode.DestroyVehicle(vehicle);
+          route.DestoryVehicle(vehicle);
           return;
         }
+        vehicle.Position.NodeConnection.Placeables.Remove(vehicle);
         vehicle.Position.NodeConnection = nextNode;
+        vehicle.Position.NodeConnection.Placeables.Add(vehicle);
         vehicle.Position.PositionOnConnection = 0;
         Place(vehicle, route, rest);
       }

@@ -5,6 +5,7 @@ using Microsoft.Practices.Unity;
 using Prism.Unity;
 using System.Windows;
 using System.Windows.Threading;
+using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.UI.Application.ViewModel;
 
@@ -31,8 +32,8 @@ namespace TrafficSimulation.UI.Application
     protected override void InitializeShell()
     {
       vm = view.DataContext as TrafficSimulationViewModel;
-      serviceUpdateTimer = new Timer(1000);
-      drawTimer = new Timer(1000);
+      serviceUpdateTimer = new Timer(Constants.SimulationUpdateSpeed);
+      drawTimer = new Timer(Constants.SimulationRedrawSpeed);
 
       var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
       var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");

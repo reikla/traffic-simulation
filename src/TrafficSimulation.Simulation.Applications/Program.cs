@@ -13,6 +13,7 @@ namespace TrafficSimulation.Simulation.Applications
       Controllers.Add(new LoggingController(false));
       Controllers.Add(new SimulationWebserviceController());
       Controllers.Add(new TrafficLightWebserviceController());
+      Controllers.Add(new SimulationUIController());
       Controllers.ForEach(x => x.Start());
 
       Console.WriteLine("Services Started. Press any Key to exit.");

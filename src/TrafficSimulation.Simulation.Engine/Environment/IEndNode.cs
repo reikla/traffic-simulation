@@ -6,10 +6,6 @@ namespace TrafficSimulation.Simulation.Engine.Environment
   /// </summary>
   public interface IEndNode : INode
   {
-    /// <summary>
-    /// Destroys a vehicle
-    /// </summary>
-    /// <param name="vehicle"></param>
-    void DestroyVehicle(IVehicle vehicle);
+
   }
 }

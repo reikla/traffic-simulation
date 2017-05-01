@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using TrafficSimulation.Common;
 
 namespace TrafficSimulation.Simulation.Engine.Environment
@@ -15,7 +16,11 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     {
       StartNode = startNode;
       EndNode = endNode;
+      Placeables = new List<IPlaceable>();
     }
+
+    public List<IPlaceable> Placeables { get; set; }
+
     /// <summary>
     /// The start node
     /// </summary>

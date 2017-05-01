@@ -4,5 +4,7 @@
   {
     public double TickRate { get; set; }
     public double TickStepSize { get; set; }
+
+    public int TargetVehicleCount { get; set; }
   }
 }

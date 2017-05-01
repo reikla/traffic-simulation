@@ -11,16 +11,19 @@ namespace TrafficSimulation.Simulation.Applications
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private Process _process;
     private bool _forceKillOnExit;
+    private bool _createWindow;
     private string _processName;
     private string _relativePathToProcess;
     private string _startParameter;
+    
 
-    public ProcessController(bool forceKillOnExit, string processName, string relativePathToProcess, string startParameter)
+    public ProcessController(bool forceKillOnExit, string processName, string relativePathToProcess, string startParameter, bool createWindow = false)
     {
       _forceKillOnExit = forceKillOnExit;
       _processName = processName;
       _relativePathToProcess = relativePathToProcess;
       _startParameter = startParameter;
+      _createWindow = createWindow;
     }
 
 
@@ -54,8 +57,8 @@ namespace TrafficSimulation.Simulation.Applications
           new ProcessStartInfo(Path.Combine(workingDir, $"{_processName}.exe"), _startParameter)
           {
             WorkingDirectory = workingDir,
-            UseShellExecute = false,
-            CreateNoWindow = false
+            UseShellExecute = !_createWindow,
+            CreateNoWindow = !_createWindow
           };
         _process = Process.Start(psi);
         

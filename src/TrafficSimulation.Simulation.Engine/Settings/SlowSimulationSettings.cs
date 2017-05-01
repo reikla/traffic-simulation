@@ -6,6 +6,7 @@
     {
       TickRate = 250;
       TickStepSize = 1;
+      TargetVehicleCount = 5;
     }
   }
 }

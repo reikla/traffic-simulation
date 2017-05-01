@@ -1,11 +1,14 @@
-﻿namespace TrafficSimulation.Simulation.Engine.Environment
+﻿using System.Collections.Generic;
+
+namespace TrafficSimulation.Simulation.Engine.Environment
 {
   /// <summary>
   /// A node connection connects two nodes. 
   /// </summary>
   public interface INodeConnection : ISimulationBase
   {
-    /// <summary>
+    List<IPlaceable> Placeables { get; set; }
+      /// <summary>
     /// The start node of the connection.
     /// </summary>
     INode StartNode { get; set; }

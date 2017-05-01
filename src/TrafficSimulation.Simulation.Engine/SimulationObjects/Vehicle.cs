@@ -11,8 +11,8 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private readonly VehiclePhysics _physics;
+    private readonly IRoute _route;
     private double _currentVelocity;
-    private IRoute _route;
 
     public Vehicle(VehicleType type, IPosition position, IRoute route)
     {
@@ -31,6 +31,13 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
 
     private double GetAcceleration()
     {
+      if (_route.GetNextPlaceable(this).NextPlaceable != null)
+      {
+        if (_route.GetNextPlaceable(this).DistanceInMeters < 150)
+        {
+          return 0;
+        }
+      }
       return _currentVelocity > _physics.MaxVelocity ? 0 : 1;
     }
 

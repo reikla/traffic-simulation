@@ -6,5 +6,6 @@
     public static readonly string Exception_Already_Stopped = "Can't stop Simulation because its not running.";
     public static readonly string Exception_Cant_Step = "Can't single step because its allready running";
     public static readonly string Exception_Already_Initialized = "Cant init engine, its already initialized";
+    public static readonly string Exception_Placable_Not_On_Route = "The placable {0} is not on the route";
   }
 }

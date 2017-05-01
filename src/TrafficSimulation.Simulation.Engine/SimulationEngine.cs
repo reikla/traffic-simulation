@@ -1,4 +1,6 @@
-﻿using System.Timers;
+﻿using System;
+using System.Linq;
+using System.Timers;
 using NLog;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts.Exceptions;
@@ -14,6 +16,7 @@ namespace TrafficSimulation.Simulation.Engine
     private Timer SimulationTimer;
     private SimulationSettings _settings;
     private IDataModelInitializer _dataModelInitializer;
+    private readonly Random _random;
 
     internal DataModel DataModel => _dataModel;
 
@@ -21,6 +24,7 @@ namespace TrafficSimulation.Simulation.Engine
     public SimulationEngine()
     {
       _settings = new SlowSimulationSettings();
+      _random = new Random(1);
       _dataModelInitializer = new SingleCarDataModelInitialzier();
     }
 
@@ -72,9 +76,18 @@ namespace TrafficSimulation.Simulation.Engine
     private void DoStep()
     {
       Logger.Trace($"Do Step. Size: {_settings.TickStepSize}");
-      foreach (var vehicle in _dataModel.Vehicles)
+      CheckVehicleAmount();
+      foreach (var vehicle in _dataModel.Routes.SelectMany(x=>x.Vehicles))
       {
         vehicle.Tick(_settings.TickStepSize);
+      }
+    }
+
+    private void CheckVehicleAmount()
+    {
+      if (DataModel.Routes.SelectMany(x => x.Vehicles).Count() < _settings.TargetVehicleCount && _random.NextDouble() > 0.8)
+      {
+          DataModel.Routes[_random.Next(0,DataModel.Routes.Count)].CreateVehicle(); // we randomly select a route
       }
     }
 

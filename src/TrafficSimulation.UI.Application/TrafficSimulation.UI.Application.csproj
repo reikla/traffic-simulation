@@ -137,6 +137,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
+      <Project>{885DCB21-8AEF-4028-8285-677330B43F0E}</Project>
+      <Name>TrafficSimulation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
       <Project>{03aba0ba-0186-49ce-a8df-a6f0af92620f}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>

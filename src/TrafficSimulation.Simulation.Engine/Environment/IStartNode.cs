@@ -6,10 +6,6 @@ namespace TrafficSimulation.Simulation.Engine.Environment
   /// </summary>
   public interface IStartNode : INode
   {
-    /// <summary>
-    /// Creates a vehicle
-    /// </summary>
-    /// <returns>A new vehicle</returns>
-    IVehicle CreateVehicle();
+
   }
 }

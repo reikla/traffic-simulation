@@ -1,7 +1,5 @@
 ﻿using NLog;
-using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
-using TrafficSimulation.Simulation.Engine.SimulationObjects;
 
 namespace TrafficSimulation.Simulation.Engine
 {
@@ -24,9 +22,9 @@ namespace TrafficSimulation.Simulation.Engine
     private void CreateNodes(DataModel dataModel)
     {
       Logger.Trace("Creating Nodes");
-      var startNode = new StartNode(0,0.5);
-      var endNode = new EndNode(1,0.5);
-      var node = new Node(0.5,0.5);
+      var startNode = new StartNode(0, 0.5);
+      var endNode = new EndNode(1, 0.5);
+      var node = new Node(0.5, 0.5);
 
       var connection1 = new NodeConnection(startNode, node);
       var connection2 = new NodeConnection(node, endNode);
@@ -44,9 +42,8 @@ namespace TrafficSimulation.Simulation.Engine
       Logger.Trace("Creating Vehicles");
 
       var route = dataModel.Routes[0];
-      var position = new Position(route.NodesConnections[0]);
 
-      var vehicle = new Vehicle(VehicleType.Car, position, route);
+      var vehicle = route.CreateVehicle();
       dataModel.Vehicles.Add(vehicle);
 
     }
