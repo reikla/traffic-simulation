@@ -4,10 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrafficSimulation.UI.Application"
+        xmlns:viewModel="clr-namespace:TrafficSimulation.UI.Application.ViewModel"
+        xmlns:mvvm="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <!--   <Grid>
         <Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="179,149,0,0" VerticalAlignment="Top" Width="117"/>
+    
+    </Grid>-->
+    <!--d:DataContext="{d:DesignInstance viewModel:TrafficSimulationViewModel, IsDesignTimeCreatable=True}"-->
+    <Window.DataContext>
+        <viewModel:TrafficSimulationViewModel />
+    </Window.DataContext>
+    <Canvas x:Name="MainCanvas">
+        <Label x:Name="label" Content="{Binding CurrPos}" Canvas.Left="130" Canvas.Top="76"/>
 
-    </Grid>
+    </Canvas>
 </Window>
