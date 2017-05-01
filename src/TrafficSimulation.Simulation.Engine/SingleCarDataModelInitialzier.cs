@@ -24,12 +24,12 @@ namespace TrafficSimulation.Simulation.Engine
     private void CreateNodes(DataModel dataModel)
     {
       Logger.Trace("Creating Nodes");
-      var startNode = new StartNode();
-      var endNode = new EndNode();
-      var node = new Node();
+      var startNode = new StartNode(0,0.5);
+      var endNode = new EndNode(1,0.5);
+      var node = new Node(0.5,0.5);
 
-      var connection1 = new NodeConnection(startNode, node, 100);
-      var connection2 = new NodeConnection(node, endNode, 100000);
+      var connection1 = new NodeConnection(startNode, node);
+      var connection2 = new NodeConnection(node, endNode);
 
       dataModel.Nodes.Add(startNode);
       dataModel.Nodes.Add(node);

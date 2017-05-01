@@ -1,6 +1,14 @@
 ﻿namespace TrafficSimulation.Simulation.Engine.Environment
 {
-    public class Node : SimulationBase, INode
+  public class Node : SimulationBase, INode
+  {
+    public Node(double x, double y)
     {
+      X = x;
+      Y = y;
     }
+
+    public double X { get; set; }
+    public double Y { get; set; }
+  }
 }

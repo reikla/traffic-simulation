@@ -18,6 +18,6 @@
     /// <summary>
     /// The length of the connection.
     /// </summary>
-    double Length { get; set; }
+    double Length { get; }
   }
 }

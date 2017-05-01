@@ -6,5 +6,9 @@
     {
       throw new System.NotImplementedException();
     }
+
+    public StartNode(double x, double y) : base(x, y)
+    {
+    }
   }
 }
