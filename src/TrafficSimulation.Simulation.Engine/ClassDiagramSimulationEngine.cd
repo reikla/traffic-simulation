@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="TrafficSimulation.Simulation.Engine.DataModel" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAgAAAAEAAAAAAACAAAAAABAAAAAgAAAA=</HashCode>
+      <FileName>DataModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.SimulationBase">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEgABAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>SimulationBase.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.SimulationEngine" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAgAAQACIBAAAAgAAAAAAAAAAAEAAAIIACEgAAABE=</HashCode>
+      <FileName>SimulationEngine.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.SingleCarDataModelInitialzier" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAIAAQAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SingleCarDataModelInitialzier.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.Distance" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Environment\Distance.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.EndNode">
+    <Position X="5.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\EndNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.Node">
+    <Position X="4.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Environment\Node.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.NodeConnection">
+    <Position X="7.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAIAAQAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\NodeConnection.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.Position" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Environment\Position.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.Route">
+    <Position X="0.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAgAAIAgABAAAEAAIAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Environment\Route.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Environment.StartNode">
+    <Position X="3" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\StartNode.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Settings.SimulationSettings" Collapsed="true">
+    <Position X="0.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAIAAACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Settings\SimulationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.Settings.SlowSimulationSettings" Collapsed="true">
+    <Position X="0.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Settings\SlowSimulationSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.SimulationObjects.Placer" Collapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>SimulationObjects\Placer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.SimulationObjects.Vehicle">
+    <Position X="9.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEIAAAAgAAAAABBAAAAAAEAAAACAAAQCQAA=</HashCode>
+      <FileName>SimulationObjects\Vehicle.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="TrafficSimulation.Simulation.Engine.SimulationObjects.VehiclePhysics" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>SimulationObjects\VehiclePhysics.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="TrafficSimulation.Simulation.Engine.IDataModelInitializer" Collapsed="true">
+    <Position X="12.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IDataModelInitializer.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.IEngine" Collapsed="true">
+    <Position X="15.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAIAACAAAAAAA=</HashCode>
+      <FileName>IEngine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.ISimulationBase" Collapsed="true">
+    <Position X="4" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ISimulationBase.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.ITickable" Collapsed="true">
+    <Position X="7" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
+      <FileName>ITickable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.IVehicle" Collapsed="true">
+    <Position X="4" Y="14.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>IVehicle.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.IVehicleFactory" Collapsed="true">
+    <Position X="14" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IVehicleFactory.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IDistance" Collapsed="true">
+    <Position X="14" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Environment\IDistance.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IEndNode" Collapsed="true">
+    <Position X="1.75" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\IEndNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.INode" Collapsed="true">
+    <Position X="3" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>Environment\INode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.INodeConnection" Collapsed="true">
+    <Position X="6.25" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAIAAQAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\INodeConnection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IPlaceable" Collapsed="true">
+    <Position X="9.25" Y="13.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAABAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\IPlaceable.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IPosition" Collapsed="true">
+    <Position X="12.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Environment\IPosition.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IRoute" Collapsed="true">
+    <Position X="0.5" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAIAgABAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Environment\IRoute.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IStartNode" Collapsed="true">
+    <Position X="4" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\IStartNode.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="TrafficSimulation.Simulation.Engine.Environment.IVehicleLifetimeManager" Collapsed="true">
+    <Position X="0.5" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Environment\IVehicleLifetimeManager.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
