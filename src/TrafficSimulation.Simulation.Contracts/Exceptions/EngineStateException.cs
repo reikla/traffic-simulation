@@ -6,7 +6,7 @@ namespace TrafficSimulation.Simulation.Contracts.Exceptions
   /// Base Excpetion for the Simulation
   /// </summary>
   [Serializable]
-  public class EngineStateException : Exception
+  public class EngineStateException : SimulationException
   {
     /// <summary>
     /// c'tor

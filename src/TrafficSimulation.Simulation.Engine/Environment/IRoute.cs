@@ -12,7 +12,9 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// The list of nodes the route contains of.
     /// </summary>
     IReadOnlyList<INodeConnection> NodesConnections { get;}
-
+    /// <summary>
+    /// A list of all vehicles existing on this route. 
+    /// </summary>
     List<IVehicle> Vehicles { get; }
     
     /// <summary>

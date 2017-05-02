@@ -7,8 +7,11 @@ namespace TrafficSimulation.Simulation.Engine.Environment
   /// </summary>
   public interface INodeConnection : ISimulationBase
   {
+    /// <summary>
+    /// List of placebles currently placed on this connection
+    /// </summary>
     List<IPlaceable> Placeables { get; set; }
-      /// <summary>
+    /// <summary>
     /// The start node of the connection.
     /// </summary>
     INode StartNode { get; set; }
