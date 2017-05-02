@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -115,20 +117,30 @@ namespace TrafficSimulation.UI.Application
           Node endNode = ViewModel.Nodes.First(x => x.Id == street.EndNodeId);
 
           MainCanvas.Children.Add(rectangle);
-          if (endNode.Y == startNode.Y)
-          {
-            Canvas.SetLeft(rectangle,(viewModelVehicle.PositionOnConnection / street.Length) *(endNode.X * MainCanvas.ActualWidth - startNode.X * MainCanvas.ActualWidth));
-            Canvas.SetTop(rectangle, endNode.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
-          }
-          else if (endNode.X == startNode.X)
-          {
+          //if (endNode.Y == startNode.Y)
+          //{
+          //  Canvas.SetLeft(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.X * MainCanvas.ActualWidth - startNode.X * MainCanvas.ActualWidth));
+          //  Canvas.SetTop(rectangle, endNode.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
+          //}
+          //else if (endNode.X == startNode.X)
+          //{
 
-            Canvas.SetLeft(rectangle, endNode.X * MainCanvas.ActualWidth - rectangle.Width / 2);
-            Canvas.SetTop(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.Y * MainCanvas.ActualHeight - startNode.Y * MainCanvas.ActualHeight));
+          //  Canvas.SetLeft(rectangle, endNode.X * MainCanvas.ActualWidth - rectangle.Width / 2);
+          //  Canvas.SetTop(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.Y * MainCanvas.ActualHeight - startNode.Y * MainCanvas.ActualHeight));
 
-          }
+          //}
+
+          //double distance = Math.Sqrt(Math.Pow((endNode.X - startNode.X) * MainCanvas.ActualWidth, 2) +
+          //                    Math.Pow((endNode.Y - startNode.Y) * MainCanvas.ActualHeight, 2));
+
+          //double progressonstreet = viewModelVehicle.PositionOnConnection / street.Length;
+
+
+
         }
       }
     }
+
+
   }
 }
