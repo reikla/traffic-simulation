@@ -73,6 +73,10 @@
       <Project>{1dbb2418-ac29-46f8-aba9-1eea75936b64}</Project>
       <Name>TrafficSimulation.TrafficLightControl.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.TrafficLightControl.Engine\TrafficSimulation.TrafficLightControl.Engine.csproj">
+      <Project>{C0433425-1AE4-4A2E-9F9C-15C6C2E04F65}</Project>
+      <Name>TrafficSimulation.TrafficLightControl.Engine</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

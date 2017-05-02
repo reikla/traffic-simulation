@@ -1,5 +1,6 @@
 ﻿using System.ServiceModel;
 using TrafficSimulation.TrafficLightControl.Contracts;
+using TrafficSimulation.TrafficLightControl.Engine;
 
 namespace TrafficSimulation.TrafficLightControl.WebService
 {
@@ -7,9 +8,26 @@ namespace TrafficSimulation.TrafficLightControl.WebService
 
   public class TrafficLightControlService : ITrafficLightService
   {
-    public void Foo()
+    private readonly TrafficLightControlEngine _engine;
+    public TrafficLightControlService()
     {
-      throw new System.NotImplementedException();
+      _engine = new TrafficLightControlEngine();
+      _engine.Init();
+    }
+
+    public void Start()
+    {
+      _engine.Start();
+    }
+
+    public void Stop()
+    {
+      _engine.Stop();
+    }
+
+    public void Step()
+    {
+      _engine.Step();
     }
   }
 }
