@@ -117,25 +117,34 @@ namespace TrafficSimulation.UI.Application
           Node endNode = ViewModel.Nodes.First(x => x.Id == street.EndNodeId);
 
           MainCanvas.Children.Add(rectangle);
-          //if (endNode.Y == startNode.Y)
-          //{
-          //  Canvas.SetLeft(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.X * MainCanvas.ActualWidth - startNode.X * MainCanvas.ActualWidth));
-          //  Canvas.SetTop(rectangle, endNode.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
-          //}
-          //else if (endNode.X == startNode.X)
-          //{
 
-          //  Canvas.SetLeft(rectangle, endNode.X * MainCanvas.ActualWidth - rectangle.Width / 2);
-          //  Canvas.SetTop(rectangle, (viewModelVehicle.PositionOnConnection / street.Length) * (endNode.Y * MainCanvas.ActualHeight - startNode.Y * MainCanvas.ActualHeight));
+          double a = startNode.X * MainCanvas.ActualWidth;
+          double b = startNode.Y * MainCanvas.ActualHeight;
+          double c = endNode.X * MainCanvas.ActualWidth;
+          double d = endNode.Y * MainCanvas.ActualHeight;
 
-          //}
+          double g = Math.Sqrt(Math.Pow(a-c,2)+Math.Pow(b-d,2));
+          double h = viewModelVehicle.PositionOnConnection;
+          double k = street.Length;
 
-          //double distance = Math.Sqrt(Math.Pow((endNode.X - startNode.X) * MainCanvas.ActualWidth, 2) +
-          //                    Math.Pow((endNode.Y - startNode.Y) * MainCanvas.ActualHeight, 2));
+          double x01 = ((a * Math.Pow(d, 2) - 2 * a * b * d + a * Math.Pow(c, 2) - 2 * Math.Pow(a, 2) * c +
+                         a * Math.Pow(b, 2) + Math.Pow(a, 3)) * k
+                        + (c - a) * Math.Sqrt(Math.Pow(d, 2) - 2 * b * d + Math.Pow(c, 2) - 2 * a * c + Math.Pow(b, 2) +
+                                              Math.Pow(a, 2)) * g * h) /
+                       ((Math.Pow(d, 2) - 2 * b * d + Math.Pow(c, 2) - 2 * a * c + Math.Pow(b, 2) + Math.Pow(a, 2)) *
+                        k);
 
-          //double progressonstreet = viewModelVehicle.PositionOnConnection / street.Length;
+          //double x02 = ((-a * Math.Pow(d, 2) + 2 * a * b * d - a * Math.Pow(c, 2) + 2 * Math.Pow(a, 2) * c -
+          //               a * Math.Pow(b, 2) - Math.Pow(a, 3)) * k
+          //              + (c - a) * Math.Sqrt(Math.Pow(d, 2) - 2 * b * d + Math.Pow(c, 2) - 2 * a * c + Math.Pow(b, 2) +
+          //                                    Math.Pow(a, 2)) * g * h) /
+          //             ((Math.Pow(d, 2) - 2 * b * d + Math.Pow(c, 2) - 2 * a * c + Math.Pow(b, 2) + Math.Pow(a, 2)) *
+          //              k);
+          double y01 = ((b - d) / (a - c)) * (x01 - a) + b;
+          //double y02 = ((b - d) / (a - c)) * (x02 - a) + b;
 
-
+          Canvas.SetLeft(rectangle, x01);
+          Canvas.SetTop(rectangle, y01 - rectangle.Height/2);
 
         }
       }
