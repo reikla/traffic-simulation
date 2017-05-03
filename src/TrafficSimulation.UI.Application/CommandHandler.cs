@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace TrafficSimulation.UI.Application
 {
+  /// <inheritdoc />
   public class CommandHandler : ICommand
   {
     private readonly Action _action;

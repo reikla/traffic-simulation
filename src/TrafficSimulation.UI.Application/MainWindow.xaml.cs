@@ -21,34 +21,15 @@ namespace TrafficSimulation.UI.Application
       get { return DataContext as TrafficSimulationViewModel; }
     }
 
-
+    /// <summary>
+    /// Constructor for the MainWindow-View. Initializes all components.
+    /// </summary>
     public MainWindow()
     {
       InitializeComponent();
     }
-    //  DispatcherTimer timer = new DispatcherTimer();
-    //  timer.Interval = TimeSpan.FromSeconds(1);
-    //  timer.Tick += timer_Tick;
-    //  timer.Start();
-    //}
 
-    //void timer_Tick(object sender, EventArgs e)
-    //{
-    //  UpdateViewModel();
-    //}
-
-    //void UpdateViewModel()
-    //{
-    //}
-
-    //public void DrawSim()
-    //{
-    //  foreach (var street in ViewModel.NodeConnections)
-    //  {
-    //  }
-    //}
-
-    public Rectangle DrawVehicle(double width, double height)
+    Rectangle DrawVehicle(double width, double height)
     {
       return new Rectangle()
       {
@@ -60,7 +41,7 @@ namespace TrafficSimulation.UI.Application
       };
     }
 
-    public Line DrawStreet(double xStart, double yStart, double xEnde, double yEnde)
+    Line DrawStreet(double xStart, double yStart, double xEnde, double yEnde)
     {
       return new Line()
       {
@@ -75,7 +56,7 @@ namespace TrafficSimulation.UI.Application
       };
     }
 
-    public Rectangle DrawNode(double width, double height)
+    Rectangle DrawNode(double width, double height)
     {
       return new Rectangle()
       {
@@ -86,7 +67,9 @@ namespace TrafficSimulation.UI.Application
         StrokeThickness = 2
       };
     }
-
+    /// <summary>
+    /// Places objects like vehicles, nodes and nodeconnections on to the canvas.
+    /// </summary>
     public void Draw()
     {
       lock (ViewModel)

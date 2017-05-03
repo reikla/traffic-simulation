@@ -3,7 +3,7 @@
 namespace TrafficSimulation.UI.Application
 {
   /// <summary>
-  /// Interaction logic for App.xaml
+  /// Startup-Class of the whole UI.Application
   /// </summary>
   public partial class App
   {
