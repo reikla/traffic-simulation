@@ -41,7 +41,7 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
     {
       if (_route.GetNextPlaceable(this).NextPlaceable != null)
       {
-        if (_route.GetNextPlaceable(this).DistanceInMeters < 150)
+        if (_route.GetNextPlaceable(this).DistanceInMeters < 5)
         {
           return 0;
         }

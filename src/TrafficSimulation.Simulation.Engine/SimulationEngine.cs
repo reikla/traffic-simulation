@@ -32,7 +32,7 @@ namespace TrafficSimulation.Simulation.Engine
     {
       _settings = new SlowSimulationSettings();
       _random = new Random(1);
-      _dataModelInitializer = new SingleCarDataModelInitialzier();
+      _dataModelInitializer = new SimpleDataModelInitializer();
     }
 
     ///<inheritdoc />

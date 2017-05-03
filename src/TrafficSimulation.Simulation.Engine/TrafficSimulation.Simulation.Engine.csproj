@@ -86,7 +86,7 @@
     <Compile Include="SimulationObjects\Placer.cs" />
     <Compile Include="SimulationObjects\Vehicle.cs" />
     <Compile Include="SimulationObjects\VehiclePhysics.cs" />
-    <Compile Include="SingleCarDataModelInitialzier.cs" />
+    <Compile Include="SimpleDataModelInitializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
