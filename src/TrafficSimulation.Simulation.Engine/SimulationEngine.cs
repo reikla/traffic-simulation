@@ -8,6 +8,10 @@ using TrafficSimulation.Simulation.Engine.Settings;
 
 namespace TrafficSimulation.Simulation.Engine
 {
+  /// <summary>
+  /// The Main Class of the Simulation. Thats where all the magic happens.
+  /// </summary>
+  /// <seealso cref="TrafficSimulation.Simulation.Engine.IEngine" />
   public class SimulationEngine : IEngine
   {
     private bool _isInitialized;
@@ -21,6 +25,9 @@ namespace TrafficSimulation.Simulation.Engine
     internal DataModel DataModel => _dataModel;
 
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SimulationEngine"/> class.
+    /// </summary>
     public SimulationEngine()
     {
       _settings = new SlowSimulationSettings();
@@ -28,7 +35,7 @@ namespace TrafficSimulation.Simulation.Engine
       _dataModelInitializer = new SingleCarDataModelInitialzier();
     }
 
-
+    ///<inheritdoc />
     public void Start()
     {
       Logger.Trace("Starting Simulation");
@@ -48,6 +55,7 @@ namespace TrafficSimulation.Simulation.Engine
       DoStep();
     }
 
+    ///<inheritdoc />
     public void Stop()
     {
       CheckOrThrowInitialization("Stop()");
@@ -61,6 +69,7 @@ namespace TrafficSimulation.Simulation.Engine
       SimulationTimer = null;
     }
 
+    ///<inheritdoc />
     public void Step()
     {
       CheckOrThrowInitialization("Step()");
@@ -91,6 +100,7 @@ namespace TrafficSimulation.Simulation.Engine
       }
     }
 
+    ///<inheritdoc />
     public void Init()
     {
       if (_isInitialized)

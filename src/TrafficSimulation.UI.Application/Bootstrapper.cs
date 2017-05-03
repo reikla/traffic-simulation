@@ -15,7 +15,7 @@ namespace TrafficSimulation.UI.Application
   /// The Bootstrapper for the application: 
   /// Connects to the simulationService, updates the service via timer and re-draws via timer.
   /// Implements Prism.Unity.UnityBootstrapper, which is a base class that provides a basic bootstrapping sequence that registers most of
-  //  the Prism Library assets in a Microsoft.Practices.Unity.IUnityContainer.
+  ///  the Prism Library assets in a Microsoft.Practices.Unity.IUnityContainer.
   /// </summary>
   class Bootstrapper : UnityBootstrapper
   {

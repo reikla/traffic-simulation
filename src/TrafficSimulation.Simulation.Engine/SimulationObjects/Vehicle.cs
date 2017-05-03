@@ -14,6 +14,12 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
     private readonly IRoute _route;
     private double _currentVelocity;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Vehicle"/> class.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    /// <param name="position">The position.</param>
+    /// <param name="route">The route.</param>
     public Vehicle(VehicleType type, IPosition position, IRoute route)
     {
       VehicleType = type;
@@ -23,6 +29,8 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
       _route = route;
       Position = position;
     }
+
+    ///<inheritdoc />
     public void Tick(double timespan)
     {
       Logger.Trace($"Tick: {this}");
@@ -46,8 +54,14 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
       _currentVelocity = _currentVelocity + GetAcceleration() * deltaT;
       return _currentVelocity;
     }
+    
+    ///<inheritdoc />
     public VehicleType VehicleType { get; set; }
+
+    ///<inheritdoc />
     public IPosition Position { get; set; }
+
+    ///<inheritdoc />
     public bool IsConnectionBlocking { get; set; }
   }
 }

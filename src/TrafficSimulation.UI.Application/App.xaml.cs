@@ -7,6 +7,8 @@ namespace TrafficSimulation.UI.Application
   /// </summary>
   public partial class App
   {
+
+    /// <inheritdoc />
     protected override void OnStartup(StartupEventArgs e)
     {
       base.OnStartup(e);

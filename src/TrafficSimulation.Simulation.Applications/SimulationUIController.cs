@@ -1,8 +1,13 @@
 ﻿namespace TrafficSimulation.Simulation.Applications
 {
-  class SimulationUIController : ProcessController
+
+  /// <summary>
+  /// Controller used to start the UI Process
+  /// </summary>
+  /// <seealso cref="TrafficSimulation.Simulation.Applications.ProcessController" />
+  internal class SimulationUiController : ProcessController
   {
-    public SimulationUIController() : base(true,
+    public SimulationUiController() : base(true,
       "TrafficSimulation.UI.Application",
       @"UI", null, true)
     {

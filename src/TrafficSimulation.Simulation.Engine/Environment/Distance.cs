@@ -1,11 +1,15 @@
 ﻿namespace TrafficSimulation.Simulation.Engine.Environment
 {
-  /// <inheritdoc />>
+  /// <seealso cref="TrafficSimulation.Simulation.Engine.Environment.IDistance" />
   public class Distance : IDistance
   {
-    /// <inheritdoc />>
+    /// <summary>
+    /// The distance in meters.
+    /// </summary>
     public double DistanceInMeters { get; set; }
-    /// <inheritdoc />>
+    /// <summary>
+    /// The placeable were the distance is measured to.
+    /// </summary>
     public IPlaceable NextPlaceable { get; set; }
   }
 }

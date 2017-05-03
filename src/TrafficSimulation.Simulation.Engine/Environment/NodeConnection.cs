@@ -19,6 +19,9 @@ namespace TrafficSimulation.Simulation.Engine.Environment
       Placeables = new List<IPlaceable>();
     }
 
+    /// <summary>
+    /// List of placebles currently placed on this connection
+    /// </summary>
     public List<IPlaceable> Placeables { get; set; }
 
     /// <summary>

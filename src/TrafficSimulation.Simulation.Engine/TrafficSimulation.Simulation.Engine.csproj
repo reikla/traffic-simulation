@@ -21,7 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\TrafficSimulation.Simulation.Engine.xml</DocumentationFile>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,7 +78,6 @@
     <Compile Include="Environment\IStartNode.cs" />
     <Compile Include="ITickable.cs" />
     <Compile Include="IVehicle.cs" />
-    <Compile Include="IVehicleFactory.cs" />
     <Compile Include="Settings\SimulationSettings.cs" />
     <Compile Include="Settings\SlowSimulationSettings.cs" />
     <Compile Include="SimulationBase.cs" />

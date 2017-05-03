@@ -6,18 +6,30 @@ using NLog;
 
 namespace TrafficSimulation.Simulation.Applications
 {
-  class ProcessController : IController
+  /// <summary>
+  /// The Baseclass of Process controllers. It is responsible to start external processes.
+  /// </summary>
+  /// <seealso cref="TrafficSimulation.Simulation.Applications.IController" />
+  public class ProcessController : IController
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private Process _process;
-    private bool _forceKillOnExit;
-    private bool _createWindow;
-    private string _processName;
-    private string _relativePathToProcess;
-    private string _startParameter;
-    
+    private readonly bool _forceKillOnExit;
+    private readonly bool _createWindow;
+    private readonly string _processName;
+    private readonly string _relativePathToProcess;
+    private readonly string _startParameter;
 
-    public ProcessController(bool forceKillOnExit, string processName, string relativePathToProcess, string startParameter, bool createWindow = false)
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ProcessController"/> class.
+    /// </summary>
+    /// <param name="forceKillOnExit">if set to <c>true</c> [force kill on exit].</param>
+    /// <param name="processName">Name of the process.</param>
+    /// <param name="relativePathToProcess">The relative path to exe.</param>
+    /// <param name="startParameter">The start parameter.</param>
+    /// <param name="createWindow">if set to <c>true</c> [create window].</param>
+    protected ProcessController(bool forceKillOnExit, string processName, string relativePathToProcess, string startParameter, bool createWindow = false)
     {
       _forceKillOnExit = forceKillOnExit;
       _processName = processName;
@@ -26,13 +38,14 @@ namespace TrafficSimulation.Simulation.Applications
       _createWindow = createWindow;
     }
 
-
+    /// <inheritdoc />
     public void Start()
     {
       Logger.Trace($"Starting {GetType().Name}.");
       StartOrGetProcess();
     }
 
+    /// <inheritdoc />
     public void Shutdown()
     {
       Logger.Trace($"Shutdown {GetType().Name}. ForceKillOnExit: {_forceKillOnExit}");
@@ -62,7 +75,7 @@ namespace TrafficSimulation.Simulation.Applications
           };
         _process = Process.Start(psi);
         
-        //we wait until the process is started.
+        //we wait to make sure the process is started.
         Thread.Sleep(3000);
       }
     }
