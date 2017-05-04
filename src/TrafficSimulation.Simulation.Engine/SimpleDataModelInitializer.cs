@@ -3,7 +3,7 @@ using TrafficSimulation.Simulation.Engine.Environment;
 
 namespace TrafficSimulation.Simulation.Engine
 {
-  internal class SingleCarDataModelInitialzier : IDataModelInitializer
+  internal class SimpleDataModelInitializer : IDataModelInitializer
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     public void Initialize(DataModel dataModel)
