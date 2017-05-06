@@ -15,18 +15,16 @@ namespace TrafficSimulation.UI.Application
   /// </summary>
   public partial class MainWindow : Window
   {
-    private TrafficSimulationViewModel ViewModel
-    {
-      get { return DataContext as TrafficSimulationViewModel; }
-    }
-
-    /// <summary>
-    /// Constructor for the MainWindow-View. Initializes all components.
-    /// </summary>
-    public MainWindow()
+    private TrafficSimulationViewModel ViewModel => DataContext as TrafficSimulationViewModel;
+  /// <summary>
+  /// Constructor for the MainWindow view. Initializes all components.
+  /// </summary>
+  public MainWindow()
     {
       InitializeComponent();
     }
+
+  
 
     Rectangle DrawVehicle(double width, double height)
     {
