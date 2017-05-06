@@ -8,16 +8,54 @@
         xmlns:mvvm="http://prismlibrary.com/"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <!--   <Grid>
-        <Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="179,149,0,0" VerticalAlignment="Top" Width="117"/>
-    
-    </Grid>-->
-    <!--d:DataContext="{d:DesignInstance viewModel:TrafficSimulationViewModel, IsDesignTimeCreatable=True}"-->
     <Window.DataContext>
         <viewModel:TrafficSimulationViewModel />
     </Window.DataContext>
-    <Canvas x:Name="MainCanvas" Margin="65">
 
 
-    </Canvas>
+    <Grid x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Canvas x:Name="MainCanvas" Margin="65" Grid.Row="0"  />
+        <TabControl x:Name="Tabs" Grid.Row="1">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Simulation" Foreground="Blue" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid x:Name="TabSimGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button x:Name="StartBtn" Content=">" Click="StartStopBtn_OnClick" Command="{Binding CmdStartSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Visibility="Hidden"/>
+                    <Button x:Name="StopBtn" Content="||" Click="StartStopBtn_OnClick" Command="{Binding CmdStopSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Visibility="Visible"/>
+                    <Button x:Name="StepBtn" Content="|>" Command="{Binding CmdStepSimulation}" IsEnabled="False" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Red" Foreground="Red" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Label Content="Content goes here..." />
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Green" Foreground="Green" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Label Content="Content goes here..." />
+            </TabItem>
+        </TabControl>
+    </Grid>
+
+
+
 </Window>
+

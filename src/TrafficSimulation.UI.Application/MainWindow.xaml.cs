@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.UI.Application.ViewModel;
-
+using Prism.Regions;
 
 namespace TrafficSimulation.UI.Application
 {
@@ -22,9 +24,13 @@ namespace TrafficSimulation.UI.Application
   public MainWindow()
     {
       InitializeComponent();
+      
     }
 
   
+
+
+    
 
     Rectangle DrawVehicle(double width, double height)
     {
@@ -72,13 +78,13 @@ namespace TrafficSimulation.UI.Application
       lock (ViewModel)
       {
         this.MainCanvas.Children.Clear();
-        
+
         foreach (var node in ViewModel.Nodes)
         {
           var rectangle = DrawNode(5, 5);
           MainCanvas.Children.Add(rectangle);
           Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth);
-          Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height/2);
+          Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
         }
 
         foreach (var nodeconnection in ViewModel.NodeConnections)
@@ -96,18 +102,35 @@ namespace TrafficSimulation.UI.Application
           Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
           Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
 
-            MainCanvas.Children.Add(rectangle);
-            var deltaX = endNode.X - startNode.X;
-            var deltaY = endNode.Y - startNode.Y;
-            var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
-            var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
-            Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
-            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
+          MainCanvas.Children.Add(rectangle);
+          var deltaX = endNode.X - startNode.X;
+          var deltaY = endNode.Y - startNode.Y;
+          var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
+          var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
+          Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
+          Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
 
         }
       }
     }
 
 
+    private void StartStopBtn_OnClick(object sender, RoutedEventArgs e)
+    {
+      Button btn = sender as Button;
+      btn.Visibility = Visibility.Hidden;
+      if (btn.Name == "StartBtn")
+      {
+        StopBtn.Visibility = Visibility.Visible;
+        StepBtn.IsEnabled = false;
+      }
+      else
+      {
+        StartBtn.Visibility = Visibility.Visible;
+        StepBtn.IsEnabled = true;
+
+      }
+       
+    }
   }
 }

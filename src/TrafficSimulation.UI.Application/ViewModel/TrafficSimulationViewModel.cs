@@ -1,5 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ServiceModel.Channels;
+using System.Windows;
+using System.Windows.Input;
+using Prism.Commands;
 using Prism.Mvvm;
+using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
 
 namespace TrafficSimulation.UI.Application.ViewModel
@@ -9,6 +15,11 @@ namespace TrafficSimulation.UI.Application.ViewModel
   /// </summary>
   class TrafficSimulationViewModel : BindableBase
   {
+/// <summary>
+/// Holds the ISimulationService (overridden by the Bootstrapper)
+/// </summary>
+    public ISimulationService SimulationService { get; set; }
+
     /// <summary>
     /// Contains the vehicles for the simulation (received via WCF)
     /// </summary>
@@ -21,6 +32,19 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// Contains the NodeConnections for the simulation (received via WCF)
     /// </summary>
     public List<NodeConnection> NodeConnections { get; set; }
+    /// <summary>
+    /// Command to start the simulation.
+    /// </summary>
+    public DelegateCommand CmdStartSimulation { get; set; }
+    /// <summary>
+    /// Command to stop the simulation.
+    /// </summary>
+    public DelegateCommand CmdStopSimulation { get; set; }
+    /// <summary>
+    /// Command to step through the simulation.
+    /// </summary>
+    public DelegateCommand CmdStepSimulation { get; set; }
+
 
     /// <summary>
     /// Constructor for the TrafficSimulationViewModel - initializes the Lists Vehicles, Nodes and NodeConnections
@@ -30,6 +54,30 @@ namespace TrafficSimulation.UI.Application.ViewModel
       Vehicles = new List<Vehicle>();
       Nodes = new List<Node>();
       NodeConnections = new List<NodeConnection>();
+      CmdStartSimulation = new DelegateCommand(StartSimulation);
+      CmdStopSimulation = new DelegateCommand(StopSimulation);
+      CmdStepSimulation = new DelegateCommand(StepSimulation);
     }
+
+   private void StopSimulation()
+    {
+
+      SimulationService.Stop();
+    }
+
+    private void StartSimulation()
+    {
+
+      SimulationService.Start();
+    }
+
+    private void StepSimulation()
+    {
+
+      SimulationService.Step();
+    }
+
+
+
   }
 }
