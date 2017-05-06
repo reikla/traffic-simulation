@@ -98,13 +98,13 @@ namespace TrafficSimulation.UI.Application
           Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
           Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
 
-          MainCanvas.Children.Add(rectangle);
-          var deltaX = endNode.X - startNode.X;
-          var deltaY = endNode.Y - startNode.Y;
-          var x = endNode.X * deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
-          var y = endNode.Y * deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
-          Canvas.SetLeft(rectangle, x*MainCanvas.ActualWidth);
-          Canvas.SetTop(rectangle, y*MainCanvas.ActualHeight );
+            MainCanvas.Children.Add(rectangle);
+            var deltaX = endNode.X - startNode.X;
+            var deltaY = endNode.Y - startNode.Y;
+            var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
+            var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
+            Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
+            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
 
         }
       }

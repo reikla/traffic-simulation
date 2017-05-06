@@ -16,7 +16,7 @@
     <Window.DataContext>
         <viewModel:TrafficSimulationViewModel />
     </Window.DataContext>
-    <Canvas x:Name="MainCanvas" Margin="10">
+    <Canvas x:Name="MainCanvas" Margin="65">
 
 
     </Canvas>
