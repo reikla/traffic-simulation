@@ -13,12 +13,12 @@
     </Window.DataContext>
 
 
-    <Grid x:Name="MainGrid">
+    <Grid x:Name="MainGrid" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="22*" />
+            <RowDefinition Height="7*" />
         </Grid.RowDefinitions>
-        <Canvas x:Name="MainCanvas" Margin="65" Grid.Row="0"  />
+        <Canvas x:Name="MainCanvas" Margin="65" Grid.Row="0"   MouseDown="MainCanvas_OnMouseDown" Background="Transparent" Focusable="True"/>
         <TabControl x:Name="Tabs" Grid.Row="1">
             <TabItem>
                 <TabItem.Header>

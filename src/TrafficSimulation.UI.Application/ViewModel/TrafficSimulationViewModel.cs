@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ServiceModel.Channels;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Shapes;
 using Prism.Commands;
 using Prism.Mvvm;
 using TrafficSimulation.Simulation.Contracts;
@@ -45,6 +46,10 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// </summary>
     public DelegateCommand CmdStepSimulation { get; set; }
 
+    /// <summary>
+    /// Contains the ConstructionSides (rectangles) placed on the MainCanvas; also their position
+    /// </summary>
+    public List<KeyValuePair<Rectangle,Point>> ConstructionSides { get; set; }
 
     /// <summary>
     /// Constructor for the TrafficSimulationViewModel - initializes the Lists Vehicles, Nodes and NodeConnections
@@ -54,6 +59,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
       Vehicles = new List<Vehicle>();
       Nodes = new List<Node>();
       NodeConnections = new List<NodeConnection>();
+      ConstructionSides = new List<KeyValuePair<Rectangle, Point>>();
       CmdStartSimulation = new DelegateCommand(StartSimulation);
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);

@@ -111,6 +111,16 @@ namespace TrafficSimulation.UI.Application
           Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
 
         }
+
+        foreach (var cs in ViewModel.ConstructionSides)
+        {
+          var rectangle = cs.Key;
+          var pos = cs.Value;
+          MainCanvas.Children.Add(rectangle);
+          Canvas.SetTop(rectangle, pos.Y);
+          Canvas.SetLeft(rectangle, pos.X);
+
+        }
       }
     }
 
@@ -131,6 +141,28 @@ namespace TrafficSimulation.UI.Application
 
       }
        
+    }
+
+    private void MainCanvas_OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+      var rect = DrawConstructionSide(20, 20);
+      Point pos = e.GetPosition(MainCanvas);
+      MainCanvas.Children.Add(rect);
+      Canvas.SetLeft(rect, pos.X);
+      Canvas.SetTop(rect, pos.Y);
+      ViewModel.ConstructionSides.Add(new KeyValuePair<Rectangle, Point>(rect,pos));
+    
+    }
+    Rectangle DrawConstructionSide(double width, double height)
+    {
+      return new Rectangle()
+      {
+        Width = width,
+        Height = height,
+        Fill = Brushes.DarkRed,
+        Stroke = Brushes.Yellow,
+        StrokeThickness = 2
+      };
     }
   }
 }
