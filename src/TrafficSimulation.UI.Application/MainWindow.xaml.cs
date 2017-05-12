@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -8,7 +7,6 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.UI.Application.ViewModel;
-using Prism.Regions;
 
 namespace TrafficSimulation.UI.Application
 {

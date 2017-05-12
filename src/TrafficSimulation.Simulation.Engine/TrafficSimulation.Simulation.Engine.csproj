@@ -87,6 +87,10 @@
     <Compile Include="SimulationObjects\Vehicle.cs" />
     <Compile Include="SimulationObjects\VehiclePhysics.cs" />
     <Compile Include="SimpleDataModelInitializer.cs" />
+    <Compile Include="XmlDataModelInitializer.cs" />
+    <Compile Include="Xml\GraphMLNamespaces.cs" />
+    <Compile Include="Xml\XmlGraphReader.cs" />
+    <Compile Include="Xml\XmlNodeReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
@@ -100,7 +104,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagramSimulationEnginde.cd" />
+    <None Include="net.graphml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

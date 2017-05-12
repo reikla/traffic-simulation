@@ -32,7 +32,8 @@ namespace TrafficSimulation.Simulation.Engine
     {
       _settings = new SlowSimulationSettings();
       _random = new Random(1);
-      _dataModelInitializer = new SimpleDataModelInitializer();
+      //      _dataModelInitializer = new SimpleDataModelInitializer();
+      _dataModelInitializer = new XmlDataModelInitializer();
     }
 
     ///<inheritdoc />
@@ -86,7 +87,7 @@ namespace TrafficSimulation.Simulation.Engine
     {
       Logger.Trace($"Do Step. Size: {_settings.TickStepSize}");
       CheckVehicleAmount();
-      foreach (var vehicle in _dataModel.Routes.SelectMany(x=>x.Vehicles))
+      foreach (var vehicle in _dataModel.Routes.SelectMany(x => x.Vehicles))
       {
         vehicle.Tick(_settings.TickStepSize);
       }
@@ -96,7 +97,7 @@ namespace TrafficSimulation.Simulation.Engine
     {
       if (DataModel.Routes.SelectMany(x => x.Vehicles).Count() < _settings.TargetVehicleCount && _random.NextDouble() > 0.8)
       {
-          DataModel.Routes[_random.Next(0,DataModel.Routes.Count)].CreateVehicle(); // we randomly select a route
+        DataModel.Routes[_random.Next(0, DataModel.Routes.Count)].CreateVehicle(); // we randomly select a route
       }
     }
 
