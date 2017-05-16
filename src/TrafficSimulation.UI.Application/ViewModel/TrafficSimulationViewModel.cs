@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Shapes;
@@ -16,9 +18,9 @@ namespace TrafficSimulation.UI.Application.ViewModel
   /// </summary>
   class TrafficSimulationViewModel : BindableBase
   {
-/// <summary>
-/// Holds the ISimulationService (overridden by the Bootstrapper)
-/// </summary>
+  /// <summary>
+  /// Holds the ISimulationService (overridden by the Bootstrapper)
+  /// </summary>
     public ISimulationService SimulationService { get; set; }
 
     /// <summary>
@@ -47,6 +49,11 @@ namespace TrafficSimulation.UI.Application.ViewModel
     public DelegateCommand CmdStepSimulation { get; set; }
 
     /// <summary>
+    /// Command to disconnect from/connect to the WCF-Server.
+    /// </summary>
+    public DelegateCommand CmdDisConnect { get; set; }
+
+    /// <summary>
     /// Contains the ConstructionSides (rectangles) placed on the MainCanvas; also their position
     /// </summary>
     public List<KeyValuePair<Rectangle,Point>> ConstructionSides { get; set; }
@@ -63,12 +70,17 @@ namespace TrafficSimulation.UI.Application.ViewModel
       CmdStartSimulation = new DelegateCommand(StartSimulation);
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);
+      CmdDisConnect = new DelegateCommand(DisConnect);
+
+
     }
 
    private void StopSimulation()
     {
 
       SimulationService.Stop();
+     
+     
     }
 
     private void StartSimulation()
@@ -81,6 +93,21 @@ namespace TrafficSimulation.UI.Application.ViewModel
     {
 
       SimulationService.Step();
+    }
+
+
+    private void DisConnect()
+    {
+      if (((IClientChannel) SimulationService).State == CommunicationState.Opened)
+      {
+        ((IClientChannel) SimulationService).Close();
+        MessageBox.Show("DISCONNECTING...");
+      }
+      else
+      {
+
+        MessageBox.Show("ALREADY CONNECTED");
+      }
     }
 
 

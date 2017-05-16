@@ -27,6 +27,7 @@ namespace TrafficSimulation.UI.Application
     private Timer drawTimer;
     private ISimulationService simulationService;
     private MainWindow view;
+    private ChannelFactory<ISimulationService> cf;
 
     private TrafficSimulationViewModel vm;
 
@@ -46,14 +47,17 @@ namespace TrafficSimulation.UI.Application
 
       var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
       var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");
-      simulationService = ChannelFactory<ISimulationService>.CreateChannel(binding, ep);
+      cf = new ChannelFactory<ISimulationService>(binding, ep);
+      simulationService = cf.CreateChannel();
       serviceUpdateTimer.Elapsed += ServiceUpdateTimer_Elapsed;
       drawTimer.Elapsed += DrawTimer_Elapsed;
       serviceUpdateTimer.Start();
       drawTimer.Start();
-     
       System.Windows.Application.Current.MainWindow.Show();
+      
     }
+
+    
 
 
 
