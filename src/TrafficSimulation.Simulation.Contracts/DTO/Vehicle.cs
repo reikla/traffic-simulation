@@ -27,13 +27,19 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
     public double PositionOnConnection { get; set; }
 
     /// <summary>
+    /// Gets or sets the debug information.
+    /// </summary>
+    public string DebugInfo { get; set; }
+
+    /// <summary>
     /// Constructor
     /// </summary>
-    public Vehicle(int id, VehicleType type, int currentNodeConnectionId, double positionOnConnection) : base(id)
+    public Vehicle(int id, VehicleType type, int currentNodeConnectionId, double positionOnConnection, string debugInfo = null) : base(id)
     {
       Type = type;
       CurrentNodeConnectionId = currentNodeConnectionId;
       PositionOnConnection = positionOnConnection;
+      DebugInfo = debugInfo;
     }
   }
 }
