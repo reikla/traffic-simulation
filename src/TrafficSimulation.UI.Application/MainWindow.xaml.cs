@@ -75,17 +75,18 @@ namespace TrafficSimulation.UI.Application
     /// </summary>
     public void Draw()
     {
-      lock (ViewModel)
-      {
-        this.MainCanvas.Children.Clear();
 
-        foreach (var node in ViewModel.Nodes)
+        lock (ViewModel)
         {
-          var rectangle = DrawNode(5, 5);
-          MainCanvas.Children.Add(rectangle);
-          Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth);
-          Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
-        }
+          this.MainCanvas.Children.Clear();
+
+          foreach (var node in ViewModel.Nodes)
+          {
+            var rectangle = DrawNode(5, 5);
+            MainCanvas.Children.Add(rectangle);
+            Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth);
+            Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
+          }
 
         foreach (var nodeconnection in ViewModel.NodeConnections)
         {
@@ -95,34 +96,38 @@ namespace TrafficSimulation.UI.Application
           MainCanvas.Children.Add(line);
         }
 
+
         foreach (var viewModelVehicle in ViewModel.Vehicles)
-        {
-          var rectangle = DrawVehicle(10, 10);
-          NodeConnection street = ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
-          Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
-          Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
+          {
+            var rectangle = DrawVehicle(10, 10);
+            NodeConnection street = ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
+            Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
+            Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
 
-          MainCanvas.Children.Add(rectangle);
-          var deltaX = endNode.X - startNode.X;
-          var deltaY = endNode.Y - startNode.Y;
-          var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
-          var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
-          Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
-          Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
+            MainCanvas.Children.Add(rectangle);
+            var deltaX = endNode.X - startNode.X;
+            var deltaY = endNode.Y - startNode.Y;
+            var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
+            var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
+            Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
+            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
 
-        }
+          }
+
+
 
         foreach (var cs in ViewModel.ConstructionSides)
-        {
-          var rectangle = cs.Key;
-          var pos = cs.Value;
-          MainCanvas.Children.Add(rectangle);
-          Canvas.SetTop(rectangle, pos.Y);
-          Canvas.SetLeft(rectangle, pos.X);
+          {
+            var rectangle = cs.Key;
+            var pos = cs.Value;
+            MainCanvas.Children.Add(rectangle);
+            Canvas.SetTop(rectangle, pos.Y);
+            Canvas.SetLeft(rectangle, pos.X);
 
+          }
         }
       }
-    }
+    
 
 
     private void StartStopBtn_OnClick(object sender, RoutedEventArgs e)
@@ -163,6 +168,31 @@ namespace TrafficSimulation.UI.Application
         Stroke = Brushes.Yellow,
         StrokeThickness = 2
       };
+    }
+
+    private void DisconnectBtn_Click(object sender, RoutedEventArgs e)
+    {
+      Button btn = sender as Button;
+      btn.Visibility = Visibility.Hidden;
+      if (btn.Name == "ConnectBtn")
+      {
+        DisconnectBtn.Visibility = Visibility.Visible;
+        StartBtn.IsEnabled = true;
+        StopBtn.IsEnabled = true;
+        StartBtn.Visibility = Visibility.Visible;
+        StopBtn.Visibility = Visibility.Hidden;
+        StepBtn.IsEnabled = false;
+      }
+      else
+      {
+        ConnectBtn.Visibility = Visibility.Visible;
+        StartBtn.IsEnabled = false;
+        StopBtn.IsEnabled = false;
+        StartBtn.Visibility = Visibility.Visible;
+        StopBtn.Visibility = Visibility.Hidden;
+        StepBtn.IsEnabled = false;
+
+      }
     }
   }
 }

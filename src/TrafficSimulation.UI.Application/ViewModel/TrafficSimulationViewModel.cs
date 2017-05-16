@@ -22,7 +22,10 @@ namespace TrafficSimulation.UI.Application.ViewModel
   /// Holds the ISimulationService (overridden by the Bootstrapper)
   /// </summary>
     public ISimulationService SimulationService { get; set; }
-
+    /// <summary>
+    /// Holds the ChannelFactory (overridden by the Bootstrapper)
+    /// </summary>
+    public ChannelFactory<ISimulationService> cf { get; set; }
     /// <summary>
     /// Contains the vehicles for the simulation (received via WCF)
     /// </summary>
@@ -57,6 +60,14 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// Contains the ConstructionSides (rectangles) placed on the MainCanvas; also their position
     /// </summary>
     public List<KeyValuePair<Rectangle,Point>> ConstructionSides { get; set; }
+    /// <summary>
+    /// Contains the Timer which updates the viewmodel (overwritten by Bootstrapper)
+    /// </summary>
+    public Timer serviceUpdateTimer;
+    /// <summary>
+    /// Contains the Timer which re-draws the view (overwritten by Bootstrapper)
+    /// </summary>
+    public Timer drawTimer;
 
     /// <summary>
     /// Constructor for the TrafficSimulationViewModel - initializes the Lists Vehicles, Nodes and NodeConnections
@@ -100,13 +111,18 @@ namespace TrafficSimulation.UI.Application.ViewModel
     {
       if (((IClientChannel) SimulationService).State == CommunicationState.Opened)
       {
+        drawTimer.Stop();
+        serviceUpdateTimer.Stop();
         ((IClientChannel) SimulationService).Close();
         MessageBox.Show("DISCONNECTING...");
       }
       else
       {
-
-        MessageBox.Show("ALREADY CONNECTED");
+        SimulationService = cf.CreateChannel();
+        ((IClientChannel)SimulationService).Open();
+        serviceUpdateTimer.Start();
+        drawTimer.Start();
+        MessageBox.Show("CONNECTING...");
       }
     }
 

@@ -35,7 +35,8 @@
                     <Button x:Name="StartBtn" Content=">" Click="StartStopBtn_OnClick" Command="{Binding CmdStartSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Visibility="Hidden"/>
                     <Button x:Name="StopBtn" Content="||" Click="StartStopBtn_OnClick" Command="{Binding CmdStopSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Visibility="Visible"/>
                     <Button x:Name="StepBtn" Content="|>" Command="{Binding CmdStepSimulation}" IsEnabled="False" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="1"/>
-                    <Button x:Name="DisConnectBtn" ToolTip="Disconnect"  Content="-[x]-" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2"/>
+                    <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Visibility="Visible"/>
+                    <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Visibility="Hidden"/>
                 </Grid>
             </TabItem>
             <TabItem>
