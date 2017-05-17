@@ -22,10 +22,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
   /// Holds the ISimulationService (overridden by the Bootstrapper)
   /// </summary>
     public ISimulationService SimulationService { get; set; }
-    /// <summary>
-    /// Holds the ChannelFactory (overridden by the Bootstrapper)
-    /// </summary>
-    public ChannelFactory<ISimulationService> cf { get; set; }
+
     /// <summary>
     /// Contains the vehicles for the simulation (received via WCF)
     /// </summary>
@@ -82,22 +79,25 @@ namespace TrafficSimulation.UI.Application.ViewModel
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);
       CmdDisConnect = new DelegateCommand(DisConnect);
-
+     
 
     }
 
    private void StopSimulation()
     {
+  
+        SimulationService.Stop();
+      
 
-      SimulationService.Stop();
-     
      
     }
 
     private void StartSimulation()
     {
 
-      SimulationService.Start();
+        SimulationService.Start();
+        
+
     }
 
     private void StepSimulation()
@@ -111,22 +111,27 @@ namespace TrafficSimulation.UI.Application.ViewModel
     {
       if (((IClientChannel) SimulationService).State == CommunicationState.Opened)
       {
-        drawTimer.Stop();
-        serviceUpdateTimer.Stop();
-        ((IClientChannel) SimulationService).Close();
-        MessageBox.Show("DISCONNECTING...");
+
+          drawTimer.Stop();
+          serviceUpdateTimer.Stop();
+          ((IClientChannel)SimulationService).Close();
+          MessageBox.Show("DISCONNECTING...");
+        
       }
       else
       {
-        SimulationService = cf.CreateChannel();
-        ((IClientChannel)SimulationService).Open();
-        serviceUpdateTimer.Start();
-        drawTimer.Start();
         MessageBox.Show("CONNECTING...");
+        
+     
+          serviceUpdateTimer.Start();
+          drawTimer.Start();
+        
+        }
+
       }
     }
 
 
 
   }
-}
+

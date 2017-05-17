@@ -138,12 +138,13 @@ namespace TrafficSimulation.UI.Application
       {
         StopBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = false;
+        //DisconnectBtn.IsEnabled = true;
       }
       else
       {
         StartBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = true;
-
+        //DisconnectBtn.IsEnabled = false;
       }
        
     }
@@ -179,8 +180,8 @@ namespace TrafficSimulation.UI.Application
         DisconnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = true;
         StopBtn.IsEnabled = true;
-        StartBtn.Visibility = Visibility.Visible;
-        StopBtn.Visibility = Visibility.Hidden;
+        //StartBtn.Visibility = Visibility.Hidden;
+        //StopBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = false;
       }
       else
@@ -188,8 +189,8 @@ namespace TrafficSimulation.UI.Application
         ConnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = false;
         StopBtn.IsEnabled = false;
-        StartBtn.Visibility = Visibility.Visible;
-        StopBtn.Visibility = Visibility.Hidden;
+        //StartBtn.Visibility = Visibility.Visible;
+        //StopBtn.Visibility = Visibility.Hidden;
         StepBtn.IsEnabled = false;
 
       }

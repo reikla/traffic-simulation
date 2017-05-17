@@ -63,7 +63,7 @@ namespace TrafficSimulation.UI.Application
 
     private void DrawTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
-
+      
         System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => view.Draw()));
              
     }
@@ -73,20 +73,20 @@ namespace TrafficSimulation.UI.Application
 
       lock (vm)
       {
-
+        if (((IClientChannel)simulationService).State == CommunicationState.Closed)
+        {
+          simulationService = cf.CreateChannel();
+        }
           vm.SimulationService = simulationService;
+        
           vm.Nodes.Clear();
           vm.Nodes.AddRange(simulationService.GetNodes());
           vm.NodeConnections.Clear();
           vm.NodeConnections.AddRange(simulationService.GetNodeConnections());
           vm.Vehicles.Clear();
           vm.Vehicles.AddRange(simulationService.GetVehicles());
-
-
-        vm.cf = cf;
-
-        vm.drawTimer = drawTimer;
-        vm.serviceUpdateTimer = serviceUpdateTimer;
+          vm.drawTimer = drawTimer;
+          vm.serviceUpdateTimer = serviceUpdateTimer;
       }
       
     }
