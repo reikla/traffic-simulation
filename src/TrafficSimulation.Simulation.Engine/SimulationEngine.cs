@@ -17,7 +17,7 @@ namespace TrafficSimulation.Simulation.Engine
     private bool _isInitialized;
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private DataModel _dataModel = new DataModel();
-    private Timer SimulationTimer;
+    private Timer _simulationTimer;
     private SimulationSettings _settings;
     private IDataModelInitializer _dataModelInitializer;
     private readonly Random _random;
@@ -40,14 +40,14 @@ namespace TrafficSimulation.Simulation.Engine
     {
       Logger.Trace("Starting Simulation");
       CheckOrThrowInitialization("Start()");
-      if (SimulationTimer != null)
+      if (_simulationTimer != null)
       {
         Logger.Error(Strings.Exception_Already_Started);
         throw new EngineStateException(Strings.Exception_Already_Started);
       }
-      SimulationTimer = new Timer(_settings.TickRate);
-      SimulationTimer.Elapsed += SimulationTimer_Elapsed;
-      SimulationTimer.Start();
+      _simulationTimer = new Timer(_settings.TickRate);
+      _simulationTimer.Elapsed += SimulationTimer_Elapsed;
+      _simulationTimer.Start();
     }
 
     private void SimulationTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -59,21 +59,21 @@ namespace TrafficSimulation.Simulation.Engine
     public void Stop()
     {
       CheckOrThrowInitialization("Stop()");
-      if (SimulationTimer == null)
+      if (_simulationTimer == null)
       {
         Logger.Error(Strings.Exception_Already_Stopped);
         throw new EngineStateException(Strings.Exception_Already_Stopped);
       }
       Logger.Trace("Stopping Simulation");
-      SimulationTimer.Stop();
-      SimulationTimer = null;
+      _simulationTimer.Stop();
+      _simulationTimer = null;
     }
 
     ///<inheritdoc />
     public void Step()
     {
       CheckOrThrowInitialization("Step()");
-      if (SimulationTimer != null)
+      if (_simulationTimer != null)
       {
         Logger.Error(Strings.Exception_Cant_Step);
         throw new EngineStateException(Strings.Exception_Cant_Step);
@@ -111,6 +111,12 @@ namespace TrafficSimulation.Simulation.Engine
       Logger.Trace("Init Simulation Engine");
       _dataModelInitializer.Initialize(_dataModel);
       _isInitialized = true;
+    }
+
+    /// <inheritdoc />
+    public bool IsStarted()
+    {
+      return _simulationTimer != null;
     }
 
     private void CheckOrThrowInitialization(string method)

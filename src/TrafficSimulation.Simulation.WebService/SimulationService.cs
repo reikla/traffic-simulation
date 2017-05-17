@@ -67,5 +67,11 @@ namespace TrafficSimulation.Simulation.WebService
         x => connections.Add(new NodeConnection(x.Id, x.StartNode.Id, x.EndNode.Id, x.Length)));
       return new ReadOnlyCollection<NodeConnection>(connections);
     }
+
+    /// <inheritdoc />
+    public bool IsStarted()
+    {
+      return _engine.IsStarted();
+    }
   }
 }

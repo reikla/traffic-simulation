@@ -47,5 +47,11 @@ namespace TrafficSimulation.Simulation.Contracts
     /// <returns></returns>
     [OperationContract]
     ReadOnlyCollection<NodeConnection> GetNodeConnections();
+
+    /// <summary>
+    /// Determines whether the service is started.
+    /// </summary>
+    [OperationContract]
+    bool IsStarted();
   }
 }

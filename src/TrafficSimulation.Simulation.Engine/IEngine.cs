@@ -22,5 +22,10 @@
     /// Initalizes the Simulation.
     /// </summary>
     void Init();
+
+    /// <summary>
+    /// Determines whether this instance is started.
+    /// </summary>
+    bool IsStarted();
   }
 }
