@@ -18,6 +18,10 @@ namespace TrafficSimulation.UI.Application
   public partial class MainWindow : Window
   {
     private TrafficSimulationViewModel ViewModel => DataContext as TrafficSimulationViewModel;
+
+    private bool IsDebugOn { get; set; }
+
+
   /// <summary>
   /// Constructor for the MainWindow view. Initializes all components.
   /// </summary>
@@ -32,12 +36,12 @@ namespace TrafficSimulation.UI.Application
 
     
 
-    Rectangle DrawVehicle(double width, double height)
+    Rectangle DrawVehicle()
     {
       return new Rectangle()
       {
-        Width = width,
-        Height = height,
+        Width = 20,
+        Height = 10,
         Fill = Brushes.Green,
         Stroke = Brushes.Green,
         StrokeThickness = 2
@@ -99,11 +103,10 @@ namespace TrafficSimulation.UI.Application
 
         foreach (var viewModelVehicle in ViewModel.Vehicles)
           {
-            var rectangle = DrawVehicle(10, 10);
+            var rectangle = DrawVehicle();
             NodeConnection street = ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
             Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
             Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
-
             MainCanvas.Children.Add(rectangle);
             var deltaX = endNode.X - startNode.X;
             var deltaY = endNode.Y - startNode.Y;
@@ -111,6 +114,21 @@ namespace TrafficSimulation.UI.Application
             var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
             Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
             Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
+
+          
+          if (IsDebugOn)
+          {
+            if (viewModelVehicle.DebugInfo!=null)
+            {
+              var DebugInfo_label = new Label()
+              {
+                Content = viewModelVehicle.DebugInfo.ToString()
+              };
+              MainCanvas.Children.Add(DebugInfo_label);
+              Canvas.SetLeft(DebugInfo_label, x * MainCanvas.ActualWidth);
+              Canvas.SetTop(DebugInfo_label, Canvas.GetTop(rectangle));
+            }
+          }
 
           }
 
@@ -195,5 +213,25 @@ namespace TrafficSimulation.UI.Application
 
       }
     }
+
+    private void DebugModeRadio_Checked(object sender, RoutedEventArgs e)
+    {
+
+      if (IsDebugOn)
+      {
+        IsDebugOn = false;
+        DebugModeBtn.Content = "Debug";
+        DebugModeBtn.Foreground = Brushes.Black;
+      }
+      else
+      {
+        IsDebugOn = true;
+        DebugModeBtn.Content = "DEBUGGING";
+        DebugModeBtn.Foreground = Brushes.OrangeRed;
+      }
+
+    }
+
+
   }
 }
