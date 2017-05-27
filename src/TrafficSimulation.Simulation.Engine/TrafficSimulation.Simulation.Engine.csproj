@@ -80,6 +80,7 @@
     <Compile Include="IVehicle.cs" />
     <Compile Include="Settings\SimulationSettings.cs" />
     <Compile Include="Settings\SlowSimulationSettings.cs" />
+    <Compile Include="ShortestPath.cs" />
     <Compile Include="SimulationBase.cs" />
     <Compile Include="SimulationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
