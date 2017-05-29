@@ -1,15 +1,12 @@
 ﻿using System;
-using System.ComponentModel;
 using System.ServiceModel;
 using System.Timers;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
 using System.Windows;
 using System.Windows.Threading;
-using Prism.Commands;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
-using TrafficSimulation.UI.Application;
 using TrafficSimulation.UI.Application.ViewModel;
 using NLog;
 
