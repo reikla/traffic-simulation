@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TrafficSimulation.Simulation.Engine.Environment;
 using TrafficSimulation.Simulation.Engine.Xml;
@@ -22,7 +21,17 @@ namespace TrafficSimulation.Simulation.Engine
 
       dataModel.Nodes.AddRange(reader.Nodes);
       dataModel.NodeConnections.AddRange(reader.NodeConnections);
+
+
       InitializeRoutes();
+
+      var verticalDistance = dataModel.Routes.First().Legth;
+      var horizontalDistance = dataModel.Routes.Last().Legth;
+      var distanceBetweenTwoLanesSameDirection = GetConnectionByNodeIds(26, 30).Length;
+      var distanceBetweenTwoLanesDifferentDirection = GetConnectionByNodeIds(42, 44).Length;
+
+
+
     }
 
     private void InitializeRoutes()
