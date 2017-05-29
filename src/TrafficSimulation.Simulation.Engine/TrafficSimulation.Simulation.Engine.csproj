@@ -63,6 +63,7 @@
     <Compile Include="Environment\Node.cs" />
     <Compile Include="Environment\NodeConnection.cs" />
     <Compile Include="Environment\NodeType.cs" />
+    <Compile Include="Environment\Orientation.cs" />
     <Compile Include="Environment\Position.cs" />
     <Compile Include="Environment\Route.cs" />
     <Compile Include="IDataModelInitializer.cs" />

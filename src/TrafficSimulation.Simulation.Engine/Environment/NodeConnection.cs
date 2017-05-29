@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using TrafficSimulation.Common;
 
 namespace TrafficSimulation.Simulation.Engine.Environment
@@ -7,6 +8,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
   /// <summary>
   /// Represents a connections between two nodes.
   /// </summary>
+  [DebuggerDisplay("NC {StartNode.Id} - {EndNode.Id}")]
   public class NodeConnection : SimulationBase, INodeConnection
   {
     /// <summary>
@@ -46,6 +48,22 @@ namespace TrafficSimulation.Simulation.Engine.Environment
         var dX = Math.Max(StartNode.X, EndNode.X) -  Math.Min(StartNode.X, EndNode.X);
         var dY = Math.Max(StartNode.Y, EndNode.Y) -  Math.Min(StartNode.Y, EndNode.Y);
         return Math.Sqrt(Math.Pow(dX, 2) + Math.Pow(dY, 2)) * Constants.SimulationSizeFactor;
+      }
+    }
+
+    /// <summary>
+    /// Gets the orientation of a connection.
+    /// </summary>
+    public Orientation ConnectionOrientation
+    {
+      get
+      {
+        var dX = Math.Max(StartNode.X, EndNode.X) - Math.Min(StartNode.X, EndNode.X);
+        if (dX < 0.01)
+        {
+          return StartNode.Y < EndNode.Y ? Orientation.South : Orientation.North;
+        }
+        return StartNode.X < EndNode.X ? Orientation.East : Orientation.West;
       }
     }
   }

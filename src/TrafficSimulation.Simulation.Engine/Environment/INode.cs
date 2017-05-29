@@ -19,7 +19,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// <summary>
     /// The type of the node.
     /// </summary>
-    NodeType NodeType { get; set; }
+    NodeType NodeType { get; }
 
     /// <summary>
     /// Gets or sets the adjacent node connections.

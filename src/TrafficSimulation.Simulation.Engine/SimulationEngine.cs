@@ -111,6 +111,7 @@ namespace TrafficSimulation.Simulation.Engine
       }
       Logger.Trace("Init Simulation Engine");
       _dataModelInitializer.Initialize(_dataModel);
+
       _isInitialized = true;
     }
 

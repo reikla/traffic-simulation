@@ -3,11 +3,10 @@
 namespace TrafficSimulation.Simulation.Engine
 {
   /// <summary>
-  /// 
+  /// The DataModel initializer that uses the DrawML document
   /// </summary>
   class XmlDataModelInitializer : IDataModelInitializer
   {
-
     /// <inheritdoc />
     public void Initialize(DataModel dataModel)
     {

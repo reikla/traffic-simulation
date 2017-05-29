@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using NLog;
@@ -54,6 +55,13 @@ namespace TrafficSimulation.Simulation.Engine.Xml
         foreach (var node in nodes)
         {
           var nodeInfo = XmlNodeReader.GetNode(node);
+          var nodeLabel = node.Descendants(GraphMLNamespaces.nsY + "NodeLabel").First();
+          nodeLabel.Value = nodeInfo.Item1;
+          var hasText = nodeLabel.Attribute("hasText");
+          if (hasText != null)
+          {
+            hasText.Value = "true";
+          }
           nodeDictionary.Add(nodeInfo.Item1, nodeInfo.Item2);
         }
 
@@ -64,6 +72,7 @@ namespace TrafficSimulation.Simulation.Engine.Xml
           var connection = new NodeConnection(nodeDictionary[from], nodeDictionary[to]);
           nodeConnections.Add(connection);
         }
+        doc.Save("Strassennetz.graphml");
 
         Normalize();
       }

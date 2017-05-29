@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TrafficSimulation.Simulation.Engine.Environment
 {
@@ -19,7 +20,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     {
       X = x;
       Y = y;
-      NodeType = type;
+      //NodeType = type;
       NodeConnections = new List<INodeConnection>();
     }
 
@@ -35,7 +36,22 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// <summary>
     /// The type of the node.
     /// </summary>
-    public NodeType NodeType { get; set; }
+    public NodeType NodeType
+    {
+      get
+      {
+        var numberOfOutgoingConnections = NodeConnections.Count(x => x.StartNode.Equals(this));
+        var numberOfConnections = NodeConnections.Count;
+
+        //we are sure now we are either a start or an end node
+        if (numberOfConnections == 1)
+        {
+          return numberOfOutgoingConnections == 1 ? NodeType.StartNode : NodeType.EndNode;
+        }
+        //otherwise we are an intersection
+        return NodeType.Intersection;
+      }
+    }
 
     /// <summary>
     /// Gets or sets the adjacent node connections.

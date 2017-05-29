@@ -52,6 +52,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="EngineTests.cs" />
+    <Compile Include="NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
