@@ -16,6 +16,8 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     {
       StartNode = startNode;
       EndNode = endNode;
+      StartNode.AddNodeConnection(this);
+      EndNode.AddNodeConnection(this);
       Placeables = new List<IPlaceable>();
     }
 

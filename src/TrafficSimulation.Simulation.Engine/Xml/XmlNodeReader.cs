@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Xml.Linq;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts.Exceptions;
@@ -8,7 +10,7 @@ namespace TrafficSimulation.Simulation.Engine.Xml
 {
   internal static class XmlNodeReader
   {
-    public static (string, INode) GetNode(XElement element)
+    public static Tuple<string, INode> GetNode(XElement element)
     {
       var id = element.Attribute("id").Value;
 
@@ -21,22 +23,19 @@ namespace TrafficSimulation.Simulation.Engine.Xml
       var shape = data.Descendants(GraphMLNamespaces.nsY + "Shape").First();
       var shapeType = shape.Attribute("type").Value;
       INode n = null;
-
+      
       switch (shapeType)
       {
-        case "star5":
-          n = new StartNode(double.Parse(x), double.Parse(y));
-          break;
-        case "octagon":
-          n = new EndNode(double.Parse(x), double.Parse(y));
+        case "star8":
+          n = new Node(double.Parse(x, CultureInfo.InvariantCulture), double.Parse(y, CultureInfo.InvariantCulture), NodeType.Intersection);
           break;
         case "ellipse":
-          n = new Node(double.Parse(x), double.Parse(y));
+          n = new Node(double.Parse(x, CultureInfo.InvariantCulture), double.Parse(y, CultureInfo.InvariantCulture));
           break;
         default:
           throw new XmlDeserializationException(Strings.Exception_Xml_Node_Has_Unexpected_Type);
       }
-      return (id, n);
+      return new Tuple<string,INode>(id, n);
     }
   }
 }

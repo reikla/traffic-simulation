@@ -46,7 +46,7 @@ namespace TrafficSimulation.Simulation.Engine.Xml
     {
       try
       {
-        var doc = XDocument.Load("net.graphml");
+        var doc = XDocument.Load("Strassennetz.graphml");
 
         var graphml = doc.Element(GraphMLNamespaces.nsGraphMl + "graphml");
         var graph = graphml.Element(GraphMLNamespaces.nsGraphMl + "graph");
@@ -85,8 +85,8 @@ namespace TrafficSimulation.Simulation.Engine.Xml
       var minY = nodeDictionary.Values.Min(x => x.Y);
 
       //because we subtract it from the values later on we have to subtract it from the maximum value
-      var maxX = nodeDictionary.Values.Max(x => x.X) - minX;
-      var maxY = nodeDictionary.Values.Max(x => x.Y) - minY;
+      var xSpan = nodeDictionary.Values.Max(x => x.X) - minX;
+      var ySpan = nodeDictionary.Values.Max(x => x.Y) - minY;
 
       foreach (var nsValue in nodeDictionary.Values)
       {
@@ -95,8 +95,8 @@ namespace TrafficSimulation.Simulation.Engine.Xml
         nsValue.Y -= minY;
 
         //...and the maximum value to be 1
-        nsValue.X /= maxX;
-        nsValue.Y /= maxY;
+        nsValue.X /= xSpan;
+        nsValue.Y /= ySpan;
 
         //...so we are independed of the physical size of the network all the time
       }
