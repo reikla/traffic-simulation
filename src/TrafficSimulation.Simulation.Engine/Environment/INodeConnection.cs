@@ -30,5 +30,10 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// Gets the orientation of a connection.
     /// </summary>
     Orientation ConnectionOrientation { get; }
+
+    /// <summary>
+    /// Gets the cost of the connection
+    /// </summary>
+    double Cost { get; }
   }
 }

@@ -68,6 +68,11 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     }
 
     /// <summary>
+    /// Gets the cost of the connection
+    /// </summary>
+    public double Cost => Length;
+
+    /// <summary>
     /// Returns true if a connection is parallel to this connection
     /// </summary>
     /// <param name="connection">the connection to compare</param>
