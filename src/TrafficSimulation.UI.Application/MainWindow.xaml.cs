@@ -228,6 +228,8 @@ namespace TrafficSimulation.UI.Application
         DebugModeBtn.Foreground = Brushes.OrangeRed;
       }
 
+      
+
     }
 
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TrafficSimulation.Simulation.Contracts.DTO;
+using TrafficSimulation.Simulation.Engine.Environment;
 
 namespace TrafficSimulation.Simulation.Engine
 {
+  
   internal class NodeConnectionForSP
   {
     internal NodeForSP Target { get; private set; }
@@ -41,7 +42,7 @@ namespace TrafficSimulation.Simulation.Engine
     {
       if (targetNode == null) throw new ArgumentNullException("targetNode");
       if (targetNode == this)
-        throw new ArgumentException("Node may not connect to itself.");
+        throw new ArgumentException("INode may not connect to itself.");
       if (distance <= 0) throw new ArgumentException("Distance must be positive.");
 
       _connections.Add(new NodeConnectionForSP(targetNode, distance));
@@ -60,8 +61,8 @@ namespace TrafficSimulation.Simulation.Engine
 
     public void AddNode(NodeForSP _node)
     {
-      var node = _node;
-      Nodes.Add(node.Name, node);
+      var INode = _node;
+      Nodes.Add(INode.Name, INode);
     }
 
     public void AddConnection(NodeForSP FromNode, NodeConnectionForSP _nodeconnection)
@@ -75,7 +76,7 @@ namespace TrafficSimulation.Simulation.Engine
     internal IDictionary<string, double> CalculateDistances(Graph graph, string startingNode)
     {
       if (!graph.Nodes.Any(n => n.Key == startingNode))
-        throw new ArgumentException("Starting node must be in graph.");
+        throw new ArgumentException("Starting INode must be in graph.");
       InitialiseGraph(graph, startingNode);
       ProcessGraph(graph, startingNode);
       return ExtractDistances(graph);
@@ -83,8 +84,8 @@ namespace TrafficSimulation.Simulation.Engine
     }
     private void InitialiseGraph(Graph graph, string startingNode)
     {
-      foreach (NodeForSP node in graph.Nodes.Values)
-        node.DistanceFromStart = double.PositiveInfinity;
+      foreach (NodeForSP INode in graph.Nodes.Values)
+        INode.DistanceFromStart = double.PositiveInfinity;
       graph.Nodes[startingNode].DistanceFromStart = 0;
     }
 
@@ -108,12 +109,12 @@ namespace TrafficSimulation.Simulation.Engine
       }
     }
 
-    private void ProcessNode(NodeForSP node, List<NodeForSP> queue)
+    private void ProcessNode(NodeForSP INode, List<NodeForSP> queue)
     {
-      var connections = node.Connections.Where(c => queue.Contains(c.Target));
+      var connections = INode.Connections.Where(c => queue.Contains(c.Target));
       foreach (var connection in connections)
       {
-        double distance = node.DistanceFromStart + connection.Distance;
+        double distance = INode.DistanceFromStart + connection.Distance;
         if (distance < connection.Target.DistanceFromStart)
           connection.Target.DistanceFromStart = distance;
       }
@@ -130,6 +131,10 @@ namespace TrafficSimulation.Simulation.Engine
   /// </summary>
   public class ShortestPath
   {
+    /// <summary>
+    /// Returns a List of NodeConnections, which represent the shortest path.
+    /// </summary>
+    public List<INodeConnection> SP = new List<INodeConnection>();
     List<NodeForSP> NodesForSP = new List<NodeForSP>();
     List<NodeConnectionForSP> NodeConnectionsForSP = new List<NodeConnectionForSP>();
 
@@ -140,29 +145,67 @@ namespace TrafficSimulation.Simulation.Engine
     /// <param name="AllNodes">The full list of connections.</param>
     /// <param name="StartNodeId">Integer Id of the Start for the path.</param>
     /// <param name="EndNodeId">Integer Id of the End for the path.</param>
-    public ShortestPath( List<NodeConnection> AllNodeConnections,List<Node> AllNodes, int StartNodeId, int EndNodeId)
+    public ShortestPath( List<INodeConnection> AllNodeConnections,List<INode> AllNodes, int StartNodeId, int EndNodeId)
     {
       Graph g = new Graph();
 
-      AllNodes.ForEach(node => NodesForSP.Add(new NodeForSP(node.Id.ToString())));
-      NodesForSP.ForEach(node => g.AddNode(node));
+      AllNodes.ForEach(INode => NodesForSP.Add(new NodeForSP(INode.Id.ToString())));
+      NodesForSP.ForEach(INode => g.AddNode(INode));
 
       foreach(var con in AllNodeConnections)
       {
-        NodeForSP nfspStart = NodesForSP.Where(node => node.Name.Equals(con.StartNodeId.ToString())).FirstOrDefault();
-        NodeForSP nfspTarget = NodesForSP.Where(node => node.Name.Equals(con.EndNodeId.ToString())).FirstOrDefault();
+        NodeForSP nfspStart = NodesForSP.Where(node => node.Name.Equals(con.StartNode.Id.ToString())).FirstOrDefault();
+        NodeForSP nfspTarget = NodesForSP.Where(node => node.Name.Equals(con.EndNode.Id.ToString())).FirstOrDefault();
         NodeConnectionForSP ncfsp = new NodeConnectionForSP(nfspTarget, con.Length );
+        NodeConnectionsForSP.Add(ncfsp);
         nfspStart.AddConnection(nfspTarget, ncfsp.Distance, false);
         g.AddConnection(nfspStart, ncfsp);
       }
 
       var calculator = new DistanceCalculator();
       var distances = calculator.CalculateDistances(g, StartNodeId.ToString());
+      List<KeyValuePair<string, double>> distances_route = new List<KeyValuePair<string, double>>();
+      List<KeyValuePair<string, double>> distances_ordered = new List<KeyValuePair<string, double>>();
+
+
+      foreach (var d in distances.OrderBy(i => i.Value))
+      {
+        distances_ordered.Add(d);
+      }
+
+      foreach(var d in distances_ordered)
+      {
+        if(d.Key.Equals(EndNodeId.ToString()))
+        {
+          distances_route.Add(d);
+          break;         
+        }
+        distances_route.Add(d);
+      }
+
+      NodeForSP current_node = g.Nodes.Where(n => n.Key.Equals(StartNodeId.ToString())).FirstOrDefault().Value;
+      foreach(var d in distances_route)
+      {
+        if (d.Value > 0)
+        {
+          NodeConnectionForSP ncsp = current_node.Connections.Where(nc => nc.Target.Name.Equals(d.Key)).FirstOrDefault();
+          INodeConnection nodecon = AllNodeConnections.Where(conn => conn.StartNode.Id.ToString().Equals(current_node.Name) && conn.EndNode.Id.ToString().Equals(ncsp.Target.Name)).FirstOrDefault();
+          current_node = NodesForSP.Where(no => no.Name.Equals(nodecon.EndNode.Id.ToString())).FirstOrDefault();
+          SP.Add(nodecon);
+        }
+      }
+
 
       foreach (var d in distances)
       {
         Console.WriteLine("{0}, {1}", d.Key, d.Value);
+
+
       }
+
+      
+
+
 
 
     }
