@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using NLog;
@@ -14,15 +13,15 @@ namespace TrafficSimulation.Simulation.Engine.Xml
   /// <summary>
   /// The XML Reader to desirialize the datamodel
   /// </summary>
-  internal class XmlGraphReader
+  public class XmlGraphReader
   {
-    private readonly List<NodeConnection> nodeConnections;
+    private readonly List<INodeConnection> nodeConnections;
     private readonly Dictionary<string, INode> nodeDictionary;
 
     /// <summary>
     /// The node Connections extracted from Xml
     /// </summary>
-    public List<NodeConnection> NodeConnections => nodeConnections;
+    public List<INodeConnection> NodeConnections => nodeConnections;
 
     /// <summary>
     /// Gets the nodes.
@@ -37,17 +36,17 @@ namespace TrafficSimulation.Simulation.Engine.Xml
     public XmlGraphReader()
     {
       nodeDictionary = new Dictionary<string, INode>();
-      nodeConnections = new List<NodeConnection>();
+      nodeConnections = new List<INodeConnection>();
     }
 
     /// <summary>
     /// reads the datamodel
     /// </summary>
-    public void Read()
+    public void Read(string path)
     {
       try
       {
-        var doc = XDocument.Load("Strassennetz.graphml");
+        var doc = XDocument.Load(path);
 
         var graphml = doc.Element(GraphMLNamespaces.nsGraphMl + "graphml");
         var graph = graphml.Element(GraphMLNamespaces.nsGraphMl + "graph");
@@ -72,7 +71,7 @@ namespace TrafficSimulation.Simulation.Engine.Xml
           var connection = new NodeConnection(nodeDictionary[from], nodeDictionary[to]);
           nodeConnections.Add(connection);
         }
-        doc.Save("Strassennetz.graphml");
+        doc.Save(path);
 
         Normalize();
       }

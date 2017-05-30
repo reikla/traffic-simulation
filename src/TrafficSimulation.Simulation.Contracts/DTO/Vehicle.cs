@@ -29,6 +29,7 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
     /// <summary>
     /// Gets or sets the debug information.
     /// </summary>
+    [DataMember]
     public string DebugInfo { get; set; }
 
     /// <summary>

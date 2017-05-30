@@ -17,7 +17,7 @@ namespace TrafficSimulation.Simulation.Engine
     {
       this.dataModel = dataModel;
       XmlGraphReader reader = new XmlGraphReader();
-      reader.Read();
+      reader.Read("Strassennetz.graphml");
 
       dataModel.Nodes.AddRange(reader.Nodes);
       dataModel.NodeConnections.AddRange(reader.NodeConnections);
