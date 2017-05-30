@@ -9,7 +9,7 @@
     /// <summary>
     /// The factor beeing used for distances.
     /// </summary>
-    public static double SimulationSizeFactor = 1000;
+    public static double SimulationSizeFactor = 100;
 
     /// <summary>
     /// The simulation update speed

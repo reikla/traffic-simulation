@@ -29,5 +29,20 @@
     /// The placable is not on route
     /// </summary>
     public static readonly string Exception_Placable_Not_On_Route = "The placable {0} is not on the route";
+
+    /// <summary>
+    /// Could not deserialize GraphXml
+    /// </summary>
+    public static readonly string Exception_Xml_Could_Not_Deserialize = "Could not deserialize the GraphXml.";
+
+    /// <summary>
+    /// XML node contains no data.
+    /// </summary>
+    public static readonly string Exception_Xml_Node_Contains_No_Data = "The Node {0} contains no data.";
+
+    /// <summary>
+    /// XML node has unexpected type
+    /// </summary>
+    public static readonly string Exception_Xml_Node_Has_Unexpected_Type = "The Node {0} has an unexpected format.";
   }
 }

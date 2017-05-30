@@ -25,5 +25,10 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// The length of the connection.
     /// </summary>
     double Length { get; }
+
+    /// <summary>
+    /// Gets the orientation of a connection.
+    /// </summary>
+    Orientation ConnectionOrientation { get; }
   }
 }
