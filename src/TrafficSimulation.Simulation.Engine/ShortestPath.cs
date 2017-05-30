@@ -168,12 +168,13 @@ namespace TrafficSimulation.Simulation.Engine
       List<KeyValuePair<string, double>> distances_route = new List<KeyValuePair<string, double>>();
       List<KeyValuePair<string, double>> distances_ordered = new List<KeyValuePair<string, double>>();
 
-
       foreach (var d in distances.OrderBy(i => i.Value))
       {
         distances_ordered.Add(d);
       }
 
+ 
+     
       foreach(var d in distances_ordered)
       {
         if(d.Key.Equals(EndNodeId.ToString()))
@@ -181,7 +182,10 @@ namespace TrafficSimulation.Simulation.Engine
           distances_route.Add(d);
           break;         
         }
+
         distances_route.Add(d);
+        
+
       }
 
       NodeForSP current_node = g.Nodes.FirstOrDefault(n => n.Key.Equals(StartNodeId.ToString())).Value;
@@ -190,13 +194,22 @@ namespace TrafficSimulation.Simulation.Engine
         if (d.Value > 0)
         {
 
-            NodeConnectionForSP ncsp = current_node.Connections.FirstOrDefault(nc => nc.Target.Name.Equals(d.Key));
-            INodeConnection nodecon = AllNodeConnections.FirstOrDefault(conn => conn.StartNode.Id.ToString().Equals(current_node.Name) && conn.EndNode.Id.ToString().Equals(ncsp.Target.Name));
-            current_node = _nodesForSp.FirstOrDefault(no => no.Name.Equals(nodecon.EndNode.Id.ToString()));
+            NodeConnectionForSP ncsp = current_node?.Connections.FirstOrDefault(nc => nc.Target.Name.Equals(d.Key));
+          if (ncsp != null)
+          {
+            INodeConnection nodecon =
+              AllNodeConnections.FirstOrDefault(conn => conn.StartNode.Id.ToString().Equals(current_node?.Name) &&
+                                                        conn.EndNode.Id.ToString().Equals(ncsp?.Target.Name));
+            current_node = _nodesForSp.FirstOrDefault(no => no.Name.Equals(nodecon?.EndNode.Id.ToString()));
+
             Sp.Add(nodecon);
-          
+          }
+
+
+
         }
-      }
+        }
+      
 
 
       foreach (var d in distances)
