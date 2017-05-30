@@ -13,7 +13,7 @@
     {
       TickRate = 100;
       TickStepSize = 0.1;
-      TargetVehicleCount = 5;
+      TargetVehicleCount = 500;
     }
   }
 }

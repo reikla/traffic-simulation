@@ -8,7 +8,6 @@ using System.Windows.Threading;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.UI.Application.ViewModel;
-using NLog;
 
 namespace TrafficSimulation.UI.Application
 {

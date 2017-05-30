@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using TrafficSimulation.Simulation.Engine.Environment;
+using TrafficSimulation.Simulation.Engine.PathCalculation;
 using TrafficSimulation.Simulation.Engine.Xml;
 
 namespace TrafficSimulation.Simulation.Engine
@@ -22,8 +23,19 @@ namespace TrafficSimulation.Simulation.Engine
       dataModel.Nodes.AddRange(reader.Nodes);
       dataModel.NodeConnections.AddRange(reader.NodeConnections);
 
+      IShortestPath shortestPath = new TobisShortestPath();
 
-      InitializeRoutes();
+
+      foreach (var startNode in dataModel.Nodes.Where(x=>x.NodeType == NodeType.StartNode))
+      {
+        foreach (var endNode in dataModel.Nodes.Where(x=>x.NodeType == NodeType.EndNode))
+        {
+          dataModel.Routes.Add(shortestPath.GetRoute(dataModel.Nodes, dataModel.NodeConnections, startNode, endNode));
+        }
+      }
+
+
+      //InitializeRoutes();
 
       var verticalDistance = dataModel.Routes.First().Legth;
       var horizontalDistance = dataModel.Routes.Last().Legth;
