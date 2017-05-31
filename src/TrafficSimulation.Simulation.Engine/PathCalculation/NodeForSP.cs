@@ -3,30 +3,27 @@ using System.Collections.Generic;
 
 namespace TrafficSimulation.Simulation.Engine.PathCalculation
 {
-  internal class NodeForSP
+  internal class NodeForSp
   {
-    IList<NodeConnectionForSp> _connections;
+    private readonly IList<NodeConnectionForSp> _connections;
 
     internal string Name { get; private set; }
 
     internal double DistanceFromStart { get; set; }
 
-    internal IEnumerable<NodeConnectionForSp> Connections
-    {
-      get { return _connections; }
-    }
+    internal IEnumerable<NodeConnectionForSp> Connections => _connections;
 
-    internal NodeForSP(string name)
+    internal NodeForSp(string name)
     {
       Name = name;
       _connections = new List<NodeConnectionForSp>();
     }
 
-    internal void AddConnection(NodeForSP targetNode, double distance, bool twoWay)
+    internal void AddConnection(NodeForSp targetNode, double distance)
     {
       if (targetNode == null)
       {
-        throw new ArgumentNullException("targetNode");
+        throw new ArgumentNullException(nameof(targetNode));
       }
       if (targetNode == this)
       {
@@ -38,10 +35,6 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
       }
 
       _connections.Add(new NodeConnectionForSp(targetNode, distance));
-      if (twoWay)
-      {
-        targetNode.AddConnection(this, distance, false);
-      }
     }
   }
 }

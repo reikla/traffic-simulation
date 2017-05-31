@@ -8,7 +8,7 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
   {
     internal IDictionary<string, double> CalculateDistances(Graph graph, string startingNode)
     {
-      if (!graph.Nodes.Any(n => n.Key == startingNode))
+      if (graph.Nodes.All(n => n.Key != startingNode))
       {
         throw new ArgumentException("Starting INode must be in graph.");
       }
@@ -19,20 +19,20 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
     }
     private void InitialiseGraph(Graph graph, string startingNode)
     {
-      foreach (NodeForSP INode in graph.Nodes.Values)
+      foreach (var node in graph.Nodes.Values)
       {
-        INode.DistanceFromStart = double.PositiveInfinity;
+        node.DistanceFromStart = double.PositiveInfinity;
       }
       graph.Nodes[startingNode].DistanceFromStart = 0;
     }
 
     private void ProcessGraph(Graph graph, string startingNode)
     {
-      bool finished = false;
+      var finished = false;
       var queue = graph.Nodes.Values.ToList();
       while (!finished)
       {
-        NodeForSP nextNode = queue.OrderBy(n => n.DistanceFromStart).FirstOrDefault(
+        var nextNode = queue.OrderBy(n => n.DistanceFromStart).FirstOrDefault(
           n => !double.IsPositiveInfinity(n.DistanceFromStart));
         if (nextNode != null)
         {
@@ -46,12 +46,12 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
       }
     }
 
-    private void ProcessNode(NodeForSP INode, List<NodeForSP> queue)
+    private void ProcessNode(NodeForSp node, List<NodeForSp> queue)
     {
-      var connections = INode.Connections.Where(c => queue.Contains(c.Target));
+      var connections = node.Connections.Where(c => queue.Contains(c.Target));
       foreach (var connection in connections)
       {
-        double distance = INode.DistanceFromStart + connection.Distance;
+        var distance = node.DistanceFromStart + connection.Distance;
         if (distance < connection.Target.DistanceFromStart)
         {
           connection.Target.DistanceFromStart = distance;

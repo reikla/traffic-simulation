@@ -4,22 +4,21 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
 {
   internal class Graph
   {
-    internal IDictionary<string, NodeForSP> Nodes { get; private set; }
+    internal IDictionary<string, NodeForSp> Nodes { get; private set; }
 
     public Graph()
     {
-      Nodes = new Dictionary<string, NodeForSP>();
+      Nodes = new Dictionary<string, NodeForSp>();
     }
 
-    public void AddNode(NodeForSP _node)
+    public void AddNode(NodeForSp node)
     {
-      var INode = _node;
-      Nodes.Add(INode.Name, INode);
+      Nodes.Add(node.Name, node);
     }
 
-    public void AddConnection(NodeForSP FromNode, NodeConnectionForSp _nodeconnection)
+    public void AddConnection(NodeForSp fromNode, NodeConnectionForSp nodeconnection)
     {
-      Nodes[FromNode.Name].AddConnection(Nodes[_nodeconnection.Target.Name], _nodeconnection.Distance, false);
+      Nodes[fromNode.Name].AddConnection(Nodes[nodeconnection.Target.Name], nodeconnection.Distance);
     }
   }
 }

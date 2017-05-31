@@ -12,68 +12,63 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
     /// <summary>
     /// Returns a List of NodeConnections, which represent the shortest path.
     /// </summary>
-    public List<INodeConnection> Sp = new List<INodeConnection>();
+    public readonly List<INodeConnection> Sp = new List<INodeConnection>();
 
-    readonly List<NodeForSP> _nodesForSp = new List<NodeForSP>();
-    readonly List<NodeConnectionForSp> _nodeConnectionsForSp = new List<NodeConnectionForSp>();
+    private readonly List<NodeForSp> _nodesForSp = new List<NodeForSp>();
+    private readonly List<NodeConnectionForSp> _nodeConnectionsForSp = new List<NodeConnectionForSp>();
 
     /// <summary>
     /// Calculates the shortest path between two specified nodes.
     /// </summary>
-    /// <param name="AllNodeConnections">The full list of connections.</param>
-    /// <param name="AllNodes">The full list of connections.</param>
-    /// <param name="StartNodeId">Integer Id of the Start for the path.</param>
-    /// <param name="EndNodeId">Integer Id of the End for the path.</param>
-    public ShortestPath(List<INodeConnection> AllNodeConnections, List<INode> AllNodes, int StartNodeId, int EndNodeId)
+    /// <param name="allNodeConnections">The full list of connections.</param>
+    /// <param name="allNodes">The full list of connections.</param>
+    /// <param name="startNodeId">Integer Id of the Start for the path.</param>
+    /// <param name="endNodeId">Integer Id of the End for the path.</param>
+    public ShortestPath(List<INodeConnection> allNodeConnections, List<INode> allNodes, int startNodeId, int endNodeId)
     {
-      Graph g = new Graph();
+      var g = new Graph();
 
-      AllNodes.ForEach(node => _nodesForSp.Add(new NodeForSP(node.Id.ToString())));
+      allNodes.ForEach(node => _nodesForSp.Add(new NodeForSp(node.Id.ToString())));
       _nodesForSp.ForEach(node => g.AddNode(node));
 
-      foreach (var con in AllNodeConnections)
+      foreach (var con in allNodeConnections)
       {
-        NodeForSP nfspStart = _nodesForSp.FirstOrDefault(node => node.Name.Equals(con.StartNode.Id.ToString()));
-        NodeForSP nfspTarget = _nodesForSp.FirstOrDefault(node => node.Name.Equals(con.EndNode.Id.ToString()));
-        NodeConnectionForSp ncfsp = new NodeConnectionForSp(nfspTarget, con.Length);
+        var nfspStart = _nodesForSp.FirstOrDefault(node => node.Name.Equals(con.StartNode.Id.ToString()));
+        var nfspTarget = _nodesForSp.FirstOrDefault(node => node.Name.Equals(con.EndNode.Id.ToString()));
+        var ncfsp = new NodeConnectionForSp(nfspTarget, con.Length);
         _nodeConnectionsForSp.Add(ncfsp);
-        nfspStart.AddConnection(nfspTarget, ncfsp.Distance, false);
+        nfspStart.AddConnection(nfspTarget, ncfsp.Distance);
         g.AddConnection(nfspStart, ncfsp);
       }
 
       var calculator = new DistanceCalculator();
-      var distances = calculator.CalculateDistances(g, StartNodeId.ToString());
-      List<KeyValuePair<string, double>> distances_route = new List<KeyValuePair<string, double>>();
-      List<KeyValuePair<string, double>> distances_ordered = new List<KeyValuePair<string, double>>();
+      var distances = calculator.CalculateDistances(g, startNodeId.ToString());
+      var distancesRoute = new List<KeyValuePair<string, double>>();
+      var distancesOrdered = distances.OrderBy(i => i.Value).ToList();
 
-      foreach (var d in distances.OrderBy(i => i.Value))
+      foreach (var d in distancesOrdered)
       {
-        distances_ordered.Add(d);
-      }
-
-      foreach (var d in distances_ordered)
-      {
-        if (d.Key.Equals(EndNodeId.ToString()))
+        if (d.Key.Equals(endNodeId.ToString()))
         {
-          distances_route.Add(d);
+          distancesRoute.Add(d);
           break;
         }
 
-        distances_route.Add(d);
+        distancesRoute.Add(d);
       }
 
-      NodeForSP current_node = g.Nodes.FirstOrDefault(n => n.Key.Equals(StartNodeId.ToString())).Value;
-      foreach (var d in distances_route)
+      var currentNode = g.Nodes.FirstOrDefault(n => n.Key.Equals(startNodeId.ToString())).Value;
+      foreach (var d in distancesRoute)
       {
         if (d.Value > 0)
         {
-          NodeConnectionForSp ncsp = current_node?.Connections.FirstOrDefault(nc => nc.Target.Name.Equals(d.Key));
+          var ncsp = currentNode?.Connections.FirstOrDefault(nc => nc.Target.Name.Equals(d.Key));
           if (ncsp != null)
           {
-            INodeConnection nodecon =
-              AllNodeConnections.FirstOrDefault(conn => conn.StartNode.Id.ToString().Equals(current_node?.Name) &&
+            var nodecon =
+              allNodeConnections.FirstOrDefault(conn => conn.StartNode.Id.ToString().Equals(currentNode?.Name) &&
                                                         conn.EndNode.Id.ToString().Equals(ncsp?.Target.Name));
-            current_node = _nodesForSp.FirstOrDefault(no => no.Name.Equals(nodecon?.EndNode.Id.ToString()));
+            currentNode = _nodesForSp.FirstOrDefault(no => no.Name.Equals(nodecon?.EndNode.Id.ToString()));
 
             Sp.Add(nodecon);
           }

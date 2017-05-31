@@ -3,7 +3,7 @@ using TrafficSimulation.Simulation.Engine.Environment;
 
 namespace TrafficSimulation.Simulation.Engine.PathCalculation
 {
-  class TobisShortestPath : IShortestPath
+  internal class TobisShortestPath : IShortestPath
   {
     public IRoute GetRoute(List<INode> nodes, List<INodeConnection> connections, INode startNode, INode endNode)
     {
