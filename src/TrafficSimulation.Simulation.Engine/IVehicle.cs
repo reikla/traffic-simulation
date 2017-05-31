@@ -13,5 +13,15 @@ namespace TrafficSimulation.Simulation.Engine
     /// the type of the vehicle
     /// </summary>
     VehicleType VehicleType { get; set; }
+
+    /// <summary>
+    /// Gets or sets the route.
+    /// </summary>
+    IRoute Route { get; }
+
+    /// <summary>
+    /// Sets the route. And the Position to the startposition of the route.
+    /// </summary>
+    void SetRoute(IRoute route);
   }
 }

@@ -1,4 +1,6 @@
-﻿namespace TrafficSimulation.Simulation.Engine.Settings
+﻿using VehicleHandoverLibrary;
+
+namespace TrafficSimulation.Simulation.Engine.Settings
 {
   /// <summary>
   /// Settings of the simulation
@@ -17,5 +19,15 @@
     /// Gets or sets the target vehicle count. That is the total number of cars desired for the simulation
     /// </summary>
     public int TargetVehicleCount { get; set; }
+
+    /// <summary>
+    /// Gets or sets own goup.
+    /// </summary>
+    public Groups OwnGoup { get; set; }
+
+    /// <summary>
+    /// Gets or sets the target group.
+    /// </summary>
+    public Groups TargetGroup { get; set; }
   }
 }

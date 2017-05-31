@@ -1,4 +1,6 @@
-﻿namespace TrafficSimulation.Simulation.Engine.Settings
+﻿using VehicleHandoverLibrary;
+
+namespace TrafficSimulation.Simulation.Engine.Settings
 {
   /// <summary>
   /// Quite slow simulation settings for debugging
@@ -14,6 +16,8 @@
       TickRate = 100;
       TickStepSize = 0.1;
       TargetVehicleCount = 500;
+      OwnGoup = Groups.GROUP02;
+      TargetGroup = Groups.GROUP02;
     }
   }
 }

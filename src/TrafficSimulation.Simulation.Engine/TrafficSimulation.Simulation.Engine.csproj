@@ -36,6 +36,15 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.13.4\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SQS, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.SQS.3.3.2.2\lib\net45\AWSSDK.SQS.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.6\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -63,6 +72,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="VehicleHandoverLibrary">
+      <HintPath>..\lib\VehicleHandoverLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\VersionInfo.cs">
@@ -78,6 +90,7 @@
     <Compile Include="Environment\Orientation.cs" />
     <Compile Include="Environment\Position.cs" />
     <Compile Include="Environment\Route.cs" />
+    <Compile Include="Environment\VehicleExchangeRoute.cs" />
     <Compile Include="IDataModelInitializer.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="Environment\INode.cs" />
@@ -104,6 +117,9 @@
     <Compile Include="SimulationObjects\Vehicle.cs" />
     <Compile Include="SimulationObjects\VehiclePhysics.cs" />
     <Compile Include="PathCalculation\TobisShortestPath.cs" />
+    <Compile Include="VehicleExchange\IVehicleExchange.cs" />
+    <Compile Include="VehicleExchange\VehicleConverter.cs" />
+    <Compile Include="VehicleExchange\VehicleExchange.cs" />
     <Compile Include="XmlDataModelInitializer.cs" />
     <Compile Include="Xml\GraphMLNamespaces.cs" />
     <Compile Include="Xml\XmlGraphReader.cs" />
@@ -130,6 +146,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.SQS.3.3.2.2\analyzers\dotnet\cs\AWSSDK.SQS.CodeAnalysis.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

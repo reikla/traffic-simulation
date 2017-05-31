@@ -28,11 +28,11 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
         .Cost;
 
       DijkstraShortestPathAlgorithm<int,TaggedEdge<int,int>> a = new DijkstraShortestPathAlgorithm<int, TaggedEdge<int, int>>(g,edgeCost);
-      IEnumerable<TaggedEdge<int, int>> path;
+      //IEnumerable<TaggedEdge<int, int>> path;
       var tryGet = g.ShortestPathsDijkstra(edgeCost, startNode.Id);
       var conns = new List<INodeConnection>();
 
-      if (tryGet(endNode.Id, out path))
+      if (tryGet(endNode.Id, out var path))
       {
         foreach (var taggedEdge in path)
         {

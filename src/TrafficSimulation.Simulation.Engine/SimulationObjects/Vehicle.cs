@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using System.Diagnostics;
+using NLog;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
 
@@ -11,37 +12,46 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
     private readonly VehiclePhysics _physics;
-    private readonly IRoute _route;
     private double _currentVelocity;
+
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Vehicle"/> class.
     /// </summary>
     /// <param name="type">The type.</param>
-    /// <param name="position">The position.</param>
     /// <param name="route">The route.</param>
-    public Vehicle(VehicleType type, IPosition position, IRoute route)
+    public Vehicle(VehicleType type, IRoute route)
     {
       VehicleType = type;
       IsConnectionBlocking = true;
       _currentVelocity = 0;
       _physics = new VehiclePhysics();
-      _route = route;
-      Position = position;
+      SetRoute(route);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Vehicle"/> class.
+    /// </summary>
+    /// <param name="type">The type.</param>
+    public Vehicle(VehicleType type)
+    {
+      VehicleType = type;
+      _physics = new VehiclePhysics();
     }
 
     ///<inheritdoc />
     public void Tick(double timespan)
     {
       Logger.Trace($"Tick: {this}");
-      Placer.Place(this, _route, GetVelocity(timespan) * timespan);
+      Debug.Assert(Route != null, "Route not set. Can't simulate this!");
+      Placer.Place(this, Route, GetVelocity(timespan) * timespan);
     }
 
     private double GetAcceleration()
     {
-      if (_route.GetNextPlaceable(this).NextPlaceable != null)
+      if (Route.GetNextPlaceable(this).NextPlaceable != null)
       {
-        if (_route.GetNextPlaceable(this).DistanceInMeters < 5)
+        if (Route.GetNextPlaceable(this).DistanceInMeters < 5)
         {
           return 0;
         }
@@ -54,7 +64,7 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
       _currentVelocity = _currentVelocity + GetAcceleration() * deltaT;
       return _currentVelocity;
     }
-    
+
     ///<inheritdoc />
     public VehicleType VehicleType { get; set; }
 
@@ -63,5 +73,19 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
 
     ///<inheritdoc />
     public bool IsConnectionBlocking { get; set; }
+
+    /// <summary>
+    /// Gets the route.
+    /// </summary>
+    public IRoute Route { get; private set; }
+
+    /// <summary>
+    /// Sets the route. And the Position to the startposition of the route.
+    /// </summary>
+    public void SetRoute(IRoute route)
+    {
+      Route = route;
+      Position = new Position(Route.NodesConnections[0]);
+    }
   }
 }

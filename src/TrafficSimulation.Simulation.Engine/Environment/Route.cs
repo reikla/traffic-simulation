@@ -122,10 +122,9 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// <returns>
     /// The newly created vehicle
     /// </returns>
-    public IVehicle CreateVehicle()
+    public virtual IVehicle CreateVehicle()
     {
-      var position = new Position(_nodeConnections[0]);
-      var vehicle = new Vehicle(VehicleType.Car, position, this);
+      var vehicle = new Vehicle(VehicleType.Car, this);
       vehicle.Position.NodeConnection.Placeables.Add(vehicle);
       _vehicles.Add(vehicle);
       return vehicle;
@@ -135,7 +134,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// Destroys a vehicle
     /// </summary>
     /// <param name="vehicle">The vehicle to destroy</param>
-    public void DestoryVehicle(IVehicle vehicle)
+    public virtual void DestoryVehicle(IVehicle vehicle)
     {
       vehicle.Position.NodeConnection.Placeables.Remove(vehicle);
       _vehicles.Remove(vehicle);
