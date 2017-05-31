@@ -229,12 +229,6 @@ namespace TrafficSimulation.Simulation.Engine
       
 
 
-      foreach (var d in distances)
-      {
-        Console.WriteLine("{0}, {1}", d.Key, d.Value);
-
-
-      }
 
       
 
