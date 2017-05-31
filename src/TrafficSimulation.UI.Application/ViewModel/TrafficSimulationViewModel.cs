@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
 using System.Timers;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Shapes;
 using Prism.Commands;
 using Prism.Mvvm;
