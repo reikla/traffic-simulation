@@ -23,5 +23,10 @@ namespace TrafficSimulation.Simulation.Engine
     /// Sets the route. And the Position to the startposition of the route.
     /// </summary>
     void SetRoute(IRoute route);
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is a foreign vehicle.
+    /// </summary>
+    bool IsForeignVehicle { get; set; }
   }
 }

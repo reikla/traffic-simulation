@@ -86,6 +86,12 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
     {
       Route = route;
       Position = new Position(Route.NodesConnections[0]);
+      Route.Vehicles.Add(this);
     }
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is a foreign vehicle.
+    /// </summary>
+    public bool IsForeignVehicle { get; set; } = false;
   }
 }

@@ -7,7 +7,10 @@ namespace TrafficSimulation.Simulation.Engine.VehicleExchange
     {
       internal static IVehicle Convert(Vehicle vehicle)
       {
-        return new SimulationObjects.Vehicle(VehicleType.Car);
+        return new SimulationObjects.Vehicle(VehicleType.Car)
+        {
+          IsForeignVehicle = true
+        };
       }
 
       internal static Vehicle Convert(IVehicle vehicle)
