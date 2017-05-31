@@ -40,13 +40,24 @@ namespace TrafficSimulation.Simulation.Engine
 
     internal void AddConnection(NodeForSP targetNode, double distance, bool twoWay)
     {
-      if (targetNode == null) throw new ArgumentNullException("targetNode");
+      if (targetNode == null)
+      {
+        throw new ArgumentNullException("targetNode");
+      }
       if (targetNode == this)
+      {
         throw new ArgumentException("INode may not connect to itself.");
-      if (distance <= 0) throw new ArgumentException("Distance must be positive.");
+      }
+      if (distance <= 0)
+      {
+        throw new ArgumentException("Distance must be positive.");
+      }
 
       _connections.Add(new NodeConnectionForSP(targetNode, distance));
-      if (twoWay) targetNode.AddConnection(this, distance, false);
+      if (twoWay)
+      {
+        targetNode.AddConnection(this, distance, false);
+      }
     }
   }
 
@@ -76,7 +87,9 @@ namespace TrafficSimulation.Simulation.Engine
     internal IDictionary<string, double> CalculateDistances(Graph graph, string startingNode)
     {
       if (!graph.Nodes.Any(n => n.Key == startingNode))
+      {
         throw new ArgumentException("Starting INode must be in graph.");
+      }
       InitialiseGraph(graph, startingNode);
       ProcessGraph(graph, startingNode);
       return ExtractDistances(graph);
@@ -85,7 +98,9 @@ namespace TrafficSimulation.Simulation.Engine
     private void InitialiseGraph(Graph graph, string startingNode)
     {
       foreach (NodeForSP INode in graph.Nodes.Values)
+      {
         INode.DistanceFromStart = double.PositiveInfinity;
+      }
       graph.Nodes[startingNode].DistanceFromStart = 0;
     }
 
@@ -116,7 +131,9 @@ namespace TrafficSimulation.Simulation.Engine
       {
         double distance = INode.DistanceFromStart + connection.Distance;
         if (distance < connection.Target.DistanceFromStart)
+        {
           connection.Target.DistanceFromStart = distance;
+        }
       }
     }
 
@@ -157,7 +174,7 @@ namespace TrafficSimulation.Simulation.Engine
       {
         NodeForSP nfspStart = _nodesForSp.FirstOrDefault(node => node.Name.Equals(con.StartNode.Id.ToString()));
         NodeForSP nfspTarget = _nodesForSp.FirstOrDefault(node => node.Name.Equals(con.EndNode.Id.ToString()));
-        NodeConnectionForSP ncfsp = new NodeConnectionForSP(nfspTarget, con.Length );
+        NodeConnectionForSP ncfsp = new NodeConnectionForSP(nfspTarget, con.Cost );
         _nodeConnectionsForSp.Add(ncfsp);
         nfspStart.AddConnection(nfspTarget, ncfsp.Distance, false);
         g.AddConnection(nfspStart, ncfsp);
