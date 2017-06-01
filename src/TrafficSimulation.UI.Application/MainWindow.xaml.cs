@@ -38,7 +38,7 @@ namespace TrafficSimulation.UI.Application
     {
       return new Rectangle()
       {
-        Width = 20,
+        Width = 10,
         Height = 10,
         Fill = Brushes.Green,
         Stroke = Brushes.Green,
@@ -110,8 +110,8 @@ namespace TrafficSimulation.UI.Application
             var deltaY = endNode.Y - startNode.Y;
             var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
             var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
-            Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth);
-            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight);
+            Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth - rectangle.Height / 2);
+            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height/2);
 
           
           if (IsDebugOn)
