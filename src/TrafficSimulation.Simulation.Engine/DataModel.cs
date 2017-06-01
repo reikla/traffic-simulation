@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.Simulation.Engine.Environment;
 
 namespace TrafficSimulation.Simulation.Engine
@@ -19,5 +21,6 @@ namespace TrafficSimulation.Simulation.Engine
     public List<IRoute> Routes { get; set; }
     public IEnumerable<INode> StartNodes => Nodes.Where(x => x.NodeType == NodeType.StartNode);
     public IEnumerable<INode> EndNodes => Nodes.Where(x => x.NodeType == NodeType.EndNode);
+    public List<ITrafficLight> TrafficLights { get; set; }
   }
 }

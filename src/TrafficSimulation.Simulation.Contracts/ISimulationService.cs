@@ -53,5 +53,20 @@ namespace TrafficSimulation.Simulation.Contracts
     /// </summary>
     [OperationContract]
     bool IsStarted();
+
+    /// <summary>
+    /// Returns a list of traffic lights.
+    /// </summary>
+    /// <returns></returns>
+    [OperationContract]
+    ReadOnlyCollection<TrafficLight> GetTrafficLights();
+
+    /// <summary>
+    /// Method to create obstacles (in this case a defect car)
+    /// </summary>
+    /// <param name="id">the id of the car</param>
+    /// <param name="isDefect">true if the car is defect, false either.</param>
+    [OperationContract]
+    void SetCarDefect(int id, bool isDefect);
   }
 }

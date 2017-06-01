@@ -98,6 +98,7 @@
     <Compile Include="Environment\IPlaceable.cs" />
     <Compile Include="Environment\IPosition.cs" />
     <Compile Include="Environment\IRoute.cs" />
+    <Compile Include="ITrafficLight.cs" />
     <Compile Include="PathCalculation\DistanceCalculator.cs" />
     <Compile Include="PathCalculation\Graph.cs" />
     <Compile Include="PathCalculation\IShortestPath.cs" />

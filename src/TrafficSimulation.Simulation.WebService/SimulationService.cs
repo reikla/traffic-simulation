@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ServiceModel;
 using TrafficSimulation.Simulation.Contracts;
@@ -72,6 +73,18 @@ namespace TrafficSimulation.Simulation.WebService
     public bool IsStarted()
     {
       return _engine.IsStarted();
+    }
+
+    /// <inheritdoc />
+    public ReadOnlyCollection<TrafficLight> GetTrafficLights()
+    {
+      throw new NotImplementedException();
+    }
+
+    /// <inheritdoc />
+    public void SetCarDefect(int id, bool isDefect)
+    {
+      throw new NotImplementedException();
     }
   }
 }
