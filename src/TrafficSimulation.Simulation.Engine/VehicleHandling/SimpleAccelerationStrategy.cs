@@ -24,7 +24,7 @@
           _vehicle.Acceleration = 0;
         }
       }
-      _vehicle.CurrentVelocity = _vehicle.CurrentVelocity > _vehicle.Physics.MaxVelocity ? 0 : 1;
+      _vehicle.CurrentVelocity = _vehicle.CurrentVelocity > _vehicle.Physics.MaxVelocity ? 0 : _vehicle.Physics.MaxAccelelration;
     }
   }
 }

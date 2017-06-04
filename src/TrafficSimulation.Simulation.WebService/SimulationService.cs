@@ -5,6 +5,7 @@ using System.ServiceModel;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.Simulation.Engine;
+using TrafficSimulation.Simulation.Engine.Debugging;
 
 namespace TrafficSimulation.Simulation.WebService
 {
@@ -56,7 +57,7 @@ namespace TrafficSimulation.Simulation.WebService
     public List<Vehicle> GetVehicles()
     {
       var vehicles = new List<Vehicle>();
-      _engine.DataModel.Vehicles.ForEach(x => vehicles.Add(new Vehicle(x.Id, x.VehicleType, x.Position.NodeConnection.Id, x.Position.PositionOnConnection, $"Id: {x.Id} isForeign:{x.IsForeignVehicle}")));
+      _engine.DataModel.Vehicles.ForEach(x => vehicles.Add(new Vehicle(x.Id, x.VehicleType, x.Position.NodeConnection.Id, x.Position.PositionOnConnection, DebugPrinter.PrintDebug(x))));
       return vehicles;
     }
 

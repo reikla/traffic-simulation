@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using NLog;
+﻿using NLog;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
 using TrafficSimulation.Simulation.Engine.SimulationObjects;
@@ -34,7 +33,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
       VehicleType = type;
       IsConnectionBlocking = true;
       Physics = new VehiclePhysics();
-      _accelerationStrategy = new SimpleAccelerationStrategy(this);
+      _accelerationStrategy = new IntelligentDriverModelStrategy(this);
       _laneChangeStrategy = new NoLaneChangeStrategy();
       Physics = new VehiclePhysics();
     }
@@ -49,13 +48,15 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
       }
       _accelerationStrategy.CalculateAcceleration();
 
-      Debug.Assert(Route != null, "Route not set. Can't simulate this!");
+      System.Diagnostics.Debug.Assert(Route != null, "Route not set. Can't simulate this!");
       Placer.Place(this, Route, GetVelocity(timespan) * timespan);
     }
 
     private double GetVelocity(double deltaT)
     {
-      return CurrentVelocity = CurrentVelocity + Acceleration * deltaT;
+      var calculatedNewVelocety = CurrentVelocity + Acceleration * deltaT;
+      CurrentVelocity =  calculatedNewVelocety < 0 ? 0 : calculatedNewVelocety;
+      return CurrentVelocity;
     }
 
     ///<inheritdoc />
@@ -84,13 +85,20 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
 
     internal VehiclePhysics Physics { get; }
 
-    internal double Acceleration { get; set; }
+    /// <summary>
+    /// Gets or sets the acceleration.
+    /// </summary>
+    public double Acceleration { get; set; }
 
-    internal double CurrentVelocity { get; set; } = 0;
+    /// <summary>
+    /// The current velocity of the vehicle
+    /// </summary>
+    public double CurrentVelocity { get; set; } = 0;
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance is a foreign vehicle.
     /// </summary>
     public bool IsForeignVehicle { get; set; } = false;
+
   }
 }

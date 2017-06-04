@@ -81,6 +81,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="DataModel.cs" />
+    <Compile Include="Debugging\DebugPrinter.cs" />
     <Compile Include="Environment\Distance.cs" />
     <Compile Include="Environment\IDistance.cs" />
     <Compile Include="Environment\IVehicleLifetimeManager.cs" />

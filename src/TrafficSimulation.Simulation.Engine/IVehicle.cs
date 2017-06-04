@@ -28,5 +28,15 @@ namespace TrafficSimulation.Simulation.Engine
     /// Gets or sets a value indicating whether this instance is a foreign vehicle.
     /// </summary>
     bool IsForeignVehicle { get; set; }
+
+    /// <summary>
+    /// The current velocity of the vehicle
+    /// </summary>
+    double CurrentVelocity { get; set; }
+
+    /// <summary>
+    /// Gets or sets the acceleration.
+    /// </summary>
+    double Acceleration { get; set; }
   }
 }

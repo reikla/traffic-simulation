@@ -1,4 +1,6 @@
-﻿namespace TrafficSimulation.Simulation.Engine.VehicleHandling
+﻿using System;
+
+namespace TrafficSimulation.Simulation.Engine.VehicleHandling
 {
 
 
@@ -8,6 +10,15 @@
   public class VehiclePhysics
   {
     /// <summary>
+    /// ctor
+    /// </summary>
+    public VehiclePhysics()
+    {
+      MaxVelocity = new Random().Next(22,33);
+      //MaxVelocity = 33.33;
+    }
+
+    /// <summary>
     /// Gets the maximum accelelration.
     /// </summary>
     public double MaxAccelelration => 1.5;
@@ -15,11 +26,16 @@
     /// <summary>
     /// Gets the maximum velocity.
     /// </summary>
-    public double MaxVelocity => 33.33;
+    public double MaxVelocity { get; private set; }
 
     /// <summary>
     /// Gets the length.
     /// </summary>
     public double Length => 4;
+
+    /// <summary>
+    /// the maximum deceleration of a vehicle
+    /// </summary>
+    public double MaxDeceleration => 1.5;
   }
 }

@@ -68,7 +68,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// <param name="placable">The placable.</param>
     /// <returns></returns>
     /// <exception cref="System.ArgumentException"></exception>
-    public IDistance GetNextPlaceable(IPlaceable placable)
+    public IDistance<IPlaceable> GetNextPlaceable(IPlaceable placable)
     {
 
       var position = placable.Position;
@@ -92,7 +92,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
           {
             var nextPlacable = placablesFurtherOnConnection.First();
             totalDistance = nextPlacable.Position.PositionOnConnection - position.PositionOnConnection;
-            return new Distance(nextPlacable, totalDistance);
+            return Distance<IPlaceable>.CreateDistance(nextPlacable, totalDistance);
           }
           //we found no placable on this connection so we have to add the rest of the connection to the length
           totalDistance += position.NodeConnection.Length - position.PositionOnConnection;
@@ -105,7 +105,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
           {
             var nextPlacable = placablesFurtherOnConnection.First();
             totalDistance += nextPlacable.Position.PositionOnConnection;
-            return new Distance(nextPlacable, totalDistance);
+            return Distance<IPlaceable>.CreateDistance(nextPlacable, totalDistance);
           }
           //we found no placable on this connection so we have to add this connection lenght
           totalDistance += connection.Length;
@@ -116,18 +116,18 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     }
 
     /// <inheritdoc />
-    public IDistance GetNextPlaceable<T>(IPlaceable position) where T : IPlaceable
+    public IDistance<T> GetNextPlaceable<T>(IPlaceable position) where T : IPlaceable
     {
       var placeable = GetNextPlaceable(position);
-      if (placeable != null)
+      if (placeable == null)
       {
-        if (placeable.NextPlaceable is T)
-        {
-          return placeable;
-        }
-        return GetNextPlaceable<T>(placeable.NextPlaceable);
+        return null;
       }
-      return null;
+      if (placeable.NextPlaceable is T)
+      {
+        return placeable as IDistance<T>;
+      }
+      return GetNextPlaceable<T>(placeable.NextPlaceable);
     }
 
     /// <summary>
@@ -140,7 +140,6 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     {
       var vehicle = new Vehicle(VehicleType.Car, this);
       vehicle.Position.NodeConnection.Placeables.Add(vehicle);
-      _vehicles.Add(vehicle);
       return vehicle;
     }
 
