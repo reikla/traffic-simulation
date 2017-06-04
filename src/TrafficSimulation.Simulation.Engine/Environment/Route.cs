@@ -4,6 +4,7 @@ using System.Linq;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.SimulationObjects;
+using TrafficSimulation.Simulation.Engine.VehicleHandling;
 
 namespace TrafficSimulation.Simulation.Engine.Environment
 {

@@ -2,8 +2,9 @@
 using NLog;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
+using TrafficSimulation.Simulation.Engine.SimulationObjects;
 
-namespace TrafficSimulation.Simulation.Engine.SimulationObjects
+namespace TrafficSimulation.Simulation.Engine.VehicleHandling
 {
   /// <summary>
   /// Represents a vehicle in the simulation
@@ -11,21 +12,16 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
   public class Vehicle : SimulationBase, IVehicle
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-    private readonly VehiclePhysics _physics;
-    private double _currentVelocity;
-
+    private readonly IAccelerationStrategy _accelerationStrategy;
+    private readonly ILaneChangeStrategy _laneChangeStrategy;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="Vehicle"/> class.
     /// </summary>
     /// <param name="type">The type.</param>
     /// <param name="route">The route.</param>
-    public Vehicle(VehicleType type, IRoute route)
+    public Vehicle(VehicleType type, IRoute route) : this(type)
     {
-      VehicleType = type;
-      IsConnectionBlocking = true;
-      _currentVelocity = 0;
-      _physics = new VehiclePhysics();
       SetRoute(route);
     }
 
@@ -36,33 +32,30 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
     public Vehicle(VehicleType type)
     {
       VehicleType = type;
-      _physics = new VehiclePhysics();
+      IsConnectionBlocking = true;
+      Physics = new VehiclePhysics();
+      _accelerationStrategy = new SimpleAccelerationStrategy(this);
+      _laneChangeStrategy = new NoLaneChangeStrategy();
+      Physics = new VehiclePhysics();
     }
 
     ///<inheritdoc />
     public void Tick(double timespan)
     {
       Logger.Trace($"Tick: {this}");
+      if (_laneChangeStrategy.ShouldChangeLange())
+      {
+        _laneChangeStrategy.ChangeLane();
+      }
+      _accelerationStrategy.CalculateAcceleration();
+
       Debug.Assert(Route != null, "Route not set. Can't simulate this!");
       Placer.Place(this, Route, GetVelocity(timespan) * timespan);
     }
 
-    private double GetAcceleration()
-    {
-      if (Route.GetNextPlaceable(this).NextPlaceable != null)
-      {
-        if (Route.GetNextPlaceable(this).DistanceInMeters < 5)
-        {
-          return 0;
-        }
-      }
-      return _currentVelocity > _physics.MaxVelocity ? 0 : 1;
-    }
-
     private double GetVelocity(double deltaT)
     {
-      _currentVelocity = _currentVelocity + GetAcceleration() * deltaT;
-      return _currentVelocity;
+      return CurrentVelocity = CurrentVelocity + Acceleration * deltaT;
     }
 
     ///<inheritdoc />
@@ -88,6 +81,12 @@ namespace TrafficSimulation.Simulation.Engine.SimulationObjects
       Position = new Position(Route.NodesConnections[0]);
       Route.Vehicles.Add(this);
     }
+
+    internal VehiclePhysics Physics { get; }
+
+    internal double Acceleration { get; set; }
+
+    internal double CurrentVelocity { get; set; } = 0;
 
     /// <summary>
     /// Gets or sets a value indicating whether this instance is a foreign vehicle.

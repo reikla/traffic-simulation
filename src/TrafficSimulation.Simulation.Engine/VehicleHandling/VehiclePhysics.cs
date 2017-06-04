@@ -1,4 +1,4 @@
-﻿namespace TrafficSimulation.Simulation.Engine.SimulationObjects
+﻿namespace TrafficSimulation.Simulation.Engine.VehicleHandling
 {
 
 
@@ -7,7 +7,6 @@
   /// </summary>
   public class VehiclePhysics
   {
-
     /// <summary>
     /// Gets the maximum accelelration.
     /// </summary>
@@ -17,5 +16,10 @@
     /// Gets the maximum velocity.
     /// </summary>
     public double MaxVelocity => 33.33;
+
+    /// <summary>
+    /// Gets the length.
+    /// </summary>
+    public double Length => 4;
   }
 }
