@@ -34,5 +34,14 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// </summary>
     /// <param name="position">The placable we are looking ahead of.</param>
     IDistance GetNextPlaceable(IPlaceable position);
+
+    
+    /// <summary>
+    /// Gets the next Placeable on the connection of a given type.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    IDistance GetNextPlaceable<T>(IPlaceable position) where T : IPlaceable;
   }
 }

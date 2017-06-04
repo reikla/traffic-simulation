@@ -115,6 +115,7 @@
     <Compile Include="SimulationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimulationObjects\Placer.cs" />
+    <Compile Include="VehicleHandling\IntelligentDriverModelStrategy.cs" />
     <Compile Include="VehicleHandling\NoLaneChangeStrategy.cs" />
     <Compile Include="VehicleHandling\SimpleAccelerationStrategy.cs" />
     <Compile Include="VehicleHandling\Vehicle.cs" />

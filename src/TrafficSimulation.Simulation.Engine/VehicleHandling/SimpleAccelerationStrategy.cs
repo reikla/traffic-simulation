@@ -17,7 +17,7 @@
     /// </summary>
     public void CalculateAcceleration()
     {
-      if (_vehicle.Route.GetNextPlaceable(_vehicle).NextPlaceable != null)
+      if (_vehicle.Route.GetNextPlaceable(_vehicle) != null)
       {
         if (_vehicle.Route.GetNextPlaceable(_vehicle).DistanceInMeters < 5)
         {

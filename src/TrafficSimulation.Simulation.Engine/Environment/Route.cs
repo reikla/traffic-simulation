@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
-using TrafficSimulation.Simulation.Engine.SimulationObjects;
 using TrafficSimulation.Simulation.Engine.VehicleHandling;
 
 namespace TrafficSimulation.Simulation.Engine.Environment
@@ -93,7 +92,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
           {
             var nextPlacable = placablesFurtherOnConnection.First();
             totalDistance = nextPlacable.Position.PositionOnConnection - position.PositionOnConnection;
-            return new Distance() {DistanceInMeters = totalDistance, NextPlaceable = nextPlacable};
+            return new Distance(nextPlacable, totalDistance);
           }
           //we found no placable on this connection so we have to add the rest of the connection to the length
           totalDistance += position.NodeConnection.Length - position.PositionOnConnection;
@@ -106,15 +105,29 @@ namespace TrafficSimulation.Simulation.Engine.Environment
           {
             var nextPlacable = placablesFurtherOnConnection.First();
             totalDistance += nextPlacable.Position.PositionOnConnection;
-            return new Distance() { DistanceInMeters = totalDistance, NextPlaceable = nextPlacable };
+            return new Distance(nextPlacable, totalDistance);
           }
           //we found no placable on this connection so we have to add this connection lenght
           totalDistance += connection.Length;
         }
       }
       //we found no placable
-      return new Distance() { DistanceInMeters = double.PositiveInfinity, NextPlaceable = null };
+      return null;
+    }
 
+    /// <inheritdoc />
+    public IDistance GetNextPlaceable<T>(IPlaceable position) where T : IPlaceable
+    {
+      var placeable = GetNextPlaceable(position);
+      if (placeable != null)
+      {
+        if (placeable.NextPlaceable is T)
+        {
+          return placeable;
+        }
+        return GetNextPlaceable<T>(placeable.NextPlaceable);
+      }
+      return null;
     }
 
     /// <summary>
