@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -165,14 +166,17 @@ namespace TrafficSimulation.UI.Application
         }
         catch (InvalidOperationException exception)
         {
-          //if (DisconnectBtn.IsEnabled)
-          //{
-          //  DisconnectBtn.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-          //  DisconnectBtn.Command?.Execute(null);
-          //  return;
-          //}
+
+            DisconnectBtn.Visibility = Visibility.Hidden;
+            ConnectBtn.Visibility = Visibility.Visible;
+            StartBtn.IsEnabled = false;
+            StopBtn.IsEnabled = false;
+            StepBtn.IsEnabled = false;
+
           Logger.Error(exception);
+          
         }
+
       }
 
     }
@@ -186,13 +190,15 @@ namespace TrafficSimulation.UI.Application
       {
         StopBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = false;
-        //DisconnectBtn.IsEnabled = true;
+       
+
+
       }
       else
       {
         StartBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = true;
-        //DisconnectBtn.IsEnabled = false;
+        
       }
        
     }
@@ -232,6 +238,7 @@ namespace TrafficSimulation.UI.Application
         StartBtn.IsEnabled = true;
         StopBtn.IsEnabled = true;
         StepBtn.IsEnabled = false;
+        
       }
       else if (btn.Name == "DisconnectBtn") 
       {
