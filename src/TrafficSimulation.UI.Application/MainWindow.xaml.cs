@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
@@ -226,6 +227,7 @@ namespace TrafficSimulation.UI.Application
       btn.Visibility = Visibility.Hidden;
       if (btn.Name == "ConnectBtn")
       {
+        Thread.Sleep(1000);
         DisconnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = true;
         StopBtn.IsEnabled = true;
@@ -233,6 +235,7 @@ namespace TrafficSimulation.UI.Application
       }
       else if (btn.Name == "DisconnectBtn") 
       {
+        Thread.Sleep(1000);
         ConnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = false;
         StopBtn.IsEnabled = false;

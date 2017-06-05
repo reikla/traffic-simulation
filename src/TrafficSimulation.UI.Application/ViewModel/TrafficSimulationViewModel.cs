@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ServiceModel;
 using System.Timers;
 using System.Windows;
 using System.Windows.Shapes;
+using NLog;
 using Prism.Commands;
 using Prism.Mvvm;
 using TrafficSimulation.Simulation.Contracts;
@@ -15,9 +17,10 @@ namespace TrafficSimulation.UI.Application.ViewModel
   /// </summary>
   class TrafficSimulationViewModel : BindableBase
   {
-  /// <summary>
-  /// Holds the ISimulationService (overridden by the Bootstrapper)
-  /// </summary>
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    /// <summary>
+    /// Holds the ISimulationService (overridden by the Bootstrapper)
+    /// </summary>
     public ISimulationService SimulationService { get; set; }
 
     /// <summary>
@@ -106,12 +109,21 @@ namespace TrafficSimulation.UI.Application.ViewModel
 
     private void DisConnect()
     {
+      try
+      {
+
+      
       if (((IClientChannel) SimulationService).State == CommunicationState.Opened)
       {
 
           drawTimer.Stop();
           serviceUpdateTimer.Stop();
           ((IClientChannel)SimulationService).Close();
+          serviceUpdateTimer.Start();
+          drawTimer.Start();
+          drawTimer.Stop();
+          serviceUpdateTimer.Stop();
+
           MessageBox.Show("DISCONNECTING...");
         
       }
@@ -124,8 +136,13 @@ namespace TrafficSimulation.UI.Application.ViewModel
           drawTimer.Start();
         
         }
-
       }
+      catch (Exception e)
+      {
+        Logger.Error(e);
+      }
+
+    }
     }
 
 
