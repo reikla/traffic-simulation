@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Automation.Peers;
-using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -23,11 +22,12 @@ namespace TrafficSimulation.UI.Application
 
     private bool IsDebugOn { get; set; }
 
+    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-  /// <summary>
-  /// Constructor for the MainWindow view. Initializes all components.
-  /// </summary>
-  public MainWindow()
+    /// <summary>
+    /// Constructor for the MainWindow view. Initializes all components.
+    /// </summary>
+    public MainWindow()
     {
       InitializeComponent();
       
@@ -162,14 +162,15 @@ namespace TrafficSimulation.UI.Application
 
           }
         }
-        catch (InvalidOperationException)
+        catch (InvalidOperationException exception)
         {
-          if (DisconnectBtn.IsEnabled)
-          {
-            DisconnectBtn.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
-            DisconnectBtn.Command?.Execute(null);
-            return;
-          }
+          //if (DisconnectBtn.IsEnabled)
+          //{
+          //  DisconnectBtn.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+          //  DisconnectBtn.Command?.Execute(null);
+          //  return;
+          //}
+          Logger.Error(exception);
         }
       }
 
@@ -228,8 +229,6 @@ namespace TrafficSimulation.UI.Application
         DisconnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = true;
         StopBtn.IsEnabled = true;
-        //StartBtn.Visibility = Visibility.Hidden;
-        //StopBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = false;
       }
       else if (btn.Name == "DisconnectBtn") 
@@ -237,8 +236,6 @@ namespace TrafficSimulation.UI.Application
         ConnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = false;
         StopBtn.IsEnabled = false;
-        //StartBtn.Visibility = Visibility.Visible;
-        //StopBtn.Visibility = Visibility.Hidden;
         StepBtn.IsEnabled = false;
 
       }
