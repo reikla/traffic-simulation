@@ -34,14 +34,14 @@ namespace TrafficSimulation.UI.Application
 
     
 
-    Rectangle DrawVehicle()
+    Rectangle DrawVehicle(Brush color)
     {
       return new Rectangle()
       {
         Width = 10,
         Height = 10,
-        Fill = Brushes.Green,
-        Stroke = Brushes.Green,
+        Fill = color,
+        Stroke = color,
         StrokeThickness = 2
       };
     }
@@ -101,7 +101,7 @@ namespace TrafficSimulation.UI.Application
 
         foreach (var viewModelVehicle in ViewModel.Vehicles)
           {
-            var rectangle = DrawVehicle();
+            var rectangle = DrawVehicle(Brushes.Green);
             NodeConnection street = ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
             Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
             Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
