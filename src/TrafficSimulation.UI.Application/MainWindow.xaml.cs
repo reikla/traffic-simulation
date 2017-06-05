@@ -86,7 +86,7 @@ namespace TrafficSimulation.UI.Application
           {
             var rectangle = DrawNode(5, 5);
             MainCanvas.Children.Add(rectangle);
-            Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth);
+            Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth - rectangle.Height / 2);
             Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
           }
 
