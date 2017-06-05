@@ -100,8 +100,15 @@ namespace TrafficSimulation.UI.Application
 
 
         foreach (var viewModelVehicle in ViewModel.Vehicles)
-          {
-            var rectangle = DrawVehicle(Brushes.Green);
+        {
+          Brush color = Brushes.Green;
+            if (viewModelVehicle.IsForeignCar)
+            {
+               color = Brushes.Red;
+            }
+
+            var rectangle = DrawVehicle(color);
+            
             NodeConnection street = ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
             Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
             Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
