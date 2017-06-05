@@ -1,10 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using NLog;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.UI.Application.ViewModel;
 
@@ -78,9 +82,12 @@ namespace TrafficSimulation.UI.Application
     public void Draw()
     {
 
-        lock (ViewModel)
+      lock (ViewModel)
+      {
+        this.MainCanvas.Children.Clear();
+        try
         {
-          this.MainCanvas.Children.Clear();
+
 
           foreach (var node in ViewModel.Nodes)
           {
@@ -88,28 +95,34 @@ namespace TrafficSimulation.UI.Application
             MainCanvas.Children.Add(rectangle);
             Canvas.SetLeft(rectangle, node.X * MainCanvas.ActualWidth - rectangle.Height / 2);
             Canvas.SetTop(rectangle, node.Y * MainCanvas.ActualHeight - rectangle.Height / 2);
+
+
           }
 
-        foreach (var nodeconnection in ViewModel.NodeConnections)
-        {
-          Node startNode = ViewModel.Nodes.First(x => x.Id == nodeconnection.StartNodeId);
-          Node endNode = ViewModel.Nodes.First(x => x.Id == nodeconnection.EndNodeId);
-          var line = DrawStreet(startNode.X * MainCanvas.ActualWidth, startNode.Y * MainCanvas.ActualHeight, endNode.X * MainCanvas.ActualWidth, endNode.Y * MainCanvas.ActualHeight);
-          MainCanvas.Children.Add(line);
-        }
+          foreach (var nodeconnection in ViewModel.NodeConnections)
+          {
+            Node startNode = ViewModel.Nodes.First(x => x.Id == nodeconnection.StartNodeId);
+            Node endNode = ViewModel.Nodes.First(x => x.Id == nodeconnection.EndNodeId);
+            var line = DrawStreet(startNode.X * MainCanvas.ActualWidth, startNode.Y * MainCanvas.ActualHeight,
+              endNode.X * MainCanvas.ActualWidth, endNode.Y * MainCanvas.ActualHeight);
+            MainCanvas.Children.Add(line);
 
 
-        foreach (var viewModelVehicle in ViewModel.Vehicles)
-        {
-          Brush color = Brushes.Green;
+          }
+
+
+          foreach (var viewModelVehicle in ViewModel.Vehicles)
+          {
+            Brush color = Brushes.Green;
             if (viewModelVehicle.IsForeignCar)
             {
-               color = Brushes.Red;
+              color = Brushes.Red;
             }
 
             var rectangle = DrawVehicle(color);
-            
-            NodeConnection street = ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
+
+            NodeConnection street =
+              ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
             Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
             Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
             MainCanvas.Children.Add(rectangle);
@@ -118,28 +131,28 @@ namespace TrafficSimulation.UI.Application
             var x = deltaX * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.X;
             var y = deltaY * (viewModelVehicle.PositionOnConnection / street.Length) + startNode.Y;
             Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth - rectangle.Height / 2);
-            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height/2);
+            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height / 2);
 
-          
-          if (IsDebugOn)
-          {
-            if (viewModelVehicle.DebugInfo!=null)
+
+            if (IsDebugOn)
             {
-              var DebugInfo_label = new Label()
+              if (viewModelVehicle.DebugInfo != null)
               {
-                Content = viewModelVehicle.DebugInfo.ToString()
-              };
-              MainCanvas.Children.Add(DebugInfo_label);
-              Canvas.SetLeft(DebugInfo_label, x * MainCanvas.ActualWidth);
-              Canvas.SetTop(DebugInfo_label, Canvas.GetTop(rectangle));
+                var DebugInfo_label = new Label()
+                {
+                  Content = viewModelVehicle.DebugInfo.ToString()
+                };
+                MainCanvas.Children.Add(DebugInfo_label);
+                Canvas.SetLeft(DebugInfo_label, x * MainCanvas.ActualWidth);
+                Canvas.SetTop(DebugInfo_label, Canvas.GetTop(rectangle));
+              }
             }
-          }
 
           }
 
 
 
-        foreach (var cs in ViewModel.ConstructionSides)
+          foreach (var cs in ViewModel.ConstructionSides)
           {
             var rectangle = cs.Key;
             var pos = cs.Value;
@@ -149,8 +162,18 @@ namespace TrafficSimulation.UI.Application
 
           }
         }
+        catch (InvalidOperationException)
+        {
+          if (DisconnectBtn.IsEnabled)
+          {
+            DisconnectBtn.RaiseEvent(new RoutedEventArgs(System.Windows.Controls.Primitives.ButtonBase.ClickEvent));
+            DisconnectBtn.Command?.Execute(null);
+            return;
+          }
+        }
       }
-    
+
+    }
 
 
     private void StartStopBtn_OnClick(object sender, RoutedEventArgs e)
@@ -174,14 +197,16 @@ namespace TrafficSimulation.UI.Application
 
     private void MainCanvas_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
-      var rect = DrawConstructionSide(20, 20);
-      Point pos = e.GetPosition(MainCanvas);
-      MainCanvas.Children.Add(rect);
-      Canvas.SetLeft(rect, pos.X);
-      Canvas.SetTop(rect, pos.Y);
-      ViewModel.ConstructionSides.Add(new KeyValuePair<Rectangle, Point>(rect,pos));
-    
+      //var rect = DrawConstructionSide(20, 20);
+      //Point pos = e.GetPosition(MainCanvas);
+      //MainCanvas.Children.Add(rect);
+      //Canvas.SetLeft(rect, pos.X);
+      //Canvas.SetTop(rect, pos.Y);
+      //ViewModel.ConstructionSides.Add(new KeyValuePair<Rectangle, Point>(rect,pos));
+
+      
     }
+
     Rectangle DrawConstructionSide(double width, double height)
     {
       return new Rectangle()
@@ -207,7 +232,7 @@ namespace TrafficSimulation.UI.Application
         //StopBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = false;
       }
-      else
+      else if (btn.Name == "DisconnectBtn") 
       {
         ConnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = false;
