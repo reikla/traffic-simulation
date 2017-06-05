@@ -233,5 +233,11 @@ namespace TrafficSimulation.UI.Application
     }
 
 
+    private void MainCanvas_OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+      var mc = sender as Canvas;
+      mc.Width = mc.ActualHeight;
+      
+    }
   }
 }
