@@ -23,85 +23,41 @@ namespace TrafficSimulation.UI.Application
   class Bootstrapper : UnityBootstrapper
   {
 
-    private Timer serviceUpdateTimer;
-    private Timer drawTimer;
-    private ISimulationService simulationService;
-    private MainWindow view;
+    private Timer _drawTimer;
+    private MainWindow _view;
     private ChannelFactory<ISimulationService> cf;
     private TrafficSimulationViewModel vm;
-    private new static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
     protected override DependencyObject CreateShell()
     {
-      view =  Container.Resolve<MainWindow>();
-      return view;
+      _view =  Container.Resolve<MainWindow>();
+      return _view;
     }
 
 
 
     protected override void InitializeShell()
     {
-      vm = view.DataContext as TrafficSimulationViewModel;
-      serviceUpdateTimer = new Timer(Constants.SimulationUpdateSpeed);
-      drawTimer = new Timer(Constants.SimulationRedrawSpeed);
-
+      vm = _view.DataContext as TrafficSimulationViewModel;
+      _drawTimer = new Timer(Constants.SimulationRedrawSpeed);
       var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
       var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");
       cf = new ChannelFactory<ISimulationService>(binding, ep);
-      simulationService = cf.CreateChannel();
-      serviceUpdateTimer.Elapsed += ServiceUpdateTimer_Elapsed;
-      drawTimer.Elapsed += DrawTimer_Elapsed;
-      serviceUpdateTimer.Start();
-      drawTimer.Start();
+      _drawTimer.Elapsed += DrawTimer_Elapsed;
+      vm.cf = cf;
+      vm.DrawTimer = _drawTimer;
       System.Windows.Application.Current.MainWindow.Show();
       
     }
 
     
-
-
-
     private void DrawTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
      
-        System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => view.Draw()));
+        System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => _view.Draw()));
 
     }
 
-    private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
-    {
-      try
-      {
 
-     
-      lock (vm)
-      {
-
-          
-        
-        if (((IClientChannel)simulationService).State == CommunicationState.Closed)
-        {
-          simulationService = cf.CreateChannel();
-        }
-          vm.SimulationService = simulationService;
-        
-          vm.Nodes.Clear();
-          vm.Nodes.AddRange(simulationService.GetNodes());
-          vm.NodeConnections.Clear();
-          vm.NodeConnections.AddRange(simulationService.GetNodeConnections());
-          vm.Vehicles.Clear();
-          vm.Vehicles.AddRange(simulationService.GetVehicles());
-          vm.drawTimer = drawTimer;
-          vm.serviceUpdateTimer = serviceUpdateTimer;
-      }
-
-      }
-      catch (Exception exception)
-      {
-        Logger.Error(exception);
-
-
-      }
-    }
   }
 }

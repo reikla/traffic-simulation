@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ServiceModel;
 using System.Timers;
 using System.Windows;
@@ -7,6 +8,7 @@ using System.Windows.Shapes;
 using NLog;
 using Prism.Commands;
 using Prism.Mvvm;
+using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
 
@@ -18,6 +20,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
   class TrafficSimulationViewModel : BindableBase
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
     /// <summary>
     /// Holds the ISimulationService (overridden by the Bootstrapper)
     /// </summary>
@@ -27,22 +30,27 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// Contains the vehicles for the simulation (received via WCF)
     /// </summary>
     public List<Vehicle> Vehicles { get; set; }
+
     /// <summary>
     /// Contains the nodes for the simulation (received via WCF)
     /// </summary>
     public List<Node> Nodes { get; set; }
+
     /// <summary>
     /// Contains the NodeConnections for the simulation (received via WCF)
     /// </summary>
     public List<NodeConnection> NodeConnections { get; set; }
+
     /// <summary>
     /// Command to start the simulation.
     /// </summary>
     public DelegateCommand CmdStartSimulation { get; set; }
+
     /// <summary>
     /// Command to stop the simulation.
     /// </summary>
     public DelegateCommand CmdStopSimulation { get; set; }
+
     /// <summary>
     /// Command to step through the simulation.
     /// </summary>
@@ -56,21 +64,29 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// <summary>
     /// Contains the ConstructionSides (rectangles) placed on the MainCanvas; also their position
     /// </summary>
-    public List<KeyValuePair<Rectangle,Point>> ConstructionSides { get; set; }
+    public List<KeyValuePair<Rectangle, Point>> ConstructionSides { get; set; }
+   
+
     /// <summary>
     /// Contains the Timer which updates the viewmodel (overwritten by Bootstrapper)
     /// </summary>
-    public Timer serviceUpdateTimer;
+    public Timer ServiceUpdateTimer;
+
     /// <summary>
     /// Contains the Timer which re-draws the view (overwritten by Bootstrapper)
     /// </summary>
-    public Timer drawTimer;
+    public Timer DrawTimer;
+    /// <summary>
+    /// A factory that creates channels of the type ISimulationService.
+    /// </summary>
+    public ChannelFactory<ISimulationService> cf;
 
     /// <summary>
     /// Constructor for the TrafficSimulationViewModel - initializes the Lists Vehicles, Nodes and NodeConnections
     /// </summary>
     public TrafficSimulationViewModel()
     {
+      
       Vehicles = new List<Vehicle>();
       Nodes = new List<Node>();
       NodeConnections = new List<NodeConnection>();
@@ -78,25 +94,40 @@ namespace TrafficSimulation.UI.Application.ViewModel
       CmdStartSimulation = new DelegateCommand(StartSimulation);
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);
-      CmdDisConnect = new DelegateCommand(DisConnect);
+      CmdDisConnect = new DelegateCommand(() => DisConnect());
+      ServiceUpdateTimer = new Timer(Constants.SimulationUpdateSpeed);
+      ServiceUpdateTimer.Elapsed += ServiceUpdateTimer_Elapsed;
      
-
     }
 
-   private void StopSimulation()
+    private void StopSimulation()
     {
-  
+      if (SimulationService.IsStarted())
+      {
         SimulationService.Stop();
-      
+      }
 
-     
+
+
     }
 
     private void StartSimulation()
     {
-
+      if (!SimulationService.IsStarted())
+      {
         SimulationService.Start();
-        
+      }
+
+      if (!ServiceUpdateTimer.Enabled)
+        {
+          ServiceUpdateTimer.Start();
+          if (!DrawTimer.Enabled)
+          {
+            DrawTimer.Start();
+          }
+        }
+      
+
 
     }
 
@@ -109,43 +140,69 @@ namespace TrafficSimulation.UI.Application.ViewModel
 
     private void DisConnect()
     {
-      try
+      if (((IClientChannel)SimulationService)?.State==CommunicationState.Opened)
       {
-
+        DrawTimer.Stop();
+        ServiceUpdateTimer.Stop();
+        ((IClientChannel)SimulationService).Close();
       
-      if (((IClientChannel) SimulationService).State == CommunicationState.Opened)
-      {
-
-          drawTimer.Stop();
-          serviceUpdateTimer.Stop();
-          ((IClientChannel)SimulationService).Close();
-          serviceUpdateTimer.Start();
-          drawTimer.Start();
-          drawTimer.Stop();
-          serviceUpdateTimer.Stop();
-
-          MessageBox.Show("DISCONNECTING...");
         
       }
-      else
+      else 
       {
-        MessageBox.Show("CONNECTING...");
-        
-     
-          serviceUpdateTimer.Start();
-          drawTimer.Start();
-        
+        try
+        {
+          SimulationService = cf.CreateChannel();
+          ((IClientChannel)SimulationService).Open();
         }
+        catch (Exception e)
+        {
+          var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
+          var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");
+          cf = new ChannelFactory<ISimulationService>(binding, ep);
+          SimulationService = cf.CreateChannel();
+          ((IClientChannel)SimulationService).Open();
+          Logger.Error(e);
+        }
+        
+
       }
-      catch (Exception e)
+
+
+
+    }
+
+
+    private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+
+      lock (this)
       {
-        Logger.Error(e);
+
+        Nodes.Clear();
+        Nodes.AddRange(SimulationService.GetNodes());
+        NodeConnections.Clear();
+        NodeConnections.AddRange(SimulationService.GetNodeConnections());
+        Vehicles.Clear();
+        Vehicles.AddRange(SimulationService.GetVehicles());
+
       }
 
+
     }
+
+
+    /// <summary>
+    /// Stops update and draw timer.
+    /// </summary>
+    public void StopTimers()
+    {
+      if (ServiceUpdateTimer.Enabled)
+      {
+        DrawTimer.Stop();
+        ServiceUpdateTimer.Stop();
+      }
     }
-
-
-
   }
+}
 

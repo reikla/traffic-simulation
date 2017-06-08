@@ -26,6 +26,7 @@ namespace TrafficSimulation.UI.Application
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
+    private bool IsExceptionThrown { get; set; }
     /// <summary>
     /// Constructor for the MainWindow view. Initializes all components.
     /// </summary>
@@ -167,15 +168,16 @@ namespace TrafficSimulation.UI.Application
         catch (InvalidOperationException exception)
         {
 
-            DisconnectBtn.Visibility = Visibility.Hidden;
-            ConnectBtn.Visibility = Visibility.Visible;
-            StartBtn.IsEnabled = false;
-            StopBtn.IsEnabled = false;
-            StepBtn.IsEnabled = false;
+          IsExceptionThrown = true;
+          ViewModel.StopTimers();
+          DisconnectBtn_Click(DisconnectBtn, new RoutedEventArgs());
 
           Logger.Error(exception);
-          
+
         }
+
+
+        
 
       }
 
@@ -233,20 +235,24 @@ namespace TrafficSimulation.UI.Application
       btn.Visibility = Visibility.Hidden;
       if (btn.Name == "ConnectBtn")
       {
-        Thread.Sleep(1000);
+       
         DisconnectBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = true;
         StopBtn.IsEnabled = true;
+        DebugModeBtn.IsEnabled = true;
         StepBtn.IsEnabled = false;
         
       }
       else if (btn.Name == "DisconnectBtn") 
       {
-        Thread.Sleep(1000);
+
         ConnectBtn.Visibility = Visibility.Visible;
+        StartBtn.Visibility = Visibility.Visible;
+        StopBtn.Visibility = Visibility.Hidden;
         StartBtn.IsEnabled = false;
         StopBtn.IsEnabled = false;
         StepBtn.IsEnabled = false;
+        DebugModeBtn.IsEnabled = false;
 
       }
     }

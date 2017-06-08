@@ -36,12 +36,12 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <Button x:Name="StartBtn" Content=">" Click="StartStopBtn_OnClick" Command="{Binding CmdStartSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"    Visibility="Hidden"/>
-                    <Button x:Name="StopBtn" Content="||" Click="StartStopBtn_OnClick" Command="{Binding CmdStopSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Visibility="Visible"/>
+                    <Button x:Name="StartBtn" Content=">" Click="StartStopBtn_OnClick" Command="{Binding CmdStartSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"    Visibility="Visible" IsEnabled="False"/>
+                    <Button x:Name="StopBtn" Content="||" Click="StartStopBtn_OnClick" Command="{Binding CmdStopSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
                     <Button x:Name="StepBtn" Content="|>" Command="{Binding CmdStepSimulation}" IsEnabled="False" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
-                    <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Visible"/>
-                    <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Hidden"/>
-                    <Button x:Name="DebugModeBtn" Content="Debug"  Click="DebugModeRadio_Checked" Height="20" Width="100" Grid.Column="1" Grid.Row="0"/>
+                    <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Hidden"/>
+                    <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Visible"/>
+                    <Button x:Name="DebugModeBtn" Content="Debug"  Click="DebugModeRadio_Checked" Height="20" Width="100" Grid.Column="1" Grid.Row="0" IsEnabled="False"/>
                 </Grid>
             </TabItem>
             <TabItem>
