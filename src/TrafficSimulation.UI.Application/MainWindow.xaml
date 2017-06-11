@@ -50,7 +50,7 @@
                         <TextBlock Text="Red" Foreground="Red" />
                     </StackPanel>
                 </TabItem.Header>
-                <Label Content="Content goes here..." />
+                <Label x:Name ="lb_test" Content="Content goes here..." />
             </TabItem>
             <TabItem>
                 <TabItem.Header>
