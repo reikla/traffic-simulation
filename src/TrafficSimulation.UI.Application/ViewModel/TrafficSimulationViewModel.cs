@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ServiceModel;
+using System.Text;
 using System.Timers;
 using System.Windows;
 using System.Windows.Shapes;
@@ -11,6 +12,8 @@ using Prism.Mvvm;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
+using TrafficSimulation.Simulation.WebService;
+
 
 namespace TrafficSimulation.UI.Application.ViewModel
 {
@@ -19,7 +22,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
   /// </summary>
   class TrafficSimulationViewModel : BindableBase
   {
-    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    static Logger _logger = LogManager.GetCurrentClassLogger();
 
     /// <summary>
     /// Holds the ISimulationService (overridden by the Bootstrapper)
@@ -140,40 +143,73 @@ namespace TrafficSimulation.UI.Application.ViewModel
 
     private void DisConnect()
     {
-      if (((IClientChannel)SimulationService)?.State==CommunicationState.Opened)
+      try
       {
-        DrawTimer.Stop();
-        ServiceUpdateTimer.Stop();
-        ((IClientChannel)SimulationService).Close();
-      
-        
-      }
-      else 
-      {
-        try
+        if (((IClientChannel)SimulationService)?.State == CommunicationState.Opened)
         {
-          SimulationService = cf.CreateChannel();
-          ((IClientChannel)SimulationService).Open();
+          DrawTimer.Stop();
+          ServiceUpdateTimer.Stop();
+          ((IClientChannel)SimulationService).Close();
+
+
         }
-        catch (Exception e)
+        else
         {
-          var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
-          var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");
-          cf = new ChannelFactory<ISimulationService>(binding, ep);
-          SimulationService = cf.CreateChannel();
-          ((IClientChannel)SimulationService).Open();
-          Logger.Error(e);
+          try
+          {
+            SimulationService = cf.CreateChannel();
+            ((IClientChannel)SimulationService).Open();
+          }
+          catch (Exception e)
+          {
+            SimulationService = new SimulationService();
+            SimulationService.Start();
+            _logger.Error(e);
+          }
+
+
         }
-        
 
       }
+      catch (Exception )
+      {
+        if (SimulationService.IsStarted())
+        {
+          DrawTimer.Stop();
+          ServiceUpdateTimer.Stop();
+          
+
+
+        }
+        else
+        {
+          try
+          {
+            SimulationService = cf.CreateChannel();
+            ((IClientChannel)SimulationService).Open();
+          }
+          catch (Exception e)
+          {
+            SimulationService = new SimulationService();
+            SimulationService.Start();
+            _logger.Error(e);
+          }
+
+
+        }
+      }
+
+
 
 
 
     }
 
+    
+  
 
-    private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+
+  private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
 
       lock (this)

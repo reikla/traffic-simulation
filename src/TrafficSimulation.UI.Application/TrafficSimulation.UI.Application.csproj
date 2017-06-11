@@ -146,6 +146,10 @@
       <Project>{03aba0ba-0186-49ce-a8df-a6f0af92620f}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.WebService\TrafficSimulation.Simulation.WebService.csproj">
+      <Project>{4b9ba40e-e33b-4af9-bd91-a2d1d50360c8}</Project>
+      <Name>TrafficSimulation.Simulation.WebService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
