@@ -41,7 +41,7 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
     /// <summary>
     /// Constructor
     /// </summary>
-    public Vehicle(int id, VehicleType type, int currentNodeConnectionId, double positionOnConnection, string debugInfo = null) : base(id)
+    public Vehicle(int id, VehicleType type, int currentNodeConnectionId, double positionOnConnection,bool isForeignVehicle, string debugInfo = null) : base(id)
     {
       Type = type;
       CurrentNodeConnectionId = currentNodeConnectionId;

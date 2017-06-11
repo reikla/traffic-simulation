@@ -57,7 +57,7 @@ namespace TrafficSimulation.Simulation.WebService
     public List<Vehicle> GetVehicles()
     {
       var vehicles = new List<Vehicle>();
-      _engine.DataModel.Vehicles.ForEach(x => vehicles.Add(new Vehicle(x.Id, x.VehicleType, x.Position.NodeConnection.Id, x.Position.PositionOnConnection, DebugPrinter.PrintDebug(x))));
+      _engine.DataModel.Vehicles.ForEach(x => vehicles.Add(new Vehicle(x.Id, x.VehicleType, x.Position.NodeConnection.Id, x.Position.PositionOnConnection,x.IsForeignVehicle, DebugPrinter.PrintDebug(x))));
       return vehicles;
     }
 
