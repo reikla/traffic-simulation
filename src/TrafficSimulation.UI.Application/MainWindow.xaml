@@ -42,6 +42,7 @@
                     <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Hidden"/>
                     <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Visible"/>
                     <Button x:Name="DebugModeBtn" Content="Debug"  Click="DebugModeRadio_Checked" Height="20" Width="100" Grid.Column="1" Grid.Row="0" IsEnabled="False"/>
+                    <Rectangle x:Name="Car" MouseRightButtonDown="Car_OnMouseRightButtonDown"></Rectangle>
                 </Grid>
             </TabItem>
             <TabItem>

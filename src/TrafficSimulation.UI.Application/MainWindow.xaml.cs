@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -123,7 +124,8 @@ namespace TrafficSimulation.UI.Application
             }
 
             var rectangle = DrawVehicle(color);
-
+            rectangle.Tag = viewModelVehicle.Id;
+            rectangle.MouseDown += Car_OnMouseDown;
             NodeConnection street =
               ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
             Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
@@ -283,6 +285,19 @@ namespace TrafficSimulation.UI.Application
       var mc = sender as Canvas;
       mc.Width = mc.ActualHeight;
       
+    }
+
+
+    private void Car_OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+      lb_test.Content += " " + (sender as Rectangle).Tag.ToString();
+      ViewModel.SetCarDefect(Int32.Parse((sender as Rectangle).Tag.ToString()));
+    }
+
+    private void Car_OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+    {
+      lb_test.Content += " repaired: " + (sender as Rectangle).Tag.ToString();
+      ViewModel.UNsetCarDefect((Int32.Parse((sender as Rectangle).Tag.ToString())));
     }
   }
 }
