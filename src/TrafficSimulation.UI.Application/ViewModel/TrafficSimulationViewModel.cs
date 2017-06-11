@@ -103,6 +103,23 @@ namespace TrafficSimulation.UI.Application.ViewModel
      
     }
 
+    /// <summary>
+    /// Sets a car as defect.
+    /// </summary>
+    /// <param name="id">ID (Int32) of the Car.</param>
+    public void SetCarDefect(int id)
+    {
+      SimulationService.SetCarDefect(id, true);
+    }
+    /// <summary>
+    /// Sets a car as NOT defect.
+    /// </summary>
+    /// <param name="id">ID (Int32) of the Car.</param>
+    public void UNsetCarDefect(int id)
+    {
+      SimulationService.SetCarDefect(id, false);
+    }
+
     private void StopSimulation()
     {
       if (SimulationService.IsStarted())
