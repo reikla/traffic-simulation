@@ -148,10 +148,10 @@ namespace TrafficSimulation.Simulation.Engine
     }
 
     /// <inheritdoc />
-    public void SetCarDefect(int id, bool isDefect)
+    public void SetCarDefect(int id)
     {
       var car = DataModel.Vehicles.FirstOrDefault(x => x.Id == id);
-      car?.SetDefect(isDefect);
+      car?.SetDefect();
     }
 
     private void CheckOrThrowInitialization(string method)

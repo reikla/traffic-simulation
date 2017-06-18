@@ -55,6 +55,10 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
 
     private double GetVelocity(double deltaT)
     {
+      if (IsDefect)
+      {
+        return 0;
+      }
       var calculatedNewVelocety = CurrentVelocity + Acceleration * deltaT;
       CurrentVelocity = calculatedNewVelocety;/*calculatedNewVelocety < 0 ? 0 : calculatedNewVelocety*/;
       return CurrentVelocity;
@@ -94,11 +98,13 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     /// <summary>
     /// Sets a car as defective.
     /// </summary>
-    /// <param name="isDefect"></param>
-    public void SetDefect(bool isDefect)
+    public void SetDefect()
     {
-      IsDefect = isDefect;
-      Physics.MaxVelocity = isDefect ? 0 : new Random().Next(22, 33);
+      IsDefect = !IsDefect;
+      if (IsDefect)
+      {
+        CurrentVelocity = 0;
+      }
     }
 
     /// <summary>

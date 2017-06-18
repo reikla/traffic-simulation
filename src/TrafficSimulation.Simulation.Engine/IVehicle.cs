@@ -40,9 +40,9 @@ namespace TrafficSimulation.Simulation.Engine
     double Acceleration { get; set; }
 
     /// <summary>
-    /// Sets a car as defective.
+    /// Toggels a car defective.
     /// </summary>
-    void SetDefect(bool isDefect);
+    void SetDefect();
 
     /// <summary>
     /// Signals if a vehicle is defect.
