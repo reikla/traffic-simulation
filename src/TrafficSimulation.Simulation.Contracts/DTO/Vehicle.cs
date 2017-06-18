@@ -47,6 +47,7 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
       CurrentNodeConnectionId = currentNodeConnectionId;
       PositionOnConnection = positionOnConnection;
       DebugInfo = debugInfo;
+      IsForeignCar = isForeignVehicle;
     }
   }
 }

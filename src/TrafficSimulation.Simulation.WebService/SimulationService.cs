@@ -85,7 +85,7 @@ namespace TrafficSimulation.Simulation.WebService
     /// <inheritdoc />
     public void SetCarDefect(int id, bool isDefect)
     {
-      throw new NotImplementedException();
+      _engine.SetCarDefect(id, isDefect);
     }
   }
 }

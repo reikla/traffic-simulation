@@ -27,5 +27,12 @@
     /// Determines whether this instance is started.
     /// </summary>
     bool IsStarted();
+
+    /// <summary>
+    /// Sets the car defect.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    /// <param name="isDefect">if set to <c>true</c> [is defect].</param>
+    void SetCarDefect(int id, bool isDefect);
   }
 }

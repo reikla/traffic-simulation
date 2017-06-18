@@ -26,7 +26,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     /// <summary>
     /// Gets the maximum velocity.
     /// </summary>
-    public double MaxVelocity { get; private set; }
+    public double MaxVelocity { get; set; }
 
     /// <summary>
     /// Gets the length.

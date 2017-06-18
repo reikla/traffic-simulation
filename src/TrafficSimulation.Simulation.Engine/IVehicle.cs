@@ -38,5 +38,15 @@ namespace TrafficSimulation.Simulation.Engine
     /// Gets or sets the acceleration.
     /// </summary>
     double Acceleration { get; set; }
+
+    /// <summary>
+    /// Sets a car as defective.
+    /// </summary>
+    void SetDefect(bool isDefect);
+
+    /// <summary>
+    /// Signals if a vehicle is defect.
+    /// </summary>
+    bool IsDefect { get; }
   }
 }

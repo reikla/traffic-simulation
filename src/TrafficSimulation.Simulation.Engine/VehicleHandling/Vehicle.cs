@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using System;
+using NLog;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
 using TrafficSimulation.Simulation.Engine.SimulationObjects;
@@ -55,7 +56,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     private double GetVelocity(double deltaT)
     {
       var calculatedNewVelocety = CurrentVelocity + Acceleration * deltaT;
-      CurrentVelocity =  calculatedNewVelocety < 0 ? 0 : calculatedNewVelocety;
+      CurrentVelocity = calculatedNewVelocety;/*calculatedNewVelocety < 0 ? 0 : calculatedNewVelocety*/;
       return CurrentVelocity;
     }
 
@@ -91,6 +92,16 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     public double Acceleration { get; set; }
 
     /// <summary>
+    /// Sets a car as defective.
+    /// </summary>
+    /// <param name="isDefect"></param>
+    public void SetDefect(bool isDefect)
+    {
+      IsDefect = isDefect;
+      Physics.MaxVelocity = isDefect ? 0 : new Random().Next(22, 33);
+    }
+
+    /// <summary>
     /// The current velocity of the vehicle
     /// </summary>
     public double CurrentVelocity { get; set; } = 0;
@@ -99,6 +110,11 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     /// Gets or sets a value indicating whether this instance is a foreign vehicle.
     /// </summary>
     public bool IsForeignVehicle { get; set; } = false;
+
+    /// <summary>
+    /// Signals if a vehicle is defect.
+    /// </summary>
+    public bool IsDefect { get; set; } = false;
 
   }
 }

@@ -147,6 +147,13 @@ namespace TrafficSimulation.Simulation.Engine
       return _simulationTimer != null;
     }
 
+    /// <inheritdoc />
+    public void SetCarDefect(int id, bool isDefect)
+    {
+      var car = DataModel.Vehicles.FirstOrDefault(x => x.Id == id);
+      car?.SetDefect(isDefect);
+    }
+
     private void CheckOrThrowInitialization(string method)
     {
       if (!_isInitialized)
