@@ -138,7 +138,6 @@ namespace TrafficSimulation.UI.Application
             Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth - rectangle.Height / 2);
             Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height / 2);
 
-
             if (IsDebugOn)
             {
               if (viewModelVehicle.DebugInfo != null)
