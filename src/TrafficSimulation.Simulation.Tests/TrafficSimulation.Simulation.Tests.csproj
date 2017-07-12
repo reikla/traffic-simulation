@@ -52,6 +52,7 @@
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="EngineTests.cs" />
+    <Compile Include="EnumToggleTest.cs" />
     <Compile Include="NodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShortestPathTests.cs" />
@@ -70,6 +71,10 @@
     <ProjectReference Include="..\TrafficSimulation.Simulation.Engine\TrafficSimulation.Simulation.Engine.csproj">
       <Project>{4B41D580-C0CD-43A5-B28B-3714A3A1CDB2}</Project>
       <Name>TrafficSimulation.Simulation.Engine</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TrafficSimulation.Simulation.WebService\TrafficSimulation.Simulation.WebService.csproj">
+      <Project>{4B9BA40E-E33B-4AF9-BD91-A2D1D50360C8}</Project>
+      <Name>TrafficSimulation.Simulation.WebService</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

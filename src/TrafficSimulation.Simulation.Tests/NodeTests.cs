@@ -16,7 +16,7 @@ namespace TrafficSimulation.Simulation.Tests
     }
 
     [TestMethod]
-    public void South()
+    public void NodeTests_TestOrientation_South()
     {
       Node start = new Node(1305, -135);
       Node end = new Node(1305, 15);

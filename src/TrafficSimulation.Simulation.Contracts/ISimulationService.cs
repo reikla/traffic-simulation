@@ -68,5 +68,11 @@ namespace TrafficSimulation.Simulation.Contracts
     /// <param name="isDefect">true if the car is defect, false either.</param>
     [OperationContract]
     void SetCarDefect(int id, bool isDefect);
+
+    /// <summary>
+    /// Toggles a traffic light.
+    /// </summary>
+    [OperationContract]
+    void ToggleTrafficLight(int id);
   }
 }

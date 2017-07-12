@@ -82,7 +82,7 @@ namespace TrafficSimulation.Simulation.WebService
     public ReadOnlyCollection<TrafficLight> GetTrafficLights()
     {
       var trafficLights = _engine.DataModel.TrafficLights.Select(trafficLight => 
-        new TrafficLight(0, 
+        new TrafficLight(trafficLight.Id, 
           ConvertTrafficLightState(trafficLight.TrafficLightState), 
           trafficLight.Position.NodeConnection.Id, 
           trafficLight.Position.PositionOnConnection)).ToList();
@@ -107,6 +107,12 @@ namespace TrafficSimulation.Simulation.WebService
     public void SetCarDefect(int id, bool isDefect)
     {
       _engine.SetCarDefect(id);
+    }
+    /// <inheritdoc />
+    public void ToggleTrafficLight(int id)
+    {
+      var trafficLight = _engine.DataModel.TrafficLights.First(x => x.Id == id);
+      trafficLight.TrafficLightState = trafficLight.TrafficLightState.Toggle();
     }
   }
 }

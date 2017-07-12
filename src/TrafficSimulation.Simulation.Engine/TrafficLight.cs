@@ -9,12 +9,17 @@ namespace TrafficSimulation.Simulation.Engine
   public class TrafficLight : ITrafficLight
   {
     /// <summary>
+    /// internal value for an id.
+    /// </summary>
+    private static int _id = 0;
+    /// <summary>
     /// Initializes a new instance of the <see cref="TrafficLight"/> class.
     /// </summary>
     /// <param name="nodeConnection">The node connection on which end the traffic light is placed.</param>
     public TrafficLight(INodeConnection nodeConnection)
     {
       Position = new Position(nodeConnection);
+      Id = _id++;
 
       //we want the traffic light to be placed 2 meters before end node
       
@@ -25,6 +30,12 @@ namespace TrafficSimulation.Simulation.Engine
     /// The position
     /// </summary>
     public IPosition Position { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Id.
+    /// </summary>
+    public int Id { get; set; }
+
 
     /// <summary>
     /// Signals if this placable is blocking the node connection where it lives on.
@@ -39,6 +50,7 @@ namespace TrafficSimulation.Simulation.Engine
     /// Gets or sets the state of the traffic light.
     /// </summary>
     public TrafficLightState TrafficLightState { get; set; }
+
 
     internal void CalculatePosition()
     {
