@@ -209,6 +209,17 @@ namespace TrafficSimulation.UI.Application
             Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height / 2);
 
 
+
+
+            var ID_label = new Label()
+            {
+              Content = viewModelTrafficLight.Id.ToString()
+            };
+            MainCanvas.Children.Add(ID_label);
+            Canvas.SetLeft(ID_label, x * MainCanvas.ActualWidth);
+            Canvas.SetTop(ID_label, Canvas.GetTop(rectangle));
+
+
           }
         }
         catch (InvalidOperationException exception)
