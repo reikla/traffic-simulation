@@ -125,6 +125,15 @@ namespace TrafficSimulation.UI.Application.ViewModel
       SimulationService.SetCarDefect(id, false);
     }
 
+    /// <summary>
+    /// Toggles Traffic Lights between there states
+    /// </summary>
+    /// <param name="id">ID (Int32) of the Traffic Light.</param>
+    public void ToggleTrafficLight(int id)
+    {
+
+    }
+
     private void StopSimulation()
     {
       if (SimulationService.IsStarted())

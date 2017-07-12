@@ -138,6 +138,8 @@ namespace TrafficSimulation.UI.Application
             var rectangle = DrawVehicle(color);
             rectangle.Tag = viewModelVehicle.Id;
             rectangle.MouseDown += Car_OnMouseDown;
+            rectangle.MouseEnter += (s, e) => Mouse.OverrideCursor = Cursors.Hand;
+            rectangle.MouseLeave += (s, e) => Mouse.OverrideCursor = Cursors.Arrow;
             NodeConnection street =
               ViewModel.NodeConnections.First(nc => nc.Id == viewModelVehicle.CurrentNodeConnectionId);
             Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
@@ -189,8 +191,10 @@ namespace TrafficSimulation.UI.Application
             }
 
             var rectangle = DrawTrafficLight(color);
-           
-
+            rectangle.Tag = viewModelTrafficLight.Id;
+            rectangle.MouseDown += TrafficLight_OnMouseDown;
+            rectangle.MouseEnter += (s, e) => Mouse.OverrideCursor = Cursors.Hand;
+            rectangle.MouseLeave += (s, e) => Mouse.OverrideCursor = Cursors.Arrow;
 
             NodeConnection street =
             ViewModel.NodeConnections.First(nc => nc.Id == viewModelTrafficLight.ConnectionId);
@@ -332,14 +336,19 @@ namespace TrafficSimulation.UI.Application
 
     private void Car_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
-      lb_test.Content += " " + (sender as Rectangle).Tag.ToString();
       ViewModel.SetCarDefect(Int32.Parse((sender as Rectangle).Tag.ToString()));
     }
-
+    
     private void Car_OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
     {
       lb_test.Content += " repaired: " + (sender as Rectangle).Tag.ToString();
       ViewModel.UNsetCarDefect((Int32.Parse((sender as Rectangle).Tag.ToString())));
+    }
+
+    private void TrafficLight_OnMouseDown(object sender, MouseButtonEventArgs e)
+    {
+      ViewModel.ToggleTrafficLight(Int32.Parse((sender as Rectangle).Tag.ToString()));
+      lb_test.Content = (sender as Rectangle).Tag.ToString();
     }
   }
 }
