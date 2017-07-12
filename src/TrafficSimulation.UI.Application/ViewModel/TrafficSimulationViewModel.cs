@@ -13,7 +13,7 @@ using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.Simulation.WebService;
-
+using System.Threading;
 
 namespace TrafficSimulation.UI.Application.ViewModel
 {
@@ -73,12 +73,12 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// <summary>
     /// Contains the Timer which updates the viewmodel (overwritten by Bootstrapper)
     /// </summary>
-    public Timer ServiceUpdateTimer;
+    public System.Timers.Timer ServiceUpdateTimer;
 
     /// <summary>
     /// Contains the Timer which re-draws the view (overwritten by Bootstrapper)
     /// </summary>
-    public Timer DrawTimer;
+    public System.Timers.Timer DrawTimer;
     /// <summary>
     /// A factory that creates channels of the type ISimulationService.
     /// </summary>
@@ -98,7 +98,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);
       CmdDisConnect = new DelegateCommand(() => DisConnect());
-      ServiceUpdateTimer = new Timer(Constants.SimulationUpdateSpeed);
+      ServiceUpdateTimer = new System.Timers.Timer(Constants.SimulationUpdateSpeed);
       ServiceUpdateTimer.Elapsed += ServiceUpdateTimer_Elapsed;
      
     }
@@ -166,8 +166,9 @@ namespace TrafficSimulation.UI.Application.ViewModel
         {
           DrawTimer.Stop();
           ServiceUpdateTimer.Stop();
+          Thread.Sleep(100);
           ((IClientChannel)SimulationService).Close();
-
+          
 
         }
         else
@@ -204,6 +205,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
           {
             SimulationService = cf.CreateChannel();
             ((IClientChannel)SimulationService).Open();
+
           }
           catch (Exception e)
           {
@@ -222,11 +224,8 @@ namespace TrafficSimulation.UI.Application.ViewModel
 
     }
 
-    
-  
 
-
-  private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
+    private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
 
       lock (this)
