@@ -183,7 +183,7 @@ namespace TrafficSimulation.UI.Application
                 color = Brushes.Green;
                 break;
               case TrafficLightState.Disabled:
-                color = Brushes.Orange;
+                color = Brushes.Yellow;
                 break;
               default:
                 color = Brushes.Green;
@@ -336,7 +336,6 @@ namespace TrafficSimulation.UI.Application
     private void TrafficLight_OnMouseDown(object sender, MouseButtonEventArgs e)
     {
       ViewModel.ToggleTrafficLight(Int32.Parse((sender as Rectangle).Tag.ToString()));
-      lb_test.Content = (sender as Rectangle).Tag.ToString();
     }
   }
 }
