@@ -131,7 +131,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// <param name="id">ID (Int32) of the Traffic Light.</param>
     public void ToggleTrafficLight(int id)
     {
-
+      SimulationService.ToggleTrafficLight(id);
     }
 
     private void StopSimulation()
