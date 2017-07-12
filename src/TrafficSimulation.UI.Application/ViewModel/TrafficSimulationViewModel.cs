@@ -231,14 +231,12 @@ namespace TrafficSimulation.UI.Application.ViewModel
 
       lock (this)
       {
-
         Nodes.Clear();
         Nodes.AddRange(SimulationService.GetNodes());
         NodeConnections.Clear();
         NodeConnections.AddRange(SimulationService.GetNodeConnections());
         Vehicles.Clear();
         Vehicles.AddRange(SimulationService.GetVehicles());
-
       }
 
 

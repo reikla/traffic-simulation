@@ -11,6 +11,7 @@ namespace TrafficSimulation.Simulation.Engine
       Nodes = new List<INode>();
       NodeConnections = new List<INodeConnection>();
       Routes = new List<IRoute>();
+      TrafficLights = new List<ITrafficLight>();
     }
 
     public List<INode> Nodes { get; set; }
