@@ -58,8 +58,8 @@ namespace TrafficSimulation.UI.Application
     {
       return new Rectangle()
       {
-        Width = 3,
-        Height = 3,
+        Width = 5,
+        Height = 5,
         Fill = color,
         Stroke = color,
         StrokeThickness = 2
@@ -263,19 +263,7 @@ namespace TrafficSimulation.UI.Application
       
     }
 
-    Rectangle DrawConstructionSide(double width, double height)
-    {
-      return new Rectangle()
-      {
-        Width = width,
-        Height = height,
-        Fill = Brushes.DarkRed,
-        Stroke = Brushes.Yellow,
-        StrokeThickness = 2
-      };
-    }
-
-    private void DisconnectBtn_Click(object sender, RoutedEventArgs e)
+      private void DisconnectBtn_Click(object sender, RoutedEventArgs e)
     {
       Button btn = sender as Button;
       btn.Visibility = Visibility.Hidden;
