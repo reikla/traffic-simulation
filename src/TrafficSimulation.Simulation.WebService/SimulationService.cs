@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.ServiceModel;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.Simulation.Engine;
 using TrafficSimulation.Simulation.Engine.Debugging;
+using TrafficLight = TrafficSimulation.Simulation.Contracts.DTO.TrafficLight;
+using TrafficLightState = TrafficSimulation.Simulation.Contracts.DTO.TrafficLightState;
 
 namespace TrafficSimulation.Simulation.WebService
 {
@@ -77,9 +79,28 @@ namespace TrafficSimulation.Simulation.WebService
     }
 
     /// <inheritdoc />
-    public ReadOnlyCollection<Contracts.DTO.TrafficLight> GetTrafficLights()
+    public ReadOnlyCollection<TrafficLight> GetTrafficLights()
     {
-      throw new NotImplementedException();
+      var trafficLights = _engine.DataModel.TrafficLights.Select(trafficLight => 
+        new TrafficLight(0, 
+          ConvertTrafficLightState(trafficLight.TrafficLightState), 
+          trafficLight.Position.NodeConnection.Id, 
+          trafficLight.Position.PositionOnConnection)).ToList();
+      return new ReadOnlyCollection<TrafficLight>(trafficLights);
+    }
+
+    private static TrafficLightState ConvertTrafficLightState(Engine.TrafficLightState state)
+    {
+      switch (state)
+      {
+        case Engine.TrafficLightState.Red:
+          return TrafficLightState.Red;
+        case Engine.TrafficLightState.Green:
+          return TrafficLightState.Green;
+        case Engine.TrafficLightState.Disabled:
+          return TrafficLightState.Disabled;
+      }
+      return TrafficLightState.Disabled;
     }
 
     /// <inheritdoc />

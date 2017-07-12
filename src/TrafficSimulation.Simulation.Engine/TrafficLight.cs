@@ -9,6 +9,19 @@ namespace TrafficSimulation.Simulation.Engine
   public class TrafficLight : ITrafficLight
   {
     /// <summary>
+    /// Initializes a new instance of the <see cref="TrafficLight"/> class.
+    /// </summary>
+    /// <param name="nodeConnection">The node connection on which end the traffic light is placed.</param>
+    public TrafficLight(INodeConnection nodeConnection)
+    {
+      Position = new Position(nodeConnection);
+
+      //we want the traffic light to be placed 2 meters before end node
+      var posOfTrafficlightInMeters = nodeConnection.Length - 2;
+      Position.PositionOnConnection = posOfTrafficlightInMeters / nodeConnection.Length;
+    }
+
+    /// <summary>
     /// The position
     /// </summary>
     public IPosition Position { get; set; }

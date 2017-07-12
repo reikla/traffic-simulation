@@ -15,18 +15,24 @@ namespace TrafficSimulation.Simulation.Engine.Xml
   /// </summary>
   public class XmlGraphReader
   {
-    private readonly List<INodeConnection> nodeConnections;
-    private readonly Dictionary<string, INode> nodeDictionary;
+    private readonly List<INodeConnection> _nodeConnections;
+    private readonly Dictionary<string, INode> _nodeDictionary;
+    private readonly List<ITrafficLight> _trafficLights;
 
     /// <summary>
     /// The node Connections extracted from Xml
     /// </summary>
-    public List<INodeConnection> NodeConnections => nodeConnections;
+    public List<INodeConnection> NodeConnections => _nodeConnections;
+
+    /// <summary>
+    /// Gets the traffic lights.
+    /// </summary>
+    public List<ITrafficLight> TrafficLights => _trafficLights;
 
     /// <summary>
     /// Gets the nodes.
     /// </summary>
-    public List<INode> Nodes => nodeDictionary.Values.ToList();
+    public List<INode> Nodes => _nodeDictionary.Values.ToList();
 
     private static Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -35,8 +41,9 @@ namespace TrafficSimulation.Simulation.Engine.Xml
     /// </summary>
     public XmlGraphReader()
     {
-      nodeDictionary = new Dictionary<string, INode>();
-      nodeConnections = new List<INodeConnection>();
+      _nodeDictionary = new Dictionary<string, INode>();
+      _nodeConnections = new List<INodeConnection>();
+      _trafficLights = new List<ITrafficLight>();
     }
 
     /// <summary>
@@ -61,15 +68,22 @@ namespace TrafficSimulation.Simulation.Engine.Xml
           {
             hasText.Value = "true";
           }
-          nodeDictionary.Add(nodeInfo.Item1, nodeInfo.Item2);
+          _nodeDictionary.Add(nodeInfo.Item1, nodeInfo.Item2);
         }
 
         foreach (var edge in graph.Descendants(GraphMLNamespaces.nsGraphMl + "edge"))
         {
           var from = edge.Attribute("source").Value;
           var to = edge.Attribute("target").Value;
-          var connection = new NodeConnection(nodeDictionary[from], nodeDictionary[to]);
-          nodeConnections.Add(connection);
+          var connection = new NodeConnection(_nodeDictionary[from], _nodeDictionary[to]);
+          _nodeConnections.Add(connection);
+
+          //handle traffic lights
+          var arrow = edge.Descendants(GraphMLNamespaces.nsY + "Arrows").First();
+          if(arrow.Attribute("target").Value == "white_delta")
+          {
+            _trafficLights.Add(new TrafficLight(connection));
+          }
         }
         doc.Save(path);
 
@@ -89,14 +103,14 @@ namespace TrafficSimulation.Simulation.Engine.Xml
     private void Normalize()
     {
       //we need to know the minimal value
-      var minX = nodeDictionary.Values.Min(x => x.X);
-      var minY = nodeDictionary.Values.Min(x => x.Y);
+      var minX = _nodeDictionary.Values.Min(x => x.X);
+      var minY = _nodeDictionary.Values.Min(x => x.Y);
 
       //because we subtract it from the values later on we have to subtract it from the maximum value
-      var xSpan = nodeDictionary.Values.Max(x => x.X) - minX;
-      var ySpan = nodeDictionary.Values.Max(x => x.Y) - minY;
+      var xSpan = _nodeDictionary.Values.Max(x => x.X) - minX;
+      var ySpan = _nodeDictionary.Values.Max(x => x.Y) - minY;
 
-      foreach (var nsValue in nodeDictionary.Values)
+      foreach (var nsValue in _nodeDictionary.Values)
       {
         //we want the minimum value to be 0...
         nsValue.X -= minX;

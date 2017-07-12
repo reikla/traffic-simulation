@@ -12,6 +12,10 @@ namespace TrafficSimulation.Simulation.Engine
     /// <summary>
     /// Traffic light is green
     /// </summary>
-    Green
+    Green,
+    /// <summary>
+    /// Traffic light is disabled
+    /// </summary>
+    Disabled
   }
 }

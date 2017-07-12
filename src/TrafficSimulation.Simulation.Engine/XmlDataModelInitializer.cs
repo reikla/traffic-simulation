@@ -18,6 +18,7 @@ namespace TrafficSimulation.Simulation.Engine
 
       dataModel.Nodes.AddRange(reader.Nodes);
       dataModel.NodeConnections.AddRange(reader.NodeConnections);
+      dataModel.TrafficLights.AddRange(reader.TrafficLights);
 
       CalculateRoutes(dataModel);
     }
