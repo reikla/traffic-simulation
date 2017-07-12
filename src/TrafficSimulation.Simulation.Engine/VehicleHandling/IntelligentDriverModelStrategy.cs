@@ -9,7 +9,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
   public class IntelligentDriverModelStrategy : IAccelerationStrategy
   {
 
-    private static readonly double Minimal_Distance = 2;
+    private static readonly double Minimal_Distance = 5;
     private static readonly double Security_Time_Distance = 1.4;
 
     private readonly Vehicle _vehicle;

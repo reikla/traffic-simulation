@@ -77,7 +77,7 @@ namespace TrafficSimulation.Simulation.WebService
     }
 
     /// <inheritdoc />
-    public ReadOnlyCollection<TrafficLight> GetTrafficLights()
+    public ReadOnlyCollection<Contracts.DTO.TrafficLight> GetTrafficLights()
     {
       throw new NotImplementedException();
     }

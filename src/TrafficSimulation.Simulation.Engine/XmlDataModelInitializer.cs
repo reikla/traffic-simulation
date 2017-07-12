@@ -10,8 +10,6 @@ namespace TrafficSimulation.Simulation.Engine
   /// </summary>
   internal class XmlDataModelInitializer : IDataModelInitializer
   {
-
-
     /// <inheritdoc />
     public void Initialize(DataModel dataModel)
     {
@@ -35,8 +33,6 @@ namespace TrafficSimulation.Simulation.Engine
           dataModel.Routes.Add(shortestPath.GetRoute(dataModel.Nodes, dataModel.NodeConnections, startNode, endNode));
         }
       }
-
-
     }
   }
 }

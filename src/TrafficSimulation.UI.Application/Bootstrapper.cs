@@ -53,9 +53,7 @@ namespace TrafficSimulation.UI.Application
     
     private void DrawTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
-     
-        System.Windows.Application.Current.Dispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => _view.Draw()));
-
+        System.Windows.Application.Current?.Dispatcher?.BeginInvoke(DispatcherPriority.Normal, new Action(() => _view.Draw()));
     }
 
 

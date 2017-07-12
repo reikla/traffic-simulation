@@ -70,7 +70,6 @@ namespace TrafficSimulation.Simulation.Engine.Environment
     /// <exception cref="System.ArgumentException"></exception>
     public IDistance<IPlaceable> GetNextPlaceable(IPlaceable placable)
     {
-
       var position = placable.Position;
 
       if (!NodesConnections.Contains(position.NodeConnection))
@@ -127,7 +126,10 @@ namespace TrafficSimulation.Simulation.Engine.Environment
       {
         return placeable as IDistance<T>;
       }
-      return GetNextPlaceable<T>(placeable.NextPlaceable);
+      var distanceUntilNow = placeable.DistanceInMeters;
+      var nextPlacable = GetNextPlaceable<T>(placeable.NextPlaceable);
+      nextPlacable.DistanceInMeters += distanceUntilNow;
+      return nextPlacable;
     }
 
     /// <summary>

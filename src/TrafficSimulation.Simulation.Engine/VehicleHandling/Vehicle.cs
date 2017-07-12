@@ -1,5 +1,4 @@
-﻿using System;
-using NLog;
+﻿using NLog;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
 using TrafficSimulation.Simulation.Engine.SimulationObjects;
@@ -60,7 +59,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
         return 0;
       }
       var calculatedNewVelocety = CurrentVelocity + Acceleration * deltaT;
-      CurrentVelocity = calculatedNewVelocety;/*calculatedNewVelocety < 0 ? 0 : calculatedNewVelocety*/;
+      CurrentVelocity = calculatedNewVelocety < 0 ? 0 : calculatedNewVelocety;
       return CurrentVelocity;
     }
 
@@ -120,7 +119,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     /// <summary>
     /// Signals if a vehicle is defect.
     /// </summary>
-    public bool IsDefect { get; set; } = false;
+    public bool IsDefect { get; private set; } = false;
 
   }
 }
