@@ -17,24 +17,32 @@ namespace TrafficSimulation.Simulation.Engine
       Position = new Position(nodeConnection);
 
       //we want the traffic light to be placed 2 meters before end node
-      var posOfTrafficlightInMeters = nodeConnection.Length - 2;
-      Position.PositionOnConnection = posOfTrafficlightInMeters / nodeConnection.Length;
+      
+      nodeConnection.Placeables.Add(this);
     }
 
     /// <summary>
     /// The position
     /// </summary>
     public IPosition Position { get; set; }
+
     /// <summary>
     /// Signals if this placable is blocking the node connection where it lives on.
     /// </summary>
-    public bool IsConnectionBlocking {
+    public bool IsConnectionBlocking
+    {
       get => TrafficLightState == TrafficLightState.Red;
       set => throw new Exception("We don't set this property!");
     }
+
     /// <summary>
     /// Gets or sets the state of the traffic light.
     /// </summary>
     public TrafficLightState TrafficLightState { get; set; }
+
+    internal void CalculatePosition()
+    {
+      Position.PositionOnConnection = Position.NodeConnection.Length - 1.5;
+    }
   }
 }

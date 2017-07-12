@@ -8,7 +8,6 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
   [DataContract]
   public class DtoBase
   {
-
     /// <summary>
     /// Identifier
     /// </summary>
@@ -24,7 +23,6 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
       Id = id;
     }
 
- 
     /// <inheritdoc />
     public override bool Equals(object obj)
     {

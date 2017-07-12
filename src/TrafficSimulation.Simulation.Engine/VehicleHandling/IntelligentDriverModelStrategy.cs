@@ -55,6 +55,10 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
         var nextVehicle = (IVehicle) nextPlacable.NextPlaceable;
         nextItemSpeed = nextVehicle.CurrentVelocity;
       }
+      else // we found a traffic light 
+      {
+        
+      }
       var velocityDifference =  _vehicle.CurrentVelocity - nextItemSpeed;
       return velocityDifference;
     }

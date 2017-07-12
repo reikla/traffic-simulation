@@ -25,6 +25,7 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
     /// <summary>
     /// Gets or sets the position on connection.
     /// </summary>
+    [DataMember]
     public double PositionOnConnection { get; set; }
 
     /// <summary>

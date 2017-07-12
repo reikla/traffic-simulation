@@ -80,7 +80,7 @@ namespace TrafficSimulation.Simulation.Engine.Xml
 
           //handle traffic lights
           var arrow = edge.Descendants(GraphMLNamespaces.nsY + "Arrows").First();
-          if(arrow.Attribute("target").Value == "white_delta")
+          if (arrow.Attribute("target").Value == "white_delta")
           {
             _trafficLights.Add(new TrafficLight(connection));
           }
@@ -88,6 +88,7 @@ namespace TrafficSimulation.Simulation.Engine.Xml
         doc.Save(path);
 
         Normalize();
+        _trafficLights.ForEach(x => ((TrafficLight)x).CalculatePosition());
       }
 
       //we expect the .graphml file to a fulfill a very special schema so otherwise we will throw an exception.
