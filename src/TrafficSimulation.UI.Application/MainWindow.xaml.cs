@@ -238,6 +238,8 @@ namespace TrafficSimulation.UI.Application
       {
        
         DisconnectBtn.Visibility = Visibility.Visible;
+        StartBtn.Visibility = Visibility.Hidden;
+        StopBtn.Visibility = Visibility.Visible;
         StartBtn.IsEnabled = true;
         StopBtn.IsEnabled = true;
         DebugModeBtn.IsEnabled = true;

@@ -177,6 +177,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
           {
             SimulationService = cf.CreateChannel();
             ((IClientChannel)SimulationService).Open();
+            StartSimulation();
           }
           catch (Exception e)
           {
