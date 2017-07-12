@@ -40,6 +40,11 @@ namespace TrafficSimulation.UI.Application.ViewModel
     public List<Node> Nodes { get; set; }
 
     /// <summary>
+    /// Contains the traffic lights for the simulation (received via WCF)
+    /// </summary>
+    public List<TrafficLight> TrafficLights { get; set; }
+
+    /// <summary>
     /// Contains the NodeConnections for the simulation (received via WCF)
     /// </summary>
     public List<NodeConnection> NodeConnections { get; set; }
@@ -93,7 +98,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
       Vehicles = new List<Vehicle>();
       Nodes = new List<Node>();
       NodeConnections = new List<NodeConnection>();
-      ConstructionSides = new List<KeyValuePair<Rectangle, Point>>();
+      TrafficLights = new List<TrafficLight>();
       CmdStartSimulation = new DelegateCommand(StartSimulation);
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);
@@ -237,6 +242,8 @@ namespace TrafficSimulation.UI.Application.ViewModel
         NodeConnections.AddRange(SimulationService.GetNodeConnections());
         Vehicles.Clear();
         Vehicles.AddRange(SimulationService.GetVehicles());
+        TrafficLights.Clear();
+        TrafficLights.AddRange(SimulationService.GetTrafficLights());
       }
 
 

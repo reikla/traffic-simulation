@@ -54,6 +54,18 @@ namespace TrafficSimulation.UI.Application
       };
     }
 
+    Rectangle DrawTrafficLight(Brush color)
+    {
+      return new Rectangle()
+      {
+        Width = 3,
+        Height = 3,
+        Fill = color,
+        Stroke = color,
+        StrokeThickness = 2
+      };
+    }
+
     Line DrawStreet(double xStart, double yStart, double xEnde, double yEnde)
     {
       return new Line()
@@ -117,10 +129,10 @@ namespace TrafficSimulation.UI.Application
 
           foreach (var viewModelVehicle in ViewModel.Vehicles)
           {
-            Brush color = Brushes.Green;
+            Brush color = Brushes.Blue;
             if (viewModelVehicle.IsForeignCar)
             {
-              color = Brushes.Red;
+              color = Brushes.LightPink;
             }
 
             var rectangle = DrawVehicle(color);
@@ -156,13 +168,42 @@ namespace TrafficSimulation.UI.Application
 
 
 
-          foreach (var cs in ViewModel.ConstructionSides)
+          foreach (var viewModelTrafficLight in ViewModel.TrafficLights)
           {
-            var rectangle = cs.Key;
-            var pos = cs.Value;
+            TrafficLightState State = viewModelTrafficLight.State;
+            Brush color = Brushes.Green; 
+            switch (State)
+            {
+              case TrafficLightState.Red:
+                color = Brushes.Red;
+                break;
+              case TrafficLightState.Green:
+                color = Brushes.Green;
+                break;
+              case TrafficLightState.Disabled:
+                color = Brushes.Orange;
+                break;
+              default:
+                color = Brushes.Green;
+                break;
+            }
+
+            var rectangle = DrawTrafficLight(color);
+           
+
+
+            NodeConnection street =
+            ViewModel.NodeConnections.First(nc => nc.Id == viewModelTrafficLight.ConnectionId);
+            Node startNode = ViewModel.Nodes.First(n => n.Id == street.StartNodeId);
+            Node endNode = ViewModel.Nodes.First(n => n.Id == street.EndNodeId);
             MainCanvas.Children.Add(rectangle);
-            Canvas.SetTop(rectangle, pos.Y);
-            Canvas.SetLeft(rectangle, pos.X);
+            var deltaX = endNode.X - startNode.X;
+            var deltaY = endNode.Y - startNode.Y;
+            var x = deltaX * (viewModelTrafficLight.PositionOnConnection / street.Length) + startNode.X;
+            var y = deltaY * (viewModelTrafficLight.PositionOnConnection / street.Length) + startNode.Y;
+            Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth - rectangle.Height / 2);
+            Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height / 2);
+
 
           }
         }
