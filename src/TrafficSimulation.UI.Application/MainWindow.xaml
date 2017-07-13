@@ -48,19 +48,12 @@
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Red" Foreground="Red" />
+                        <TextBlock Text="Settings?" Foreground="Red" />
                     </StackPanel>
                 </TabItem.Header>
-                <Label x:Name ="lb_test" Content="Content goes here..." />
+                <Label x:Name ="lb_test" Content="Transfer 100 Bitcoins to Reimar to enable Settings" />
             </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Green" Foreground="Green" />
-                    </StackPanel>
-                </TabItem.Header>
-                <Label Content="Content goes here..." />
-            </TabItem>
+            
             
         </TabControl>
     </Grid>

@@ -68,6 +68,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
+      <Project>{885DCB21-8AEF-4028-8285-677330B43F0E}</Project>
+      <Name>TrafficSimulation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
       <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>

@@ -11,7 +11,7 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
   /// </summary>
   public class IntelligentDriverModelStrategy : IAccelerationStrategy
   {
-    private static readonly double Lookahead_Time = 5;
+    private static readonly double Lookahead_Time = 10;
     private static readonly double Minimal_Distance = 2;
     private static readonly double Security_Time_Distance = 1.4;
     private static readonly double Car_Length = 4;
@@ -42,19 +42,18 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
       var distanceToIntersection = _vehicle.Position.NodeConnection.Length - _vehicle.Position.PositionOnConnection;
 
       double wantedDistance, sAlpha;
-      bool debugDeleteME = false;
       if (_vehicle.Id == 332)
       {
 
         Logger.Info($"Velocity: {_vehicle.CurrentVelocity}");
       }
 
+      //We handle the intersection
       if (distanceToIntersection < distanceToNextPlacable && IsBlockedForVehicle(nextIntersection, _vehicle))
       {
         var intersectionDistanceObject = Distance<INode>.CreateDistance(nextIntersection, distanceToIntersection);
         wantedDistance = CalculateWantedDistance(intersectionDistanceObject);
         sAlpha = GetSAlpha(intersectionDistanceObject);
-        debugDeleteME = _vehicle.Id == 332;
       }
       
       //the distance to the next car is smaller than the distance to the next intersection -> we must handle the next car
