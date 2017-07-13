@@ -56,6 +56,7 @@
   <ItemGroup>
     <None Include="..\NLog.config">
       <Link>NLog.config</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="..\NLog.xsd">
       <Link>NLog.xsd</Link>
@@ -65,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
+      <Project>{885dcb21-8aef-4028-8285-677330b43f0e}</Project>
+      <Name>TrafficSimulation.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TrafficSimulation.Simulation.Contracts\TrafficSimulation.Simulation.Contracts.csproj">
       <Project>{03ABA0BA-0186-49CE-A8DF-A6F0AF92620F}</Project>
       <Name>TrafficSimulation.Simulation.Contracts</Name>

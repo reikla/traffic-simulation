@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using System.Diagnostics;
+using NLog;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Engine.Environment;
 using TrafficSimulation.Simulation.Engine.SimulationObjects;
@@ -41,14 +42,13 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     ///<inheritdoc />
     public void Tick(double timespan)
     {
-      Logger.Trace($"Tick: {this}");
       if (_laneChangeStrategy.ShouldChangeLange())
       {
         _laneChangeStrategy.ChangeLane();
       }
       _accelerationStrategy.CalculateAcceleration();
 
-      System.Diagnostics.Debug.Assert(Route != null, "Route not set. Can't simulate this!");
+      Debug.Assert(Route != null, "Route not set. Can't simulate this!");
       Placer.Place(this, Route, GetVelocity(timespan) * timespan);
     }
 

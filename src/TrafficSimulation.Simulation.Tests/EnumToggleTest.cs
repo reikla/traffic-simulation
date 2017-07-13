@@ -9,9 +9,8 @@ namespace TrafficSimulation.Simulation.Tests
     [TestMethod]
     public void Engine_Toggle_OK()
     {
-      Assert.AreEqual(TrafficLightState.Red, TrafficLightState.Disabled.Toggle());
+      Assert.AreEqual(TrafficLightState.Red, TrafficLightState.Green.Toggle());
       Assert.AreEqual(TrafficLightState.Green, TrafficLightState.Red.Toggle());
-      Assert.AreEqual(TrafficLightState.Disabled, TrafficLightState.Green.Toggle());
     }
 
   }

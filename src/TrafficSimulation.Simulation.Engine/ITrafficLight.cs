@@ -19,19 +19,5 @@ namespace TrafficSimulation.Simulation.Engine
     int Id { get; set; }
   }
 
-  /// <summary>
-  /// Extension class to toggle a enum
-  /// </summary>
-  public static class TrafficLightStateExtension
-  {
-    /// <summary>
-    /// Toggles an enum value
-    /// </summary>
-    /// <param name="state"></param>
-    /// <returns></returns>
-    public static TrafficLightState Toggle(this TrafficLightState state)
-    {
-      return (TrafficLightState)(((int)state + 1) % 3);
-    }
-  }
+
 }
