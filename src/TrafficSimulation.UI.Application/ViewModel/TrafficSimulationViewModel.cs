@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.ServiceModel;
 using System.Timers;
-using System.Windows;
-using System.Windows.Shapes;
 using NLog;
 using Prism.Commands;
 using Prism.Mvvm;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
-using TrafficSimulation.Simulation.WebService;
 using System.Threading;
 using TrafficSimulation.TrafficLightControl.Contracts;
 
@@ -147,6 +144,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
       if (!SimulationService.IsStarted())
       {
         SimulationService.Start();
+        TrafficLightService.Start();
       }
 
       if (!ServiceUpdateTimer.Enabled)
@@ -162,6 +160,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
     private void StepSimulation()
     {
       SimulationService.Step();
+      TrafficLightService.Step();
     }
 
 
@@ -175,15 +174,16 @@ namespace TrafficSimulation.UI.Application.ViewModel
           ServiceUpdateTimer.Stop();
           Thread.Sleep(100);
           ((IClientChannel)SimulationService).Close();
-          //((IClientChannel)TrafficLightService).Close();
+          ((IClientChannel)TrafficLightService).Close();
 
 
         }
         else
         {
           SimulationService = SimulationChannelFactory.CreateChannel();
+          TrafficLightService = TrafficLightChannelFactory.CreateChannel();
           ((IClientChannel)SimulationService).Open();
-          //((IClientChannel)TrafficLightService).Open();
+          ((IClientChannel)TrafficLightService).Open();
           StartSimulation();
         }
 
@@ -194,39 +194,19 @@ namespace TrafficSimulation.UI.Application.ViewModel
         {
           DrawTimer.Stop();
           ServiceUpdateTimer.Stop();
-
-
-
         }
         else
         {
-          try
-          {
             SimulationService = SimulationChannelFactory.CreateChannel();
+            TrafficLightService = TrafficLightChannelFactory.CreateChannel();
             ((IClientChannel)SimulationService).Open();
-
-          }
-          catch (Exception e)
-          {
-            SimulationService = new SimulationService();
-            SimulationService.Start();
-            _logger.Error(e);
-          }
-
-
+            ((IClientChannel)TrafficLightService).Open();
         }
       }
-
-
-
-
-
     }
-
 
     private void ServiceUpdateTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
-
       lock (this)
       {
         Nodes.Clear();
@@ -238,10 +218,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
         TrafficLights.Clear();
         TrafficLights.AddRange(SimulationService.GetTrafficLights());
       }
-
-
     }
-
 
     /// <summary>
     /// Stops update and draw timer.
