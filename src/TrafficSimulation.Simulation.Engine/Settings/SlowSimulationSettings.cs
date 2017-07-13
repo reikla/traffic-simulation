@@ -15,7 +15,7 @@ namespace TrafficSimulation.Simulation.Engine.Settings
     {
       TickRate = 100;
       TickStepSize = 0.1;
-      TargetVehicleCount = 100;
+      TargetVehicleCount = 20;
       OwnGoup = Groups.GROUP02;
       TargetGroup = Groups.GROUP02;
     }

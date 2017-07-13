@@ -85,7 +85,7 @@ namespace TrafficSimulation.Simulation.Engine.Environment
         if (position.NodeConnection == connection) // we are on the same connection
         {
           var placablesFurtherOnConnection = connection.Placeables
-            .Where(x => x.Position.PositionOnConnection > position.PositionOnConnection)
+            .Where(x => x.Position.PositionOnConnection > position.PositionOnConnection && x.IsConnectionBlocking)
             .OrderBy(x => x.Position.PositionOnConnection);
           if (placablesFurtherOnConnection.Count() != 0) // we found a placable on same connection that is further away
           {

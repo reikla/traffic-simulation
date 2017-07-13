@@ -14,14 +14,14 @@ namespace TrafficSimulation.Simulation.Engine.VehicleHandling
     /// </summary>
     public VehiclePhysics()
     {
-      MaxVelocity = new Random().Next(22,33);
+      MaxVelocity = new Random().Next(10,13);
       //MaxVelocity = 33.33;
     }
 
     /// <summary>
     /// Gets the maximum accelelration.
     /// </summary>
-    public double MaxAccelelration => 1.5;
+    public double MaxAccelelration => 4;
 
     /// <summary>
     /// Gets the maximum velocity.
