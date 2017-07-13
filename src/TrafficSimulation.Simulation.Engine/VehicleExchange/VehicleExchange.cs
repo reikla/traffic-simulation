@@ -11,12 +11,12 @@ namespace TrafficSimulation.Simulation.Engine.VehicleExchange
     private readonly VehicleReceiver _vehicleReceiver;
     private readonly VehicleSender _vehicleSender;
     private readonly Queue<IVehicle> _receivedVehicles;
-    private readonly SimulationSettings _simulationSettings;
+    private readonly ISimulationSettings _simulationSettings;
 
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 
-    public VehicleExchange(SimulationSettings settings)
+    public VehicleExchange(ISimulationSettings settings)
     {
       _vehicleReceiver = new VehicleReceiver(settings.OwnGoup);
       _vehicleSender = new VehicleSender(settings.TargetGroup);

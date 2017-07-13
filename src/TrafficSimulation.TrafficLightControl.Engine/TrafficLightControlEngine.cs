@@ -14,7 +14,6 @@ namespace TrafficSimulation.TrafficLightControl.Engine
     private SimulationSettings _settings;
     private ISimulationService SimulationService;
     private int _secondsSinceStart = 0;
-    private static readonly int TOGGLING_INTERVALL = 5;
 
     public void Start()
     {
@@ -44,7 +43,7 @@ namespace TrafficSimulation.TrafficLightControl.Engine
     {
       _secondsSinceStart++;
 
-      if (_secondsSinceStart % TOGGLING_INTERVALL == 0)
+      if (_secondsSinceStart % Constants.TrafficLightToggleInterval == 0)
       {
         for (var trafficLightIndex = 0; trafficLightIndex < 4; trafficLightIndex++)
         {

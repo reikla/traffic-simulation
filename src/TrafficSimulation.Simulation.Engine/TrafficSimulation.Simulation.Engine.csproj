@@ -109,8 +109,8 @@
     <Compile Include="PathCalculation\NodeConnectionForSp.cs" />
     <Compile Include="PathCalculation\NodeForSP.cs" />
     <Compile Include="PathCalculation\QuickShortestPath.cs" />
-    <Compile Include="Settings\SimulationSettings.cs" />
-    <Compile Include="Settings\SlowSimulationSettings.cs" />
+    <Compile Include="Settings\ISimulationSettings.cs" />
+    <Compile Include="Settings\StandardSimulationSettings.cs" />
     <Compile Include="PathCalculation\ShortestPath.cs" />
     <Compile Include="SimulationBase.cs" />
     <Compile Include="SimulationEngine.cs" />

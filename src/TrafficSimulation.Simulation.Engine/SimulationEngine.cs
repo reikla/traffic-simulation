@@ -18,7 +18,7 @@ namespace TrafficSimulation.Simulation.Engine
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-    private readonly SimulationSettings _settings;
+    private readonly ISimulationSettings _settings;
     private readonly IDataModelInitializer _dataModelInitializer;
     private readonly Random _random;
 
@@ -34,7 +34,8 @@ namespace TrafficSimulation.Simulation.Engine
     /// </summary>
     public SimulationEngine()
     {
-      _settings = new SlowSimulationSettings();
+      _settings = new StandardSimulationSettings();
+      
       _random = new Random(1);
       _vehicleExchange = new VehicleExchange.VehicleExchange(_settings);
       _dataModelInitializer = new XmlDataModelInitializer();
