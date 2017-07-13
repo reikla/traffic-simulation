@@ -4,43 +4,56 @@ using System.Timers;
 using NLog;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts.Exceptions;
+using TrafficSimulation.Simulation.Engine.Environment;
 using TrafficSimulation.Simulation.Engine.Settings;
+using TrafficSimulation.Simulation.Engine.VehicleExchange;
 
 namespace TrafficSimulation.Simulation.Engine
 {
+  /// <summary>
+  /// The Main Class of the Simulation. Thats where all the magic happens.
+  /// </summary>
+  /// <seealso cref="TrafficSimulation.Simulation.Engine.IEngine" />
   public class SimulationEngine : IEngine
   {
-    private bool _isInitialized;
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-    private DataModel _dataModel = new DataModel();
-    private Timer SimulationTimer;
-    private SimulationSettings _settings;
-    private IDataModelInitializer _dataModelInitializer;
+
+    private readonly ISimulationSettings _settings;
+    private readonly IDataModelInitializer _dataModelInitializer;
     private readonly Random _random;
 
-    internal DataModel DataModel => _dataModel;
+    private readonly IVehicleExchange _vehicleExchange;
+    private Timer _simulationTimer;
+    private bool _isInitialized;
+
+    internal DataModel DataModel { get; } = new DataModel();
 
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SimulationEngine"/> class.
+    /// </summary>
     public SimulationEngine()
     {
-      _settings = new SlowSimulationSettings();
+      _settings = new StandardSimulationSettings();
+      
       _random = new Random(1);
-      _dataModelInitializer = new SingleCarDataModelInitialzier();
+      _vehicleExchange = new VehicleExchange.VehicleExchange(_settings);
+      _dataModelInitializer = new XmlDataModelInitializer();
     }
 
-
+    ///<inheritdoc />
     public void Start()
     {
       Logger.Trace("Starting Simulation");
       CheckOrThrowInitialization("Start()");
-      if (SimulationTimer != null)
+      if (_simulationTimer != null)
       {
         Logger.Error(Strings.Exception_Already_Started);
         throw new EngineStateException(Strings.Exception_Already_Started);
       }
-      SimulationTimer = new Timer(_settings.TickRate);
-      SimulationTimer.Elapsed += SimulationTimer_Elapsed;
-      SimulationTimer.Start();
+      _simulationTimer = new Timer(_settings.TickRate);
+      _simulationTimer.Elapsed += SimulationTimer_Elapsed;
+      _simulationTimer.Start();
     }
 
     private void SimulationTimer_Elapsed(object sender, ElapsedEventArgs e)
@@ -48,23 +61,25 @@ namespace TrafficSimulation.Simulation.Engine
       DoStep();
     }
 
+    ///<inheritdoc />
     public void Stop()
     {
       CheckOrThrowInitialization("Stop()");
-      if (SimulationTimer == null)
+      if (_simulationTimer == null)
       {
         Logger.Error(Strings.Exception_Already_Stopped);
         throw new EngineStateException(Strings.Exception_Already_Stopped);
       }
       Logger.Trace("Stopping Simulation");
-      SimulationTimer.Stop();
-      SimulationTimer = null;
+      _simulationTimer.Stop();
+      _simulationTimer = null;
     }
 
+    ///<inheritdoc />
     public void Step()
     {
       CheckOrThrowInitialization("Step()");
-      if (SimulationTimer != null)
+      if (_simulationTimer != null)
       {
         Logger.Error(Strings.Exception_Cant_Step);
         throw new EngineStateException(Strings.Exception_Cant_Step);
@@ -76,21 +91,32 @@ namespace TrafficSimulation.Simulation.Engine
     private void DoStep()
     {
       Logger.Trace($"Do Step. Size: {_settings.TickStepSize}");
+      ReceiveVehicle();
       CheckVehicleAmount();
-      foreach (var vehicle in _dataModel.Routes.SelectMany(x=>x.Vehicles))
+      foreach (var vehicle in DataModel.Routes.SelectMany(x => x.Vehicles).ToList())
       {
         vehicle.Tick(_settings.TickStepSize);
       }
+    }
+
+    /// <summary>
+    /// Receives a vehicle from another group.
+    /// </summary>
+    private void ReceiveVehicle()
+    {
+      var vehicle = _vehicleExchange.ReceiveVehicle();
+      vehicle?.SetRoute(DataModel.Routes.First());
     }
 
     private void CheckVehicleAmount()
     {
       if (DataModel.Routes.SelectMany(x => x.Vehicles).Count() < _settings.TargetVehicleCount && _random.NextDouble() > 0.8)
       {
-          DataModel.Routes[_random.Next(0,DataModel.Routes.Count)].CreateVehicle(); // we randomly select a route
+        DataModel.Routes[_random.Next(0, DataModel.Routes.Count)].CreateVehicle(); // we randomly select a route
       }
     }
 
+    ///<inheritdoc />
     public void Init()
     {
       if (_isInitialized)
@@ -98,9 +124,35 @@ namespace TrafficSimulation.Simulation.Engine
         Logger.Error(Strings.Exception_Already_Initialized);
         throw new EngineInitializationException(Strings.Exception_Already_Initialized);
       }
-      Logger.Trace("Init Simulation Engine");
-      _dataModelInitializer.Initialize(_dataModel);
+      Logger.Trace("Init Simulation Engine.");
+      _dataModelInitializer.Initialize(DataModel);
+      EnableVehicleExchange();
       _isInitialized = true;
+    }
+
+    private void EnableVehicleExchange()
+    {
+      _vehicleExchange.Enable();
+      var exchangeRoutes = DataModel.Routes.Where(x => x.NodesConnections.Last().EndNode.Id == 7).ToList();
+
+      foreach (var route in exchangeRoutes)
+      {
+        DataModel.Routes.Remove(route);
+        DataModel.Routes.Add(new VehicleExchangeRoute(_vehicleExchange, route));
+      }
+    }
+
+    /// <inheritdoc />
+    public bool IsStarted()
+    {
+      return _simulationTimer != null;
+    }
+
+    /// <inheritdoc />
+    public void SetCarDefect(int id)
+    {
+      var car = DataModel.Vehicles.FirstOrDefault(x => x.Id == id);
+      car?.SetDefect();
     }
 
     private void CheckOrThrowInitialization(string method)

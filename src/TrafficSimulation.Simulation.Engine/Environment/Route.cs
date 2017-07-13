@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
-using TrafficSimulation.Simulation.Engine.SimulationObjects;
+using TrafficSimulation.Simulation.Engine.VehicleHandling;
 
 namespace TrafficSimulation.Simulation.Engine.Environment
 {
+  /// <summary>
+  /// Represents a route in the simulation. A route cant be modified once created
+  /// </summary>
+  /// <seealso cref="TrafficSimulation.Simulation.Engine.SimulationBase" />
+  /// <seealso cref="TrafficSimulation.Simulation.Engine.Environment.IRoute" />
   public class Route : SimulationBase, IRoute
   {
     private readonly List<INodeConnection> _nodeConnections;
     private readonly List<IVehicle> _vehicles;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="Route"/> class.
+    /// </summary>
+    /// <param name="nodeConnections">The node connections.</param>
     public Route(params INodeConnection[] nodeConnections)
     {
       _nodeConnections = new List<INodeConnection>();
@@ -21,9 +30,26 @@ namespace TrafficSimulation.Simulation.Engine.Environment
         _nodeConnections.Add(connection);
       }
     }
+    /// <summary>
+    /// The list of nodes the route contains of.
+    /// </summary>
     public IReadOnlyList<INodeConnection> NodesConnections => _nodeConnections;
+    /// <summary>
+    /// A list of all vehicles existing on this route.
+    /// </summary>
     public List<IVehicle> Vehicles => _vehicles;
+    /// <summary>
+    /// the length of the route.
+    /// </summary>
     public double Legth => _nodeConnections.Sum(x => x.Length);
+    
+    /// <summary>
+    /// Returns the next node on this connection
+    /// </summary>
+    /// <param name="currentConnection"></param>
+    /// <returns>
+    /// null if that was the last node
+    /// </returns>
     public INodeConnection NextConnection(INodeConnection currentConnection)
     {
       for (var i = 0; i < _nodeConnections.Count; i++)
@@ -36,9 +62,14 @@ namespace TrafficSimulation.Simulation.Engine.Environment
       return null;
     }
 
-    public IDistance GetNextPlaceable(IPlaceable placable)
+    /// <summary>
+    /// Gets the next placeable.
+    /// </summary>
+    /// <param name="placable">The placable.</param>
+    /// <returns></returns>
+    /// <exception cref="System.ArgumentException"></exception>
+    public IDistance<IPlaceable> GetNextPlaceable(IPlaceable placable)
     {
-
       var position = placable.Position;
 
       if (!NodesConnections.Contains(position.NodeConnection))
@@ -54,13 +85,13 @@ namespace TrafficSimulation.Simulation.Engine.Environment
         if (position.NodeConnection == connection) // we are on the same connection
         {
           var placablesFurtherOnConnection = connection.Placeables
-            .Where(x => x.Position.PositionOnConnection > position.PositionOnConnection)
+            .Where(x => x.Position.PositionOnConnection > position.PositionOnConnection && x.IsConnectionBlocking)
             .OrderBy(x => x.Position.PositionOnConnection);
           if (placablesFurtherOnConnection.Count() != 0) // we found a placable on same connection that is further away
           {
             var nextPlacable = placablesFurtherOnConnection.First();
             totalDistance = nextPlacable.Position.PositionOnConnection - position.PositionOnConnection;
-            return new Distance() {DistanceInMeters = totalDistance, NextPlaceable = nextPlacable};
+            return Distance<IPlaceable>.CreateDistance(nextPlacable, totalDistance);
           }
           //we found no placable on this connection so we have to add the rest of the connection to the length
           totalDistance += position.NodeConnection.Length - position.PositionOnConnection;
@@ -73,27 +104,52 @@ namespace TrafficSimulation.Simulation.Engine.Environment
           {
             var nextPlacable = placablesFurtherOnConnection.First();
             totalDistance += nextPlacable.Position.PositionOnConnection;
-            return new Distance() { DistanceInMeters = totalDistance, NextPlaceable = nextPlacable };
+            return Distance<IPlaceable>.CreateDistance(nextPlacable, totalDistance);
           }
           //we found no placable on this connection so we have to add this connection lenght
           totalDistance += connection.Length;
         }
       }
       //we found no placable
-      return new Distance() { DistanceInMeters = double.PositiveInfinity, NextPlaceable = null };
-
+      return null;
     }
 
-    public IVehicle CreateVehicle()
+    /// <inheritdoc />
+    public IDistance<T> GetNextPlaceable<T>(IPlaceable position) where T : IPlaceable
     {
-      var position = new Position(_nodeConnections[0]);
-      var vehicle = new Vehicle(VehicleType.Car, position, this);
+      var placeable = GetNextPlaceable(position);
+      if (placeable == null)
+      {
+        return null;
+      }
+      if (placeable.NextPlaceable is T)
+      {
+        return placeable as IDistance<T>;
+      }
+      var distanceUntilNow = placeable.DistanceInMeters;
+      var nextPlacable = GetNextPlaceable<T>(placeable.NextPlaceable);
+      nextPlacable.DistanceInMeters += distanceUntilNow;
+      return nextPlacable;
+    }
+
+    /// <summary>
+    /// Creates a new vehicle
+    /// </summary>
+    /// <returns>
+    /// The newly created vehicle
+    /// </returns>
+    public virtual IVehicle CreateVehicle()
+    {
+      var vehicle = new Vehicle(VehicleType.Car, this);
       vehicle.Position.NodeConnection.Placeables.Add(vehicle);
-      _vehicles.Add(vehicle);
       return vehicle;
     }
 
-    public void DestoryVehicle(IVehicle vehicle)
+    /// <summary>
+    /// Destroys a vehicle
+    /// </summary>
+    /// <param name="vehicle">The vehicle to destroy</param>
+    public virtual void DestoryVehicle(IVehicle vehicle)
     {
       vehicle.Position.NodeConnection.Placeables.Remove(vehicle);
       _vehicles.Remove(vehicle);

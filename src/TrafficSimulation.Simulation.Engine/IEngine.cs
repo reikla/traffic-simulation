@@ -22,5 +22,16 @@
     /// Initalizes the Simulation.
     /// </summary>
     void Init();
+
+    /// <summary>
+    /// Determines whether this instance is started.
+    /// </summary>
+    bool IsStarted();
+
+    /// <summary>
+    /// Sets the car defect.
+    /// </summary>
+    /// <param name="id">The identifier.</param>
+    void SetCarDefect(int id);
   }
 }

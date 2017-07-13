@@ -1,6 +1,4 @@
-﻿using System;
-using System.ServiceModel;
-using TrafficSimulation.Simulation.Contracts;
+﻿using TrafficSimulation.Common;
 
 namespace TrafficSimulation.TrafficLightControl.WebService
 {
@@ -8,15 +6,8 @@ namespace TrafficSimulation.TrafficLightControl.WebService
   {
     static void Main(string[] args)
     {
-      var binding = new NetNamedPipeBinding(NetNamedPipeSecurityMode.Transport);
-      var ep = new EndpointAddress("net.pipe://localhost/Simulation/Engine");
-      var simulationService = ChannelFactory<ISimulationService>.CreateChannel(binding, ep);
-
-
-      simulationService.Start();
-
-      Console.WriteLine("Traffic light Control Webservice Started. Press any key to exit.");
-      Console.ReadKey();
+      var c = new WebServiceController();
+      c.Run<TrafficLightControlService>();
     }
   }
 }

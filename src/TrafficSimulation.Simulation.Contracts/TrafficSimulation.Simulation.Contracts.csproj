@@ -23,6 +23,7 @@
     <DocumentationFile>bin\Debug\TrafficSimulation.Simulation.Contracts.xml</DocumentationFile>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <RunCodeAnalysis>false</RunCodeAnalysis>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -54,6 +55,9 @@
     <Compile Include="DTO\DtoBase.cs" />
     <Compile Include="DTO\Node.cs" />
     <Compile Include="DTO\NodeConnection.cs" />
+    <Compile Include="DTO\TrafficLight.cs" />
+    <Compile Include="DTO\TrafficLightState.cs" />
+    <Compile Include="Exceptions\XmlDeserializationException.cs" />
     <Compile Include="Exceptions\EngineInitializationException.cs" />
     <Compile Include="Exceptions\EngineStateException.cs" />
     <Compile Include="Exceptions\SimulationException.cs" />

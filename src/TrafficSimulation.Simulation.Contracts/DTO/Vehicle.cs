@@ -27,13 +27,27 @@ namespace TrafficSimulation.Simulation.Contracts.DTO
     public double PositionOnConnection { get; set; }
 
     /// <summary>
+    /// Gets or sets the debug information.
+    /// </summary>
+    [DataMember]
+    public string DebugInfo { get; set; }
+
+    /// <summary>
+    /// Signals if we have a foreign car here.
+    /// </summary>
+    [DataMember]
+    public bool IsForeignCar { get; set; }
+
+    /// <summary>
     /// Constructor
     /// </summary>
-    public Vehicle(int id, VehicleType type, int currentNodeConnectionId, double positionOnConnection) : base(id)
+    public Vehicle(int id, VehicleType type, int currentNodeConnectionId, double positionOnConnection,bool isForeignVehicle, string debugInfo = null) : base(id)
     {
       Type = type;
       CurrentNodeConnectionId = currentNodeConnectionId;
       PositionOnConnection = positionOnConnection;
+      DebugInfo = debugInfo;
+      IsForeignCar = isForeignVehicle;
     }
   }
 }

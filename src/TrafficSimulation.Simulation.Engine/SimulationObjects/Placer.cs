@@ -3,9 +3,19 @@ using TrafficSimulation.Simulation.Engine.Environment;
 
 namespace TrafficSimulation.Simulation.Engine.SimulationObjects
 {
-  public static class Placer
+
+  /// <summary>
+  /// The Placer is used to move a vehicle for a given distance
+  /// </summary>
+  internal static class Placer
   {
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+    /// <summary>
+    /// Places the specified vehicle.
+    /// </summary>
+    /// <param name="vehicle">The vehicle.</param>
+    /// <param name="route">The route.</param>
+    /// <param name="deltaS">The distance.</param>
     public static void Place(IVehicle vehicle, IRoute route, double deltaS)
     {
       var pos = vehicle.Position;

@@ -15,7 +15,7 @@ namespace TrafficSimulation.Simulation.Engine
     /// <summary>
     /// Constructor where the Id gets set automatically
     /// </summary>
-    public SimulationBase()
+    protected SimulationBase()
     {
       this.Id = _id++;
     }

@@ -13,5 +13,40 @@ namespace TrafficSimulation.Simulation.Engine
     /// the type of the vehicle
     /// </summary>
     VehicleType VehicleType { get; set; }
+
+    /// <summary>
+    /// Gets or sets the route.
+    /// </summary>
+    IRoute Route { get; }
+
+    /// <summary>
+    /// Sets the route. And the Position to the startposition of the route.
+    /// </summary>
+    void SetRoute(IRoute route);
+
+    /// <summary>
+    /// Gets or sets a value indicating whether this instance is a foreign vehicle.
+    /// </summary>
+    bool IsForeignVehicle { get; set; }
+
+    /// <summary>
+    /// The current velocity of the vehicle
+    /// </summary>
+    double CurrentVelocity { get; set; }
+
+    /// <summary>
+    /// Gets or sets the acceleration.
+    /// </summary>
+    double Acceleration { get; set; }
+
+    /// <summary>
+    /// Toggels a car defective.
+    /// </summary>
+    void SetDefect();
+
+    /// <summary>
+    /// Signals if a vehicle is defect.
+    /// </summary>
+    bool IsDefect { get; }
   }
 }

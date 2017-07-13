@@ -15,7 +15,7 @@
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.6.2</FrameworkVersion>
     <OutputPath>..\..\docs\</OutputPath>
-    <HtmlHelpName>Doku</HtmlHelpName>
+    <HtmlHelpName>Code Documentation Traffic Simulation</HtmlHelpName>
     <Language>en-US</Language>
     <TransformComponentArguments>
       <Argument Key="logoFile" Value="Help.png" xmlns="" />
@@ -40,7 +40,7 @@
     <SdkLinkTarget>Blank</SdkLinkTarget>
     <RootNamespaceContainer>False</RootNamespaceContainer>
     <PresentationStyle>VS2013</PresentationStyle>
-    <Preliminary>False</Preliminary>
+    <Preliminary>True</Preliminary>
     <NamingMethod>Guid</NamingMethod>
     <HelpTitle>A Sandcastle Documented Class Library</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>

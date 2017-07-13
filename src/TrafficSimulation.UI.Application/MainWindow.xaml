@@ -7,17 +7,49 @@
         xmlns:viewModel="clr-namespace:TrafficSimulation.UI.Application.ViewModel"
         xmlns:mvvm="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <!--   <Grid>
-        <Button Command="{Binding ClickCommand}" Content="Send Message" HorizontalAlignment="Left" Margin="179,149,0,0" VerticalAlignment="Top" Width="117"/>
-    
-    </Grid>-->
-    <!--d:DataContext="{d:DesignInstance viewModel:TrafficSimulationViewModel, IsDesignTimeCreatable=True}"-->
+        Title="MainWindow" Height="450.333" Width="525">
     <Window.DataContext>
         <viewModel:TrafficSimulationViewModel />
     </Window.DataContext>
-    <Canvas x:Name="MainCanvas" Margin="10">
 
 
-    </Canvas>
+    <Grid x:Name="MainGrid" Background="Transparent" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="22*"  />
+            <RowDefinition Height="7*" />
+        </Grid.RowDefinitions>
+        <Canvas x:Name="MainCanvas"  Margin="65" Grid.Row="0" SizeChanged="MainCanvas_OnSizeChanged"  Background="Transparent" Focusable="True"/>
+        <TabControl x:Name="Tabs" Grid.Row="1">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Simulation" Foreground="Blue" />
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid x:Name="TabSimGrid">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="StartBtn" Content=">" Click="StartStopBtn_OnClick" Command="{Binding CmdStartSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"    Visibility="Visible" IsEnabled="False"/>
+                    <Button x:Name="StopBtn" Content="||" Click="StartStopBtn_OnClick" Command="{Binding CmdStopSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
+                    <Button x:Name="StepBtn" Content="|>" Command="{Binding CmdStepSimulation}" IsEnabled="False" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
+                    <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="100" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
+                    <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="100" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Visibility="Visible" Grid.ColumnSpan="2" Margin="0,0,0,1"/>
+                    <Button x:Name="DebugModeBtn" Content="Debug"  Click="DebugModeRadio_Checked" Height="20" Width="100" Grid.Column="1" Grid.Row="0" IsEnabled="False"/>
+                    <Rectangle x:Name="Car" MouseRightButtonDown="Car_OnMouseRightButtonDown"></Rectangle>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+
+
+
 </Window>
+

@@ -21,7 +21,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\TrafficSimulation.Simulation.Engine.xml</DocumentationFile>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,8 +36,29 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.13.4\lib\net45\AWSSDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="AWSSDK.SQS, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.SQS.3.3.2.2\lib\net45\AWSSDK.SQS.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.4.6\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Data, Version=3.6.61114.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Graphviz, Version=3.6.61114.0, Culture=neutral, PublicKeyToken=f3fb40175eec2af3, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Graphviz.dll</HintPath>
+    </Reference>
+    <Reference Include="QuickGraph.Serialization, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QuickGraph.3.6.61119.7\lib\net4\QuickGraph.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,43 +72,61 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="VehicleHandoverLibrary">
+      <HintPath>..\lib\VehicleHandoverLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\VersionInfo.cs">
       <Link>Properties\VersionInfo.cs</Link>
     </Compile>
     <Compile Include="DataModel.cs" />
+    <Compile Include="Debugging\DebugPrinter.cs" />
     <Compile Include="Environment\Distance.cs" />
-    <Compile Include="Environment\EndNode.cs" />
     <Compile Include="Environment\IDistance.cs" />
     <Compile Include="Environment\IVehicleLifetimeManager.cs" />
     <Compile Include="Environment\Node.cs" />
     <Compile Include="Environment\NodeConnection.cs" />
+    <Compile Include="Environment\NodeType.cs" />
+    <Compile Include="Environment\Orientation.cs" />
     <Compile Include="Environment\Position.cs" />
     <Compile Include="Environment\Route.cs" />
-    <Compile Include="Environment\StartNode.cs" />
+    <Compile Include="Environment\VehicleExchangeRoute.cs" />
     <Compile Include="IDataModelInitializer.cs" />
-    <Compile Include="Environment\IEndNode.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="Environment\INode.cs" />
     <Compile Include="Environment\INodeConnection.cs" />
     <Compile Include="Environment\IPlaceable.cs" />
     <Compile Include="Environment\IPosition.cs" />
     <Compile Include="Environment\IRoute.cs" />
+    <Compile Include="ITrafficLight.cs" />
+    <Compile Include="PathCalculation\IShortestPath.cs" />
     <Compile Include="ISimulationBase.cs" />
-    <Compile Include="Environment\IStartNode.cs" />
     <Compile Include="ITickable.cs" />
     <Compile Include="IVehicle.cs" />
-    <Compile Include="IVehicleFactory.cs" />
-    <Compile Include="Settings\SimulationSettings.cs" />
-    <Compile Include="Settings\SlowSimulationSettings.cs" />
+    <Compile Include="PathCalculation\QuickShortestPath.cs" />
+    <Compile Include="Settings\ISimulationSettings.cs" />
+    <Compile Include="Settings\StandardSimulationSettings.cs" />
     <Compile Include="SimulationBase.cs" />
     <Compile Include="SimulationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimulationObjects\Placer.cs" />
-    <Compile Include="SimulationObjects\Vehicle.cs" />
-    <Compile Include="SimulationObjects\VehiclePhysics.cs" />
-    <Compile Include="SingleCarDataModelInitialzier.cs" />
+    <Compile Include="TrafficLight.cs" />
+    <Compile Include="TrafficLightState.cs" />
+    <Compile Include="VehicleHandling\IntelligentDriverModelStrategy.cs" />
+    <Compile Include="VehicleHandling\NoLaneChangeStrategy.cs" />
+    <Compile Include="VehicleHandling\SimpleAccelerationStrategy.cs" />
+    <Compile Include="VehicleHandling\Vehicle.cs" />
+    <Compile Include="VehicleHandling\VehiclePhysics.cs" />
+    <Compile Include="VehicleExchange\IVehicleExchange.cs" />
+    <Compile Include="VehicleExchange\VehicleConverter.cs" />
+    <Compile Include="VehicleExchange\VehicleExchange.cs" />
+    <Compile Include="VehicleHandling\IAccelerationStrategy.cs" />
+    <Compile Include="VehicleHandling\ILaneChangeStrategy.cs" />
+    <Compile Include="XmlDataModelInitializer.cs" />
+    <Compile Include="Xml\GraphMLNamespaces.cs" />
+    <Compile Include="Xml\XmlGraphReader.cs" />
+    <Compile Include="Xml\XmlNodeReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TrafficSimulation.Common\TrafficSimulation.Common.csproj">
@@ -100,7 +140,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagramSimulationEnginde.cd" />
+    <None Include="net.graphml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
+    <None Include="Strassennetz.graphml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.SQS.3.3.2.2\analyzers\dotnet\cs\AWSSDK.SQS.CodeAnalysis.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
