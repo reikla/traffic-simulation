@@ -1,2 +1,2 @@
 
-[Dokumentaion](https://github.com/reikla/traffic-simulation/wiki)
+Hier gehts zu [Dokumentaion](https://github.com/reikla/traffic-simulation/wiki)
