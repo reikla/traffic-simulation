@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Threading;
 using System.Windows;
-using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -36,12 +31,6 @@ namespace TrafficSimulation.UI.Application
       InitializeComponent();
       
     }
-
-  
-
-
-    
-
     Rectangle DrawVehicle(Brush color)
     {
       return new Rectangle()
@@ -249,17 +238,12 @@ namespace TrafficSimulation.UI.Application
       {
         StopBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = false;
-       
-
-
       }
       else
       {
         StartBtn.Visibility = Visibility.Visible;
         StepBtn.IsEnabled = true;
-        
       }
-       
     }
 
     private void MainCanvas_OnMouseDown(object sender, MouseButtonEventArgs e)
@@ -300,13 +284,11 @@ namespace TrafficSimulation.UI.Application
         StopBtn.IsEnabled = false;
         StepBtn.IsEnabled = false;
         DebugModeBtn.IsEnabled = false;
-
       }
     }
 
     private void DebugModeRadio_Checked(object sender, RoutedEventArgs e)
     {
-
       if (IsDebugOn)
       {
         IsDebugOn = false;
@@ -319,9 +301,6 @@ namespace TrafficSimulation.UI.Application
         DebugModeBtn.Content = "DEBUGGING";
         DebugModeBtn.Foreground = Brushes.OrangeRed;
       }
-
-      
-
     }
 
 
@@ -329,9 +308,7 @@ namespace TrafficSimulation.UI.Application
     {
       var mc = sender as Canvas;
       mc.Width = mc.ActualHeight;
-      
     }
-
 
     private void Car_OnMouseDown(object sender, MouseButtonEventArgs e)
     {

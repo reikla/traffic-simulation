@@ -22,7 +22,7 @@ namespace TrafficSimulation.Simulation.Engine
     private readonly IDataModelInitializer _dataModelInitializer;
     private readonly Random _random;
 
-    private IVehicleExchange _vehicleExchange;
+    private readonly IVehicleExchange _vehicleExchange;
     private Timer _simulationTimer;
     private bool _isInitialized;
 

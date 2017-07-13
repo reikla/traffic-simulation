@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ServiceModel;
-using System.Text;
 using System.Timers;
 using System.Windows;
 using System.Windows.Shapes;
@@ -14,6 +12,7 @@ using TrafficSimulation.Simulation.Contracts;
 using TrafficSimulation.Simulation.Contracts.DTO;
 using TrafficSimulation.Simulation.WebService;
 using System.Threading;
+using TrafficSimulation.TrafficLightControl.Contracts;
 
 namespace TrafficSimulation.UI.Application.ViewModel
 {
@@ -28,6 +27,11 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// Holds the ISimulationService (overridden by the Bootstrapper)
     /// </summary>
     public ISimulationService SimulationService { get; set; }
+
+    /// <summary>
+    /// Reference to the traffic light service
+    /// </summary>
+    public ITrafficLightService TrafficLightService { get; set; }
 
     /// <summary>
     /// Contains the vehicles for the simulation (received via WCF)
@@ -70,12 +74,6 @@ namespace TrafficSimulation.UI.Application.ViewModel
     public DelegateCommand CmdDisConnect { get; set; }
 
     /// <summary>
-    /// Contains the ConstructionSides (rectangles) placed on the MainCanvas; also their position
-    /// </summary>
-    public List<KeyValuePair<Rectangle, Point>> ConstructionSides { get; set; }
-   
-
-    /// <summary>
     /// Contains the Timer which updates the viewmodel (overwritten by Bootstrapper)
     /// </summary>
     public System.Timers.Timer ServiceUpdateTimer;
@@ -87,14 +85,17 @@ namespace TrafficSimulation.UI.Application.ViewModel
     /// <summary>
     /// A factory that creates channels of the type ISimulationService.
     /// </summary>
-    public ChannelFactory<ISimulationService> cf;
+    public ChannelFactory<ISimulationService> SimulationChannelFactory { get; set; }
+    /// <summary>
+    /// A factory that creates channels of the type ITrafficLightService.
+    /// </summary>
+    public ChannelFactory<ITrafficLightService> TrafficLightChannelFactory { get; set; }
 
     /// <summary>
     /// Constructor for the TrafficSimulationViewModel - initializes the Lists Vehicles, Nodes and NodeConnections
     /// </summary>
     public TrafficSimulationViewModel()
     {
-      
       Vehicles = new List<Vehicle>();
       Nodes = new List<Node>();
       NodeConnections = new List<NodeConnection>();
@@ -102,10 +103,9 @@ namespace TrafficSimulation.UI.Application.ViewModel
       CmdStartSimulation = new DelegateCommand(StartSimulation);
       CmdStopSimulation = new DelegateCommand(StopSimulation);
       CmdStepSimulation = new DelegateCommand(StepSimulation);
-      CmdDisConnect = new DelegateCommand(() => DisConnect());
+      CmdDisConnect = new DelegateCommand(ToggleConnection);
       ServiceUpdateTimer = new System.Timers.Timer(Constants.SimulationUpdateSpeed);
       ServiceUpdateTimer.Elapsed += ServiceUpdateTimer_Elapsed;
-     
     }
 
     /// <summary>
@@ -140,9 +140,6 @@ namespace TrafficSimulation.UI.Application.ViewModel
       {
         SimulationService.Stop();
       }
-
-
-
     }
 
     private void StartSimulation()
@@ -153,26 +150,22 @@ namespace TrafficSimulation.UI.Application.ViewModel
       }
 
       if (!ServiceUpdateTimer.Enabled)
+      {
+        ServiceUpdateTimer.Start();
+        if (!DrawTimer.Enabled)
         {
-          ServiceUpdateTimer.Start();
-          if (!DrawTimer.Enabled)
-          {
-            DrawTimer.Start();
-          }
+          DrawTimer.Start();
         }
-      
-
-
+      }
     }
 
     private void StepSimulation()
     {
-
       SimulationService.Step();
     }
 
 
-    private void DisConnect()
+    private void ToggleConnection()
     {
       try
       {
@@ -182,35 +175,26 @@ namespace TrafficSimulation.UI.Application.ViewModel
           ServiceUpdateTimer.Stop();
           Thread.Sleep(100);
           ((IClientChannel)SimulationService).Close();
-          
+          //((IClientChannel)TrafficLightService).Close();
+
 
         }
         else
         {
-          try
-          {
-            SimulationService = cf.CreateChannel();
-            ((IClientChannel)SimulationService).Open();
-            StartSimulation();
-          }
-          catch (Exception e)
-          {
-            SimulationService = new SimulationService();
-            SimulationService.Start();
-            _logger.Error(e);
-          }
-
-
+          SimulationService = SimulationChannelFactory.CreateChannel();
+          ((IClientChannel)SimulationService).Open();
+          //((IClientChannel)TrafficLightService).Open();
+          StartSimulation();
         }
 
       }
-      catch (Exception )
+      catch (Exception)
       {
         if (SimulationService.IsStarted())
         {
           DrawTimer.Stop();
           ServiceUpdateTimer.Stop();
-          
+
 
 
         }
@@ -218,7 +202,7 @@ namespace TrafficSimulation.UI.Application.ViewModel
         {
           try
           {
-            SimulationService = cf.CreateChannel();
+            SimulationService = SimulationChannelFactory.CreateChannel();
             ((IClientChannel)SimulationService).Open();
 
           }
