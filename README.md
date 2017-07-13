@@ -1,3 +1,2 @@
-# Dokumentation
 
-https://github.com/reikla/traffic-simulation/wiki
+[Dokumentaion](https://github.com/reikla/traffic-simulation/wiki)
