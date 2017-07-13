@@ -37,11 +37,16 @@ namespace TrafficSimulation.TrafficLightControl.Engine
 
     private void SimulationTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
+      DoStep();
+    }
+
+    private void DoStep()
+    {
       _secondsSinceStart++;
 
       if (_secondsSinceStart % TOGGLING_INTERVALL == 0)
       {
-        for (int trafficLightIndex = 0; trafficLightIndex < 4; trafficLightIndex++)
+        for (var trafficLightIndex = 0; trafficLightIndex < 4; trafficLightIndex++)
         {
           SimulationService.ToggleTrafficLight(trafficLightIndex);
         }
@@ -50,17 +55,19 @@ namespace TrafficSimulation.TrafficLightControl.Engine
 
     public void Stop()
     {
-      Logger.Debug("Stop");
+      SimulationTimer.Elapsed -= SimulationTimer_Elapsed;
+      SimulationTimer.Stop();
+      SimulationTimer = null;
+      SimulationService = null;
     }
 
     public void Step()
     {
-      Logger.Debug("Step");
+      DoStep();
     }
 
     public void Init()
     {
-      Logger.Debug("Start");
     }
   }
 
