@@ -8,7 +8,7 @@
     /// </summary>
     /// <param name="placeable">The placeable.</param>
     /// <param name="distanceInMeters">The distance in meters.</param>
-    public Distance(T placeable, double distanceInMeters)
+    private Distance(T placeable, double distanceInMeters)
     {
       NextPlaceable = placeable;
       DistanceInMeters = distanceInMeters;
@@ -30,9 +30,9 @@
     /// <param name="placeable"></param>
     /// <param name="distanceInMeters"></param>
     /// <returns></returns>
-    public static Distance<IPlaceable> CreateDistance(IPlaceable placeable, double distanceInMeters)
+    public static Distance<T> CreateDistance(T placeable, double distanceInMeters)
     {
-      return new Distance<IPlaceable>(placeable, distanceInMeters);
+      return new Distance<T>(placeable, distanceInMeters);
     }
   }
 }
