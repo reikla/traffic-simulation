@@ -52,7 +52,6 @@
       <DocumentationSource sourceFile="..\TrafficSimulation.Simulation.WebService\TrafficSimulation.Simulation.WebService.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\TrafficSimulation.TrafficLightControl.Contracts\TrafficSimulation.TrafficLightControl.Contracts.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\TrafficSimulation.TrafficLightControl.Engine\TrafficSimulation.TrafficLightControl.Engine.csproj" xmlns="" />
-      <DocumentationSource sourceFile="..\TrafficSimulation.TrafficLightControl.UI\TrafficSimulation.TrafficLightControl.UI.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\TrafficSimulation.TrafficLightControl.WebService\TrafficSimulation.TrafficLightControl.WebService.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\TrafficSimulation.UI.Application\TrafficSimulation.UI.Application.csproj" xmlns="" />
       <DocumentationSource sourceFile="..\TrafficSimulation.UI.Contracts\TrafficSimulation.UI.Contracts.csproj" xmlns="" />
