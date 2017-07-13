@@ -51,7 +51,6 @@
     <Compile Include="TrafficLightControlEngine.cs" />
     <Compile Include="IEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings\SimulationSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

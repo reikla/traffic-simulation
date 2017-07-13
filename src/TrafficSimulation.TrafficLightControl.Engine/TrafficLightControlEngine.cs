@@ -2,43 +2,72 @@
 using NLog;
 using TrafficSimulation.Common;
 using TrafficSimulation.Simulation.Contracts;
-using TrafficSimulation.TrafficLightControl.Engine.Settings;
 
 namespace TrafficSimulation.TrafficLightControl.Engine
 {
+  /// <summary>
+  /// 
+  /// </summary>
   public class TrafficLightControlEngine : IEngine
   {
-    private bool _isInitialized;
     private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-    private Timer SimulationTimer;
-    private SimulationSettings _settings;
-    private ISimulationService SimulationService;
+    private Timer _simulationTimer;
+    private ISimulationService _simulationService;
     private int _secondsSinceStart = 0;
 
+    /// <summary>
+    /// Starts the simulation.
+    /// </summary>
     public void Start()
     {
       Logger.Debug("Start");
-      if (SimulationService == null)
+      if (_simulationService == null)
       {
-        SimulationService = ChannelFactoryBuilder.GetChannelFactory<ISimulationService>("net.pipe://localhost/Simulation/Engine").CreateChannel();
+        _simulationService = ChannelFactoryBuilder.GetChannelFactory<ISimulationService>("net.pipe://localhost/Simulation/Engine").CreateChannel();
       }
 
-      if (SimulationTimer == null)
+      if (_simulationTimer == null)
       {
-        SimulationTimer = new Timer(1000);
-        SimulationTimer.Elapsed += SimulationTimer_Elapsed;
-        SimulationTimer.Start();
+        _simulationTimer = new Timer(1000);
+        _simulationTimer.Elapsed += SimulationTimer_Elapsed;
+        _simulationTimer.Start();
       }
 
-      SimulationService.ToggleTrafficLight(2);
-      SimulationService.ToggleTrafficLight(3);
+      _simulationService.ToggleTrafficLight(2);
+      _simulationService.ToggleTrafficLight(3);
+    }
+
+
+    /// <summary>
+    /// Stops the simulation.
+    /// </summary>
+    public void Stop()
+    {
+      _simulationTimer.Elapsed -= SimulationTimer_Elapsed;
+      _simulationTimer.Stop();
+      _simulationTimer = null;
+      _simulationService = null;
+    }
+
+    /// <summary>
+    /// Simulates a single step.
+    /// </summary>
+    public void Step()
+    {
+      DoStep();
+    }
+
+    /// <summary>
+    /// Initalizes the Simulation.
+    /// </summary>
+    public void Init()
+    {
     }
 
     private void SimulationTimer_Elapsed(object sender, ElapsedEventArgs e)
     {
       DoStep();
     }
-
     private void DoStep()
     {
       _secondsSinceStart++;
@@ -47,26 +76,9 @@ namespace TrafficSimulation.TrafficLightControl.Engine
       {
         for (var trafficLightIndex = 0; trafficLightIndex < 4; trafficLightIndex++)
         {
-          SimulationService.ToggleTrafficLight(trafficLightIndex);
+          _simulationService.ToggleTrafficLight(trafficLightIndex);
         }
       }
-    }
-
-    public void Stop()
-    {
-      SimulationTimer.Elapsed -= SimulationTimer_Elapsed;
-      SimulationTimer.Stop();
-      SimulationTimer = null;
-      SimulationService = null;
-    }
-
-    public void Step()
-    {
-      DoStep();
-    }
-
-    public void Init()
-    {
     }
   }
 

@@ -6,7 +6,7 @@ namespace TrafficSimulation.TrafficLightControl.WebService
 {
   [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
 
-  public class TrafficLightControlService : ITrafficLightService
+  internal class TrafficLightControlService : ITrafficLightService
   {
     private readonly TrafficLightControlEngine _engine;
     public TrafficLightControlService()
