@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using QuickGraph;
 using QuickGraph.Algorithms;
@@ -23,13 +22,13 @@ namespace TrafficSimulation.Simulation.Engine.PathCalculation
           nodeConnection.Id));
       }
 
-      Func<TaggedEdge<int, int>, double> edgeCost = edge => nodes.First(x => x.Id == edge.Source)
+      double EdgeCost(TaggedEdge<int, int> edge) => nodes.First(x => x.Id == edge.Source)
         .NodeConnections.First(x => x.EndNode.Id == edge.Target)
         .Cost;
 
-      DijkstraShortestPathAlgorithm<int,TaggedEdge<int,int>> a = new DijkstraShortestPathAlgorithm<int, TaggedEdge<int, int>>(g,edgeCost);
+      var a = new DijkstraShortestPathAlgorithm<int, TaggedEdge<int, int>>(g,EdgeCost);
       //IEnumerable<TaggedEdge<int, int>> path;
-      var tryGet = g.ShortestPathsDijkstra(edgeCost, startNode.Id);
+      var tryGet = g.ShortestPathsDijkstra(EdgeCost, startNode.Id);
       var conns = new List<INodeConnection>();
 
       if (tryGet(endNode.Id, out var path))

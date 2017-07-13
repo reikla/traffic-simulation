@@ -100,18 +100,13 @@
     <Compile Include="Environment\IPosition.cs" />
     <Compile Include="Environment\IRoute.cs" />
     <Compile Include="ITrafficLight.cs" />
-    <Compile Include="PathCalculation\DistanceCalculator.cs" />
-    <Compile Include="PathCalculation\Graph.cs" />
     <Compile Include="PathCalculation\IShortestPath.cs" />
     <Compile Include="ISimulationBase.cs" />
     <Compile Include="ITickable.cs" />
     <Compile Include="IVehicle.cs" />
-    <Compile Include="PathCalculation\NodeConnectionForSp.cs" />
-    <Compile Include="PathCalculation\NodeForSP.cs" />
     <Compile Include="PathCalculation\QuickShortestPath.cs" />
     <Compile Include="Settings\ISimulationSettings.cs" />
     <Compile Include="Settings\StandardSimulationSettings.cs" />
-    <Compile Include="PathCalculation\ShortestPath.cs" />
     <Compile Include="SimulationBase.cs" />
     <Compile Include="SimulationEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,7 +118,6 @@
     <Compile Include="VehicleHandling\SimpleAccelerationStrategy.cs" />
     <Compile Include="VehicleHandling\Vehicle.cs" />
     <Compile Include="VehicleHandling\VehiclePhysics.cs" />
-    <Compile Include="PathCalculation\TobisShortestPath.cs" />
     <Compile Include="VehicleExchange\IVehicleExchange.cs" />
     <Compile Include="VehicleExchange\VehicleConverter.cs" />
     <Compile Include="VehicleExchange\VehicleExchange.cs" />
