@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ServiceModel;
 using System.Timers;
 using Microsoft.Practices.Unity;
 using Prism.Unity;
