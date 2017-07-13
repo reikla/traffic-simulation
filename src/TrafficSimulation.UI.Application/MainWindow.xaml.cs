@@ -197,18 +197,6 @@ namespace TrafficSimulation.UI.Application
             Canvas.SetLeft(rectangle, x * MainCanvas.ActualWidth - rectangle.Height / 2);
             Canvas.SetTop(rectangle, y * MainCanvas.ActualHeight - rectangle.Height / 2);
 
-
-
-
-            var ID_label = new Label()
-            {
-              Content = viewModelTrafficLight.Id.ToString()
-            };
-            MainCanvas.Children.Add(ID_label);
-            Canvas.SetLeft(ID_label, x * MainCanvas.ActualWidth);
-            Canvas.SetTop(ID_label, Canvas.GetTop(rectangle));
-
-
           }
         }
         catch (InvalidOperationException exception)
@@ -246,17 +234,6 @@ namespace TrafficSimulation.UI.Application
       }
     }
 
-    private void MainCanvas_OnMouseDown(object sender, MouseButtonEventArgs e)
-    {
-      //var rect = DrawConstructionSide(20, 20);
-      //Point pos = e.GetPosition(MainCanvas);
-      //MainCanvas.Children.Add(rect);
-      //Canvas.SetLeft(rect, pos.X);
-      //Canvas.SetTop(rect, pos.Y);
-      //ViewModel.ConstructionSides.Add(new KeyValuePair<Rectangle, Point>(rect,pos));
-
-      
-    }
 
       private void DisconnectBtn_Click(object sender, RoutedEventArgs e)
     {
@@ -317,7 +294,6 @@ namespace TrafficSimulation.UI.Application
     
     private void Car_OnMouseRightButtonDown(object sender, MouseButtonEventArgs e)
     {
-      lb_test.Content += " repaired: " + (sender as Rectangle).Tag.ToString();
       ViewModel.UNsetCarDefect((Int32.Parse((sender as Rectangle).Tag.ToString())));
     }
 
