@@ -18,7 +18,7 @@
             <RowDefinition Height="22*"  />
             <RowDefinition Height="7*" />
         </Grid.RowDefinitions>
-        <Canvas x:Name="MainCanvas"  Margin="65" Grid.Row="0" SizeChanged="MainCanvas_OnSizeChanged"  MouseDown="MainCanvas_OnMouseDown" Background="Transparent" Focusable="True"/>
+        <Canvas x:Name="MainCanvas"  Margin="65" Grid.Row="0" SizeChanged="MainCanvas_OnSizeChanged"  Background="Transparent" Focusable="True"/>
         <TabControl x:Name="Tabs" Grid.Row="1">
             <TabItem>
                 <TabItem.Header>
@@ -39,22 +39,13 @@
                     <Button x:Name="StartBtn" Content=">" Click="StartStopBtn_OnClick" Command="{Binding CmdStartSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0"    Visibility="Visible" IsEnabled="False"/>
                     <Button x:Name="StopBtn" Content="||" Click="StartStopBtn_OnClick" Command="{Binding CmdStopSimulation}" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" Visibility="Hidden"/>
                     <Button x:Name="StepBtn" Content="|>" Command="{Binding CmdStepSimulation}" IsEnabled="False" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"/>
-                    <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Hidden"/>
-                    <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="40" HorizontalAlignment="Left" Grid.Row="2" Grid.Column="0" Visibility="Visible"/>
+                    <Button x:Name="DisconnectBtn" ToolTip="Disconnect" Click="DisconnectBtn_Click"  Content="Disconnect" Command="{Binding CmdDisConnect}" IsEnabled="True" Height="20" Width="100" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Visibility="Hidden"/>
+                    <Button x:Name="ConnectBtn" ToolTip="Connect" Click="DisconnectBtn_Click"  Content="Connect" Command="{Binding CmdDisConnect}" IsEnabled="true" Height="20" Width="100" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Visibility="Visible" Grid.ColumnSpan="2" Margin="0,0,0,1"/>
                     <Button x:Name="DebugModeBtn" Content="Debug"  Click="DebugModeRadio_Checked" Height="20" Width="100" Grid.Column="1" Grid.Row="0" IsEnabled="False"/>
                     <Rectangle x:Name="Car" MouseRightButtonDown="Car_OnMouseRightButtonDown"></Rectangle>
                 </Grid>
             </TabItem>
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="Settings?" Foreground="Red" />
-                    </StackPanel>
-                </TabItem.Header>
-                <Label x:Name ="lb_test" Content="Transfer 100 Bitcoins to Reimar to enable Settings" />
-            </TabItem>
-            
-            
+
         </TabControl>
     </Grid>
 
